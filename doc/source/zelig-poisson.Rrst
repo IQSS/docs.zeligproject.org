@@ -1,0 +1,159 @@
+.. _zpoisson:
+
+zelig-poisson
+~~~~~~
+
+Poisson Regression for Event Count Dependent Variables
+
+Use the Poisson regression model if the observations of your dependent
+variable represents the number of independent events that occur during a
+fixed period of time (see the negative binomial model, , for
+over-dispersed event counts.) For a Bayesian implementation of this
+model, see .
+
+Syntax
++++++
+
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zpoisson$new()
+z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "poisson", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+
+Example
++++++
+
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig)))
+.. .. 
+
+Load sample data:
+
+.. {r, eval = TRUE}
+data(sanction)
+.. ..
+
+Estimate Poisson model:
+
+.. {r, eval = TRUE}
+z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
+.. ..
+
+.. {r, eval = TRUE}
+summary(z.out)
+.. ..
+
+Set values for the explanatory variables to their default mean values:
+
+.. {r, eval = TRUE}
+x.out <- setx(z.out)
+.. ..
+
+Simulate fitted values:
+
+.. {r, eval = TRUE}
+s.out <- sim(z.out, x = x.out)
+summary(s.out)
+.. ..
+
+.. {r Zelig-poisson, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-poisson"}
+plot(s.out)
+.. ..
+
+Model
++++++
+
+Let :math:`Y_i` be the number of independent events that occur during a
+fixed time period. This variable can take any non-negative integer.
+
+-  The Poisson distribution has *stochastic component*
+
+   .. math:: Y_i \; \sim \; \textrm{Poisson}(\lambda_i),
+
+   where :math:`\lambda_i` is the mean and variance parameter.
+
+-  The *systematic component* is
+
+   .. math:: \lambda_i \; = \; \exp(x_i \beta),
+
+   where :math:`x_i` is the vector of explanatory variables, and
+   :math:`\beta` is the vector of coefficients.
+
+Quantities of Interest
++++++
+
+-  The expected value (qi$ev) is the mean of simulations from the
+   stochastic component,
+
+   .. math::
+
+      E(Y) = \lambda_i =  \exp(x_i
+        \beta),
+
+   given draws of :math:`\beta` from its sampling distribution.
+
+-  The predicted value (qi$pr) is a random draw from the poisson
+   distribution defined by mean :math:`\lambda_i`.
+
+-  The first difference in the expected values (qi$fd) is given by:
+
+   .. math:: \textrm{FD} \; = \; E(Y | x_1) - E(Y \mid x)
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   :math:`E[Y_i(t_i=0)]`, the counterfactual expected value of
+   :math:`Y_i` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            \widehat{Y_i(t_i=0)} \right\},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   :math:`\widehat{Y_i(t_i=0)}`, the counterfactual predicted value of
+   :math:`Y_i` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+``z.out <- zelig(y ~ x, model = poisson, data)``, then you may examine
+the available information in ``z.out`` by using ``names(z.out)``, see
+the coefficients by using z.out$coefficients, and a default summary of
+information through ``summary(z.out)``.
+
+See also
++++++
+
+The poisson model is part of the stats package by . Advanced users may
+wish to refer to ``help(glm)`` and ``help(family)``.

@@ -1,0 +1,258 @@
+
+.. _installation_quickstart:
+
+Installation and Quickstart
+=========================
+
+This guide is designed to get you up and running with the current *beta* release of Zelig (5.0-1). 
+
+------------
+
+Installing R and Zelig
+~~~~~~~~~~~~~~~~~~~~
+
+Before using Zelig, you will need to download and install both the R statistical program and the Zelig package:
+
+**Installing R**
+
+To install R, go to `http://www.r-project.org/ <http://www.r-project.org/>`_  Select the ``CRAN`` option from the left-hand menu (CRAN is the Comprehensive R Archive Network where all files related to R can be found). Pick a CRAN mirror closest to your current geographic location (there are multiple mirrors of this database in various locations, selecting the one closest to you will be sure to maximize your the speed of your download).  Follow the instructions for downloading R for Linux, Mac OS X, or Windows. 
+
+------------
+
+**Installing Zelig**
+
+Zelig 5 is not available on ``CRAN`` yet.
+
+*Beta Release*
+
+Beta releases are updated with the latest fixes and newest experimental features, and generally reflect a copy currently being tested before submission to CRAN. To download this release, enter the following into an R console:
+
+
+.. sourcecode:: r
+    
+
+    install.packages("Zelig", type = "source", repos = "http://r.iq.harvard.edu/")
+
+
+*Development Release*
+
+Development versions contain the latest code in-development. This means that the development version contains the latest code which may not be fully tested. To download this release:
+
+
+.. sourcecode:: r
+    
+
+    # This installs devtools package, if not already installed
+    install.packages("devtools")
+    # This loads devtools   	
+    library(devtools)
+    # This downloads Zelig 5.0-1 from the IQSS Github repo
+    install_github('IQSS/Zelig')
+
+
+If you have successfully installed the program, you will see a the following message: *"DONE (Zelig)"*.
+
+------------
+
+Quickstart Guide
+~~~~~~~~~~~~~~~~
+Now that we have successfully downloaded and installed Zelig, we will load the package and walk through am example. The scenario is a simple one: imagine you want to estimate the distance a car needs to stop given its speed and you have a dataset of speed and stopping distances of cars. Throughout the rest of this guide, we will walk you through building a statistical model from this data using Zelig. 
+
+
+**Loading Zelig**
+
+First, we have to load Zelig into R. After installing both R and
+Zelig, open R and type:
+
+
+
+
+.. sourcecode:: r
+    
+
+    library(Zelig)
+
+
+------------
+
+**Building Models**
+
+Now, lets build a statistical model that captures the relationship a cars stopping distance and speed, where distance is the outcome (dependent) variable and speed is the only explanatory (independent) variable. The first decision we must make is what statistical model to test for a relationship between a cars speed and distance required for it to come to a full stop. To do this, we plot the two variables in our dataset to visually inspect any potential relationship:
+
+
+.. sourcecode:: r
+    
+
+    # Scatterplot of car speed and distance required for full stop	
+    plot(cars$speed, cars$dist, main = "Scatterplot of car speed and distance required for full stop", ylab = "Distance (feet)", xlab = "Speed (miles per hour)")
+    # Fit regression line to data 
+    abline(lm(cars$dist ~ cars$speed), col = "firebrick")
+
+.. figure:: figure/Scatterplot-1.png
+    :alt: Scatterplot
+
+    Scatterplot
+
+Also included in the scatter plot is a "best-fit" regression line that indicates a positive and linear relationship between our two variables. This basic test coupled with the fact that our outcome variable (distance) is continuous suggests that an appropriate model to use is least squares regression. 
+
+To fit this model to our data, we must first create Zelig least squares object, then specify our model, and finally regress distance on speed to estimate the relationship between speed and distance:
+
+
+.. sourcecode:: r
+    
+
+    # load dataset (when you install R, example datasets are also installed)
+    data(cars)
+    # initialize Zelig5 least squares object                            
+    z5 <- zls$new()
+    # estimate ls model                     
+    z5$zelig(dist ~ speed, data = cars)
+    # you can now get model summary estimates
+    summary(z5)
+
+
+::
+
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
+    ## Call:
+    ## stats::lm(formula = dist ~ speed, data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)        speed  
+    ##     -17.579        3.932  
+    ## 
+    ## Next step: Use 'setx' method
+
+
+
+So what do our model estimates tell us? First off, we can see that the positive 3.93 estimate for speed suggests a positive relationship between speed and distance a car needs to stop. That is, the faster a car is going, the longer the distance it needs to come to a full stop. In particular, we would interpret this coefficient as a one unit increase in speed (e.g., mph) leads to a 3 unit increase in distance (e.g., miles) needed for a car to stop. This interpretation is not very intuitive, however, and we might be interested in answering a particular question such as how much more distance does a car need to stop if it traveling 30 versus 50 miles per hour.
+
+Zelig makes this simple, by automating the translation of model estimates in interpretable quantities of interest (more on this below) using Monte Carlo simulations. To get this process started we need to set explanatory variables in our model (i.e., speed) using the ``$setx()`` method:
+
+
+.. sourcecode:: r
+    
+
+    # set speed to 30
+    z5$setx(speed = 30)
+    
+    # set speed to 50
+    z5$setx1(speed = 50)
+
+
+Now that we've set our variables, all we have to do is run our simulations:
+
+
+.. sourcecode:: r
+    
+
+    # run simulations and estimate quantities of interest
+    z5$sim()
+    z5
+
+
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean       sd     50%     2.5%    97.5%
+    ## 1 100.4367 6.456612 100.271 87.36823 112.8132
+    ## pv
+    ##       mean       sd     50%     2.5%    97.5%
+    ## 1 100.4367 6.456612 100.271 87.36823 112.8132
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 179.3189 14.58772 178.8619 149.9145 207.5091
+    ## pv
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 179.3189 14.58772 178.8619 149.9145 207.5091
+    ## fd
+    ##       mean       sd      50%     2.5%    97.5%
+    ## 1 78.88218 8.339381 78.46693 62.03455 94.63368
+
+
+
+Now we've estimated a model and calculated interpretable estimates at two speeds (30 versus 50 mph). What can we do with them? Zelig gives you access to estimated quantities of interest and makes plotting and presenting them particularly easy.
+
+------------
+
+**Quantities of Interest**
+
+As mentioned earlier, a major feature of Zelig is the translation of model estimates into easy to interpret quantities of interest (QIs). These QIs (e.g., expected and predicted values) can be accessed via the ``$sim.out`` field:
+
+
+.. sourcecode:: r
+    
+
+    z5$sim.out
+
+
+::
+
+    ## $x
+    ## Source: local data frame [1 x 2]
+    ## Groups: <by row>
+    ## 
+    ##              ev            pv
+    ## 1 <dbl[1000,1]> <dbl[1000,1]>
+    ## 
+    ## $x1
+    ## Source: local data frame [1 x 3]
+    ## Groups: <by row>
+    ## 
+    ##              ev            pv            fd
+    ## 1 <dbl[1000,1]> <dbl[1000,1]> <dbl[1000,1]>
+
+
+
+------------
+
+**Plots**
+
+A second major Zelig feature is how easy it is to plot QIs for presentation in slides or an article. Using the ``plot()`` function on the ``z5$s.out`` will produce ready-to-use plots with labels and confidence intervals.
+
+*Plots of QI's:*  
+
+
+.. sourcecode:: r
+    
+
+    z5$graph()
+
+.. figure:: figure/QIs-1.png
+    :alt: QIs
+
+    QIs
+
+------------
+
+**Help**
+
+Finally, model documentation can be accessed using the ``z5$help()`` method after a model object has been initialized:
+
+
+.. sourcecode:: r
+    
+
+    # documentation for least squares model
+    z5 <- zls$new()
+    z5$help()
+    
+    # documentation for logistic regression
+    z5 <- zlogit$new()
+    z5$help()
+
+
+
+
+
+

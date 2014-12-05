@@ -1,0 +1,346 @@
+.. _zlognorm:
+
+zelig-lognorm
+~~~~~~
+
+Log-Normal Regression for Duration Dependent Variables
+
+The log-normal model describes an event’s duration, the dependent
+variable, as a function of a set of explanatory variables. The
+log-normal model may take time censored dependent variables, and allows
+the hazard rate to increase and decrease.
+
+Syntax
++++++
+
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zlognorm$new()
+    z5$zelig(Surv(Y, C) ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zlognorm$new()
+    z5$zelig(Surv(Y, C) ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Surv(Y, C) ~ X, model = "lognorm", data = mydata)
+    x.out <- setx(z.out)
+    s.out <- sim(z.out, x = x.out)
+
+
+Log-normal models require that the dependent variable be in the form
+Surv(Y, C), where Y and C are vectors of length :math:`n`. For each
+observation :math:`i` in 1, …, :math:`n`, the value :math:`y_i` is the
+duration (lifetime, for example) of each subject, and the associated
+:math:`c_i` is a binary variable such that :math:`c_i = 1` if the
+duration is not censored (*e.g.*, the subject dies during the study) or
+:math:`c_i = 0` if the duration is censored (*e.g.*, the subject is
+still alive at the end of the study). If :math:`c_i` is omitted, all Y
+are assumed to be completed; that is, time defaults to 1 for all
+observations.
+
+Input Values
++++++
+
+In addition to the standard inputs, zelig() takes the following
+additional options for lognormal regression:
+
+-  robust: defaults to FALSE. If TRUE, zelig() computes robust standard
+   errors based on sandwich estimators (see and ) based on the options
+   in cluster.
+
+-  cluster: if robust = TRUE, you may select a variable to define groups
+   of correlated observations. Let x3 be a variable that consists of
+   either discrete numeric values, character strings, or factors that
+   define strata. Then
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", model = "exp", data = mydata)
+
+
+means that the observations can be correlated within the strata
+defined by the variable x3, and that robust standard errors should be
+calculated according to those clusters. If robust = TRUE but cluster
+is not specified, zelig() assumes that each observation falls into
+its own cluster.
+
+Example
++++++
+
+
+
+Attach the sample data:
+
+
+.. sourcecode:: r
+    
+
+    data(coalition)
+
+
+Estimate the model:
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model ="lognorm",  data = coalition)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Matthew Owen, Olivia Lau, Kosuke Imai, Gary King. 2007.
+    ##   lognorm: Log-Normal Regression for Duration Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://zeligproject.org/
+
+
+
+View the regression output:
+
+
+.. sourcecode:: r
+    
+
+    summary(z.out)
+
+
+::
+
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## Call:
+    ## survival::survreg(formula = Surv(duration, ciep12) ~ fract + 
+    ##     numst2, data = ., dist = "lognormal", model = FALSE)
+    ## 
+    ## Coefficients:
+    ## (Intercept)       fract      numst2 
+    ##  5.36666977 -0.00443755  0.55983251 
+    ## 
+    ## Scale= 1.20008 
+    ## 
+    ## Loglik(model)= -1077.9   Loglik(intercept only)= -1101.2
+    ## 	Chisq= 46.58 on 2 degrees of freedom, p= 7.7e-11 
+    ## n= 314 
+    ## Next step: Use 'setx' method
+
+
+
+Set the baseline values (with the ruling coalition in the minority) and
+the alternative values (with the ruling coalition in the majority) for
+X:
+
+
+.. sourcecode:: r
+    
+
+    x.low <- setx(z.out, numst2 = 0)
+    x.high <- setx(z.out, numst2= 1)
+
+
+Simulate expected values (qi$ev) and first differences (qi$fd):
+
+
+.. sourcecode:: r
+    
+
+    s.out <- sim(z.out, x = x.low, x1 = x.high)
+
+
+
+.. sourcecode:: r
+    
+
+    summary(s.out)
+
+
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean      sd      50%     2.5%    97.5%
+    ## 1 18.20966 2.32368 18.11713 14.09047 23.18773
+    ## pv
+    ##       mean      sd      50%     2.5%    97.5%
+    ## 1 18.20966 2.32368 18.11713 14.09047 23.18773
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##       mean      sd      50%    2.5%    97.5%
+    ## 1 31.83706 3.49487 31.61557 25.5344 39.45605
+    ## pv
+    ##       mean      sd      50%    2.5%    97.5%
+    ## 1 31.83706 3.49487 31.61557 25.5344 39.45605
+    ## fd
+    ##      mean       sd      50%     2.5%    97.5%
+    ## 1 13.6274 3.581664 13.47497 7.047508 21.11413
+
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out)
+
+.. figure:: figure/Zelig-lognorm-1.png
+    :alt: Zelig-lognorm
+
+    Zelig-lognorm
+
+Model
++++++
+
+Let :math:`Y_i^*` be the survival time for observation :math:`i` with
+the density function :math:`f(y)` and the corresponding distribution
+function :math:`F(t)=\int_{0}^t f(y) dy`. This variable might be
+censored for some observations at a fixed time :math:`y_c` such that the
+fully observed dependent variable, :math:`Y_i`, is defined as
+
+.. math::
+
+   Y_i = \left\{ \begin{array}{ll}
+         Y_i^* & \textrm{if }Y_i^* \leq y_c \\
+         y_c & \textrm{if }Y_i^* > y_c \\
+       \end{array} \right.
+
+-  The *stochastic component* is described by the distribution of the
+   partially observed variable, :math:`Y^*`. For the lognormal model,
+   there are two equivalent representations:
+
+   .. math::
+
+      \begin{aligned}
+          Y_i^* \; \sim \; \textrm{LogNormal}(\mu_i, \sigma^2) & \textrm{ or
+      } & \log(Y_i^*) \; \sim \; \textrm{Normal}(\mu_i, \sigma^2)\end{aligned}
+
+   where the parameters :math:`\mu_i` and :math:`\sigma^2` are the mean
+   and variance of the Normal distribution. (Note that the output from
+   zelig() parameterizes scale\ :math:` = \sigma`.)
+
+   In addition, survival models like the lognormal have three additional
+   properties. The hazard function :math:`h(t)` measures the probability
+   of not surviving past time :math:`t` given survival up to :math:`t`.
+   In general, the hazard function is equal to :math:`f(t)/S(t)` where
+   the survival function :math:`S(t) =1 - \int_{0}^t f(s) ds` represents the fraction still surviving at
+   time :math:`t`. The cumulative hazard function :math:`H(t)` describes
+   the probability of dying before time :math:`t`. In general,
+   :math:`H(t)=
+   \int_{0}^{t} h(s) ds = -\log S(t)`. In the case of the lognormal
+   model,
+
+   .. math::
+
+      \begin{aligned}
+      h(t) &=& \frac{1}{\sqrt{2 \pi} \, \sigma t \, S(t)}
+      \exp\left\{-\frac{1}{2 \sigma^2} (\log \lambda t)^2\right\} \\
+      S(t) &=& 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \\
+      H(t) &=& -\log \left\{ 1 - \Phi\left(\frac{1}{\sigma} \log \lambda t\right) \right\}\end{aligned}
+
+   where :math:`\Phi(\cdot)` is the cumulative density function for the
+   Normal distribution.
+
+-  The *systematic component* is described as:
+
+   .. math:: \mu_i = x_i \beta .
+
+Quantities of Interest
++++++
+
+-  The expected values (qi$ev) for the lognormal model are simulations
+   of the expected duration:
+
+   .. math:: E(Y) =  \exp\left(\mu_i + \frac{1}{2}\sigma^2 \right),
+
+   given draws of :math:`\beta` and :math:`\sigma` from their sampling
+   distributions.
+
+-  The predicted value is a draw from the log-normal distribution given
+   simulations of the parameters :math:`(\lambda_i, \sigma)`.
+
+-  The first difference (qi$fd) is
+
+   .. math:: \textrm{FD} = E(Y \mid x_1) - E(Y \mid x).
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+   .. math:: \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \{ Y_i(t_i=1) - E[Y_i(t_i=0)] \},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups. When
+   :math:`Y_i(t_i=1)` is censored rather than observed, we replace it
+   with a simulation from the model given available knowledge of the
+   censoring process. Variation in the simulations is due to two
+   factors: uncertainty in the imputation process for censored
+   :math:`y_i^*` and uncertainty in simulating :math:`E[Y_i(t_i=0)]`,
+   the counterfactual expected value of :math:`Y_i` for observations in
+   the treatment group, under the assumption that everything stays the
+   same except that the treatment indicator is switched to
+   :math:`t_i=0`.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i} \sum_{i:t_i=1}^n \{  Y_i(t_i=1) -
+      \widehat{Y_i(t_i=0)} \},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups. When
+   :math:`Y_i(t_i=1)` is censored rather than observed, we replace it
+   with a simulation from the model given available knowledge of the
+   censoring process. Variation in the simulations are due to two
+   factors: uncertainty in the imputation process for censored
+   :math:`y_i^*` and uncertainty in simulating
+   :math:`\widehat{Y_i(t_i=0)}`, the counterfactual predicted value of
+   :math:`Y_i` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+``z.out <- zelig(Surv(Y, C) ~ X, model = lognorm, data)``, then you may
+examine the available information in ``z.out`` by using
+``names(z.out)``, see the coefficients by using z.out$coefficients, and
+a default summary of information through ``summary(z.out)``.
+
+See also
++++++
+
+The exponential function is part of the survival library by by Terry
+Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
+to ``help(survfit)`` in the survival library.

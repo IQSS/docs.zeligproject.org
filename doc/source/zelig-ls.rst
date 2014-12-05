@@ -1,0 +1,320 @@
+.. _zls:
+
+zelig-ls
+~~~~~~
+
+Least Squares Regression for Continuous Dependent Variables
+
+Use least squares regression analysis to estimate the best linear
+predictor for the specified dependent variables.
+
+Syntax
++++++
+
+With reference classes:
+
+
+.. sourcecode:: r
+    
+
+    z5 <- zls$new()
+    z5$zelig(Y ~ X1 + X ~ X, data = mydata)
+    z5$setx()
+    z5$sim()
+
+
+With the Zelig 4 compatibility wrappers:
+
+
+.. sourcecode:: r
+    
+
+    z.out <- zelig(Y ~ X1 + X2, model = "ls", data = mydata)
+    x.out <- setx(z.out)
+    s.out <- sim(z.out, x = x.out)
+
+
+Examples
++++++
+
+
+
+Basic Example with First Differences
+!!!!!
+
+Attach sample data:
+
+
+.. sourcecode:: r
+    
+
+    data(macro)
+
+
+Estimate model:
+
+
+.. sourcecode:: r
+    
+
+    z.out1 <- zelig(unem ~ gdp + capmob + trade, model = "ls", data = macro)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+    ##   ls: Least Squares Regression for Continuous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://zeligproject.org/
+
+
+
+Summarize regression coefficients:
+
+
+.. sourcecode:: r
+    
+
+    summary(z.out1)
+
+
+::
+
+    ## Model: 
+    ## $by
+    ## [1] 1
+    ## 
+    ## 
+    ## Call:
+    ## stats::lm(formula = unem ~ gdp + capmob + trade, data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)          gdp       capmob        trade  
+    ##     6.18129     -0.32360      1.42194      0.01985  
+    ## 
+    ## Next step: Use 'setx' method
+
+
+
+Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for the trade
+variable:
+
+
+.. sourcecode:: r
+    
+
+    x.high <- setx(z.out1, trade = quantile(macro$trade, 0.8))
+    x.low <- setx(z.out1, trade = quantile(macro$trade, 0.2))
+
+
+Generate first differences for the effect of high versus low trade on GDP:
+
+
+.. sourcecode:: r
+    
+
+    s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+
+
+
+.. sourcecode:: r
+    
+
+    summary(s.out1)
+
+
+::
+
+    ## 
+    ##  sim x :
+    ##  -----
+    ## ev
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.434277 0.1942225 5.432482 5.069243 5.824456
+    ## pv
+    ##       mean        sd      50%     2.5%    97.5%
+    ## 1 5.434277 0.1942225 5.432482 5.069243 5.824456
+    ## 
+    ##  sim x1 :
+    ##  -----
+    ## ev
+    ##      mean        sd      50%    2.5%    97.5%
+    ## 1 4.60275 0.1894787 4.599542 4.23341 4.985745
+    ## pv
+    ##      mean        sd      50%    2.5%    97.5%
+    ## 1 4.60275 0.1894787 4.599542 4.23341 4.985745
+    ## fd
+    ##         mean        sd        50%      2.5%      97.5%
+    ## 1 -0.8315266 0.2305207 -0.8288922 -1.310498 -0.4047574
+
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out1)
+
+.. figure:: figure/unnamed-chunk-10-1.png
+    :alt: 
+
+    
+
+Using Dummy Variables
+!!!!!
+
+Estimate a model with fixed effects for each country (see for help
+with dummy variables). Note that you do not need to create dummy
+variables, as the program will automatically parse the unique values
+in the selected variable into discrete levels.
+
+
+.. sourcecode:: r
+    
+
+    z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country), model = "ls", data = macro)
+
+
+::
+
+    ## How to cite this model in Zelig:
+    ##   Kosuke Imai, Gary King, and Olivia Lau. 2007.
+    ##   ls: Least Squares Regression for Continuous Dependent Variables
+    ##   in Kosuke Imai, Gary King, and Olivia Lau, "Zelig: Everyone's Statistical Software,"
+    ##   http://zeligproject.org/
+
+
+
+Set values for the explanatory variables, using the default mean/mode
+values, with country set to the United States and Japan,
+respectively:
+
+
+.. sourcecode:: r
+    
+
+    x.US <- setx(z.out2, country = "United States")
+    x.Japan <- setx(z.out2, country = "Japan")
+
+   
+Simulate quantities of interest:
+
+
+.. sourcecode:: r
+    
+
+    s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+
+
+
+.. sourcecode:: r
+    
+
+    plot(s.out2)
+
+.. figure:: figure/unnamed-chunk-14-1.png
+    :alt: 
+
+    
+
+Model
++++++
+
+-  The *stochastic component* is described by a density with mean
+   :math:`\mu_i` and the common variance :math:`\sigma^2`
+
+   .. math:: Y_i \; \sim \; f(y_i \mid \mu_i, \sigma^2).
+
+-  The *systematic component* models the conditional mean as
+
+   .. math:: \mu_i =  x_i \beta
+
+   where :math:`x_i` is the vector of covariates, and :math:`\beta` is
+   the vector of coefficients.
+
+   The least squares estimator is the best linear predictor of a
+   dependent variable given :math:`x_i`, and minimizes the sum of
+   squared residuals, :math:`\sum_{i=1}^n (Y_i-x_i \beta)^2`.
+
+Quantities of Interest
++++++
+
+-  The expected value (qi$ev) is the mean of simulations from the
+   stochastic component,
+
+   .. math:: E(Y) = x_i \beta,
+
+   given a draw of :math:`\beta` from its sampling distribution.
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
+            E[Y_i(t_i=0)] \right\},
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   :math:`E[Y_i(t_i=0)]`, the counterfactual expected value of
+   :math:`Y_i` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+``z.out <- zelig(y ~ x, model = ls, data)``, then you may examine the
+available information in ``z.out`` by using ``names(z.out)``, see the
+coefficients by using z.out$coefficients, and a default summary of
+information through ``summary(z.out)``. Other elements available through
+the $ operator are listed below.
+
+-  From the zelig() output object z.out, you may extract:
+
+   -  coefficients: parameter estimates for the explanatory variables.
+
+   -  residuals: the working residuals in the final iteration of the
+      IWLS fit.
+
+   -  fitted.values: fitted values.
+
+   -  df.residual: the residual degrees of freedom.
+
+   -  zelig.data: the input data frame if save.data = TRUE.
+
+-  From summary(z.out), you may extract:
+
+   -  coefficients: the parameter estimates with their associated
+      standard errors, :math:`p`-values, and :math:`t`-statistics.
+
+      .. math:: \hat{\beta} \; = \; \left(\sum_{i=1}^n x_i' x_i\right)^{-1} \sum x_i y_i
+
+   -  sigma: the square root of the estimate variance of the random
+      error :math:`e`:
+
+      .. math:: \hat{\sigma} \; = \; \frac{\sum (Y_i-x_i\hat{\beta})^2}{n-k}
+
+   -  r.squared: the fraction of the variance explained by the model.
+
+      .. math::
+
+         R^2 \; = \; 1 - \frac{\sum (Y_i-x_i\hat{\beta})^2}{\sum (y_i -
+                  \bar{y})^2}
+
+   -  adj.r.squared: the above :math:`R^2` statistic, penalizing for an
+      increased number of explanatory variables.
+
+   -  cov.unscaled: a :math:`k \times k` matrix of unscaled covariances.
+
+See also
++++++
+
+The least squares regression is part of the stats package by William N.
+Venables and Brian D. Ripley .In addition, advanced users may wish to
+refer to ``help(lm)`` and ``help(lm.fit)``.
