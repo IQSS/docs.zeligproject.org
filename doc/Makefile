@@ -113,7 +113,9 @@ latex:
 latexpdf:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
-	$(MAKE) -C $(BUILDDIR)/latex all-pdf
+	$(MAKE) LATEXOPTS='--interaction=nonstopmode' -C $(BUILDDIR)/latex all-pdf
+	@echo "FIXME: Stop using "--interaction=nonstopmode"! Why won't the Zelig docs build without this?"
+	@echo "See also http://tex.stackexchange.com/questions/13323/how-to-disable-the-prompt-on-error/13324#13324"
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
 
 latexpdfja:
