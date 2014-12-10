@@ -4,7 +4,7 @@
 Installation and Quickstart
 =========================
 
-This guide is designed to get you up and running with the current *beta* release of Zelig (5.0-1). 
+This guide is designed to get you up and running with the current *beta* release of Zelig (5.0-3). 
 
 ------------
 
@@ -60,6 +60,7 @@ Zelig, open R and type:
 
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
 .. .. 
 
 .. {r, eval = FALSE}	

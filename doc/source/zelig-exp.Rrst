@@ -59,7 +59,7 @@ additional options for exponential regression:
 
 .. {r, eval = FALSE}
 z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
-                        model = "exp", data = mydata)
+               model = "exp", data = mydata)
 .. ..
 
 means that the observations can be correlated within the strata
@@ -73,6 +73,7 @@ Example
 
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
 .. .. 
 
 Attach the sample data:

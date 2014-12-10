@@ -67,6 +67,7 @@ Examples
 
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
 .. .. 
 
 Example with Stationary 3 Dependence
@@ -143,7 +144,8 @@ User-defined correlation structure
 .. {r, eval = TRUE}
 corr.mat <- matrix(rep(0.5, 100), nrow = 10, ncol = 10)
 diag(corr.mat) <- 1
-corr.mat <- fixed2Zcor(corr.mat, id=sorted.turnout$cluster, waves=sorted.turnout$race)
+corr.mat <- fixed2Zcor(corr.mat, id = sorted.turnout$cluster,
+                       waves = sorted.turnout$race)
 .. ..
 
 Generating empirical estimates:

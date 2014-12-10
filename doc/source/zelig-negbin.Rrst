@@ -35,6 +35,7 @@ Example
 
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
 .. .. 
 
 Load sample data:

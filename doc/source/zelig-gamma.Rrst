@@ -38,6 +38,7 @@ Attach the sample data:
 
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
 .. .. 
 
 .. {r, eval = TRUE}

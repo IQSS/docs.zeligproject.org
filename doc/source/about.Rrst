@@ -45,5 +45,11 @@ Release Notes
 
 This release provides a set of core models, while simplifying the model wrapping process, and solving architectural problems by completely rewriting into R’s Reference Classes for a fully object-oriented architecture.
 
+**v 5.0-2**
+
+This release provides the Bayes and GEE model families.
+
+**v 5.0-3**
+
 
 

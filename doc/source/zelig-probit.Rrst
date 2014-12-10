@@ -33,6 +33,7 @@ Example
 
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
 .. .. 
 
 Attach the sample turnout dataset:
