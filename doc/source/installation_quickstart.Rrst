@@ -90,10 +90,10 @@ The -0.8624 coefficient on education suggests a negative relationship between th
 
 .. {r, eval = TRUE}
 # set education to 5
-z5$setx(education = 5)
+z5$setx(Education = 5)
 
 # set education to 15
-z5$setx1(education = 15)
+z5$setx1(Education = 15)
 
 # model summary
 summary(z5)
