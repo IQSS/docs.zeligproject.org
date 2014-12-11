@@ -8,7 +8,9 @@ This section includes technical information on the models currently implemented 
 Reference
 ~~~~~~~~~
 
-The following models are currently supported in Zelig 5.0-1:
+The following models are currently supported in Zelig 5.0-3:
+
+**Core**
 
 - :ref:`Exponential Regression <zexp>`: ``zexp$new()``
 - :ref:`Gamma Regression <zgamma>`: ``zgamma()``
@@ -30,8 +32,19 @@ The following models are currently supported in Zelig 5.0-1:
 - :ref:`Bayesian Tobit Regression <ztobitbayes>`: ``ztobitbayes$new()``
 - :ref:`Generalized Estimating Equation for Gamma Regression <zgammagee>`: ``zgammagee$new()``
 - :ref:`Generalized Estimating Equation for Probit Regression <zprobitgee>`: ``zprobitgee$new()``
-- :ref:`Generalized Estimating Equation for Poisson Regression <zpoissongee>`: ``zpoissongee$new()``
+- :ref:`Generalized Estimating Equation for Poisson Regression
+  <zpoissongee>`: ``zpoissongee$new()``
 
+**Choice**
+
+- :ref:`Bivariate Logistic Regression for Two Dichotomous Dependent Variables <zcblogit>`: ``zblogit$new()``
+- :ref:`Bivariate Probit Regression for Two Dichotomous Dependent
+  Variables <zcbprobit>`: ``zbprobit$new()``
+- :ref:`Multinomial Logistic Regression for Dependent Variables with
+  Unordered Categorical Values <zcmlogit>`: ``zmlogit$new()``
+- :ref:`Ordinal Logistic Regression for Ordered Categorical Dependent
+  Variables <zcologit>`: ``zologit$new()``
+- :ref:`Ordinal Probit Regression for Ordered Categorical Dependent Variables <zcoprobit>`: ``zoprobit$new()``
 
 --------
 
@@ -119,6 +132,26 @@ The following models are currently supported in Zelig 5.0-1:
 
 --------
 
+.. include:: zeligchoice-blogit.rst
+
+--------
+
+.. include:: zeligchoice-bprobit.rst
+
+--------
+
+.. include:: zeligchoice-mlogit.rst
+
+--------
+
+.. include:: zeligchoice-ologit.rst
+
+--------
+
+.. include:: zeligchoice-oprobit.rst
+
+--------
+
 .. toctree::
    :hidden:
 
@@ -143,3 +176,8 @@ The following models are currently supported in Zelig 5.0-1:
    zelig-gammagee.rst
    zelig-probitgee.rst
    zelig-poissongee.rst
+   zeligchoice-blogit.rst
+   zeligchoice-bprobit.rst
+   zeligchoice-mlogit.rst
+   zeligchoice-ologit.rst
+   zeligchoice-oprobit.rst

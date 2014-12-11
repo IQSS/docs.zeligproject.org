@@ -1,0 +1,369 @@
+.. _zcbprobit:
+
+zeligchoice-bprobit
+~~~~~~
+
+Bivariate Probit Regression for Two Dichotomous Dependent Variables
+
+Use the bivariate probit regression model if you have two binary
+dependent variables :math:`(Y_1, Y_2)`, and wish to model them jointly
+as a function of some explanatory variables. Each pair of dependent
+variables :math:`(Y_{i1}, Y_{i2})` has four potential outcomes,
+:math:`(Y_{i1}=1,
+Y_{i2}=1)`, :math:`(Y_{i1}=1, Y_{i2}=0)`, :math:`(Y_{i1}=0, Y_{i2}=1)`,
+and :math:`(Y_{i1}=0, Y_{i2}=0)`. The joint probability for each of
+these four outcomes is modeled with three systematic components: the
+marginal Pr\ :math:`(Y_{i1} = 1)` and Pr\ :math:`(Y_{i2} = 1)`, and the
+correlation parameter :math:`\rho` for the two marginal distributions.
+Each of these systematic components may be modeled as functions of
+(possibly different) sets of explanatory variables.
+
+
+Syntax
++++++
+
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zbprobit$new()
+z5$zelig(cbind(Y1, Y2) ~ X1 + X2 + X3, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(cbind(Y1, Y2) ~ X1 + X2 + X3, 
+               model = "bprobit", data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out, x1 = NULL)
+.. ..
+
+
+Input Values
++++++
+
+In every bivariate probit specification, there are three equations which
+correspond to each dependent variable (:math:`Y_1`, :math:`Y_2`), and
+the correlation parameter :math:`\rho`. Since the correlation parameter
+does not correspond to one of the dependent variables, the model
+estimates :math:`\rho` as a constant by default. Hence, only two
+formulas (for :math:`\mu_1` and :math:`\mu_2`) are required. If the
+explanatory variables for :math:`\mu_1` and :math:`\mu_2` are the same
+and effects are estimated separately for each parameter, you may use the
+following short hand:
+
+.. {r, eval = FALSE}
+fml <- list(cbind(Y1,Y2) ~ X1 + X2)
+.. ..
+
+which has the same meaning as:
+
+.. {r, eval = FALSE}
+fml <- list(mu1 = Y1 ~ X1 + X2, + mu2 = Y2 ~ X1 + X2)
+.. ..
+
+You may use the function tag() to constrain variables across equations.
+The tag() function takes a variable and a label for the effect
+parameter. Below, the constrained effect of x3 in both equations is
+called the age parameter:
+
+.. {r, eval = FALSE}
+fml <- list(mu1 = y1 ~ x1 + tag(x3, “age”), + mu2 = y2 ~ x2 +
+tag(x3, “age”))
+.. ..
+
+You may also constrain different variables across different equations to
+have the same effect.
+
+Examples
++++++
+
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig)))	
+suppressWarnings(suppressMessages(library(ZeligChoice)))
+set.seed(1234)
+.. ..
+
+Basic Example [basic.bp]
+!!!!!
+
+Load the data and estimate the model:
+
+.. {r, eval = TRUE}
+data(sanction)
+.. ..
+
+.. {r, eval = TRUE}
+z.out1 <- zelig(cbind(import, export) ~ coop + cost + target, 
+                model = "bprobit", data = sanction)
+.. ..
+
+
+By default, zelig() estimates two effect parameters for each
+explanatory variable in addition to the correlation coefficient; this
+formulation is parametrically independent (estimating unconstrained
+effects for each explanatory variable), but stochastically dependent
+because the models share a correlation parameter. Generate baseline
+values for the explanatory variables (with cost set to 1, net gain to
+sender) and alternative values (with cost set to 4, major loss to
+sender):
+
+.. {r, eval = TRUE}
+x.low <- setx(z.out1, cost = 1)
+x.high <- setx(z.out1, cost = 4)
+.. ..
+
+Simulate fitted values and first differences:
+
+.. {r, eval = TRUE}
+s.out1 <- sim(z.out1, x = x.low, x1 = x.high)
+.. ..
+
+.. {r, eval = FALSE}
+summary(s.out1)
+.. ..
+
+.. {r, eval = TRUE, Zelig-bprobit-1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-bprobit-1"}
+plot(s.out1)
+.. ..
+
+Joint Estimation of a Model with Different Sets of Explanatory Variables
+!!!!!
+
+Using the sample data ``sanction``, estimate the statistical model,
+with import a function of coop in the first equation and export a function of cost and target in the second equation:
+
+.. {r, eval = FALSE}
+fml2 <- list(mu1 = import ~ coop, mu2 = export ~ cost + target)
+z.out2 <- zelig(fml2, model = "bprobit", data = sanction)
+summary(z.out2)
+.. ..
+
+Set the explanatory variables to their means:
+
+.. {r, eval = FALSE}
+x.out2 <- setx(z.out2)
+.. ..
+
+Simulate draws from the posterior distribution:
+
+.. {r, eval = FALSE}
+s.out2 <- sim(z.out2, x = x.out2)
+summary(s.out2)
+.. ..
+
+.. {r, eval = FALSE}
+plot(s.out2)
+.. ..
+
+
+Joint Estimation of a Parametrically and Stochastically Dependent Model
+!!!!!
+
+Using the sample data ``sanction``. The bivariate model is
+parametrically dependent if :math:`Y_1` and :math:`Y_2` share some or
+all explanatory variables, *and* the effects of the shared explanatory
+variables are jointly estimated. For example,
+
+
+.. {r, eval = FALSE}
+fml3 <- list(mu1 = import   tag(coop,“coop”) + tag(cost,“cost”) + tag(target,“target”),
+             mu2 = export   tag(coop,“coop”) + tag(cost,“cost”) + tag(target,“target”))
+z.out3 <- zelig(fml3, model = “bprobit”, data = sanction)
+summary(z.out3)
+.. ..
+
+Note that this model only returns one parameter estimate for each of
+coop, cost, and target. Contrast this t Example which returns two
+parameter estimates for each of the explanatory variables. Set values for the explanatory variables:
+
+.. {r, eval = FALSE}
+x.out3 <- setx(z.out3, cost = 1:4)
+.. ..
+
+Draw simulated expected values:
+
+.. {r, eval = FALSE}
+s.out3 <- sim(z.out3, x = x.out3)
+summary(s.out3)
+.. ..
+
+Model
++++++
+
+For each observation, define two binary dependent variables, :math:`Y_1`
+and :math:`Y_2`, each of which take the value of either 0 or 1 (in the
+following, we suppress the observation index :math:`i`). We model the
+joint outcome :math:`(Y_1`, :math:`Y_2)` using two marginal
+probabilities for each dependent variable, and the correlation
+parameter, which describes how the two dependent variables are related.
+
+-  The *stochastic component* is described by two latent (unobserved)
+   continuous variables which follow the bivariate Normal distribution:
+
+   .. math::
+
+      \begin{aligned}
+        \left ( \begin{array}{c} 
+            Y_1^* \\
+            Y_2^* 
+          \end{array}
+        \right ) &\sim &  
+        N_2 \left \{ \left ( 
+            \begin{array}{c}
+              \mu_1 \\ \mu_2
+            \end{array} \right ), \left( \begin{array}{cc}
+                       1 & \rho \\
+                       \rho & 1 
+                       \end{array} \right) \right\},\end{aligned}
+
+   where :math:`\mu_j` is a mean for :math:`Y_j^*` and :math:`\rho` is a
+   scalar correlation parameter. The following observation mechanism
+   links the observed dependent variables, :math:`Y_j`, with these
+   latent variables
+
+   .. math::
+
+      \begin{aligned}
+      Y_j & = & \left \{ \begin{array}{cc}
+                         1 & {\rm if} \; Y_j^* \ge 0, \\
+                         0 & {\rm otherwise.}
+                         \end{array} 
+                         \right.\end{aligned}
+
+-  The *systemic components* for each observation are
+
+   .. math::
+
+      \begin{aligned}
+          \mu_j & = & x_{j} \beta_j \quad {\rm for} \quad j=1,2, \\
+          \rho & = & \frac{\exp(x_3 \beta_3) - 1}{\exp(x_3 \beta_3) + 1}.\end{aligned}
+
+Quantities of Interest
++++++
+
+For :math:`n` simulations, expected values form an :math:`n \times 4`
+matrix.
+
+-  The expected values (qi$ev) for the binomial probit model are the
+   predicted joint probabilities. Simulations of :math:`\beta_1`,
+   :math:`\beta_2`, and :math:`\beta_3` (drawn form their sampling
+   distributions) are substituted into the systematic components, to
+   find simulations of the predicted joint probabilities
+   :math:`\pi_{rs}=\Pr(Y_1=r, Y_2=s)`:
+
+   .. math::
+
+      \begin{aligned}
+      \pi_{11} &= \Pr(Y_1^* \geq 0 , Y_2^* \geq 0) &= \int_0^{\infty}
+      \int_0^{\infty} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^* \\
+      \pi_{10} &= \Pr(Y_1^* \geq 0 , Y_2^* < 0)  &= \int_0^{\infty}
+      \int_{-\infty}^{0} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^*\\
+      \pi_{01} &= \Pr(Y_1^* < 0 , Y_2^* \geq 0)  &= \int_{-\infty}^{0}
+      \int_0^{\infty} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^*\\
+      \pi_{11} &= \Pr(Y_1^* < 0 , Y_2^* < 0)  &= \int_{-\infty}^{0}
+      \int_{-\infty}^{0} \phi_2 (\mu_1, \mu_2, \rho) \, dY_2^*\, dY_1^*\\\end{aligned}
+
+   where :math:`r` and :math:`s` may take a value of either 0 or 1,
+   :math:`\phi_2` is the bivariate Normal density.
+
+-  The predicted values (qi$pr) are draws from the multinomial
+   distribution given the expected joint probabilities.
+
+-  The first difference (qi$fd) in each of the predicted joint
+   probabilities are given by
+
+   .. math::
+
+      \textrm{FD}_{rs} = \Pr(Y_1=r, Y_2=s \mid x_1)-\Pr(Y_1=r, Y_2=s
+        \mid x).
+
+-  The risk ratio (qi$rr) for each of the predicted joint probabilities
+   are given by
+
+   .. math:: \textrm{RR}_{rs} = \frac{\Pr(Y_1=r, Y_2=s \mid x_1)}{\Pr(Y_1=r, Y_2=s \mid x)}.
+
+-  In conditional prediction models, the average expected treatment
+   effect (att.ev) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_{ij}(t_i=1) -
+            E[Y_{ij}(t_i=0)] \right\} \textrm{ for } j = 1,2,
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   :math:`E[Y_{ij}(t_i=0)]`, the counterfactual expected value of
+   :math:`Y_{ij}` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+-  In conditional prediction models, the average predicted treatment
+   effect (att.pr) for the treatment group is
+
+   .. math::
+
+      \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_{ij}(t_i=1) -
+            \widehat{Y_{ij}(t_i=0)}\right\} \textrm{ for } j = 1,2,
+
+   where :math:`t_i` is a binary explanatory variable defining the
+   treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups.
+   Variation in the simulations are due to uncertainty in simulating
+   :math:`\widehat{Y_{ij}(t_i=0)}`, the counterfactual predicted value
+   of :math:`Y_{ij}` for observations in the treatment group, under the
+   assumption that everything stays the same except that the treatment
+   indicator is switched to :math:`t_i=0`.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+``z.out <- zelig(y ~ x, model = bprobit, data)``, then you may examine
+the available information in ``z.out`` by using ``names(z.out)``, see
+the coefficients by using z.out$coefficients, and obtain a default
+summary of information through ``summary(z.out)``. Other elements
+available through the $ operator are listed below.
+
+-  From the zelig() output object z.out, you may extract:
+
+   -  coefficients: the named vector of coefficients.
+
+   -  fitted.values: an :math:`n \times 4` matrix of the in-sample
+      fitted values.
+
+   -  predictors: an :math:`n \times 3` matrix of the linear predictors
+      :math:`x_j \beta_j`.
+
+   -  residuals: an :math:`n \times 3` matrix of the residuals.
+
+   -  df.residual: the residual degrees of freedom.
+
+   -  df.total: the total degrees of freedom.
+
+   -  rss: the residual sum of squares.
+
+   -  y: an :math:`n \times 2` matrix of the dependent variables.
+
+   -  zelig.data: the input data frame if save.data = TRUE.
+
+-  From summary(z.out), you may extract:
+
+   -  coef3: a table of the coefficients with their associated standard
+      errors and :math:`t`-statistics.
+
+   -  cov.unscaled: the variance-covariance matrix.
+
+   -  pearson.resid: an :math:`n \times 3` matrix of the Pearson
+      residuals.
+
+
+See also
++++++
+
+The bivariate probit function is part of the VGAM package by Thomas
+Yee. In addition, advanced users may wish to refer to ``help(vglm)``
+in the VGAM library.
