@@ -86,7 +86,7 @@ z5$zelig(Fertility ~ Education, data = swiss)
 summary(z5)
 .. ..
 
-The -0.8624 coefficient on education suggests a negative relationship between the education of a province and its fertility rate. More precisely, a one unit increase in education leads to a 0.8624 unit decrease in fertility. Although this finding is interesting in and of itself, we might be interested in other quantities of interest, such as expected values or first differences.  Zelig makes this simple by automating the translation of model estimates into interpretable quantities of interest  using Monte Carlo simulations (see King, Tomz, and Wittenberg (2000) for more information). For example, let's say we want to examine the effect of increasing education from 5 to 15.  To do so, we set our covariate values using the setx() method:
+The -0.8624 coefficient on education suggests a negative relationship between the education of a province and its fertility rate. More precisely, for every one percent increase in draftees educated beyond primary school, the fertility rate of the province decreases 0.8624 units.  To help us better interpret this finding, we may want other quantities of interest, such as expected values or first differences.  Zelig makes this simple by automating the translation of model estimates into interpretable quantities of interest using Monte Carlo simulation methods (see King, Tomz, and Wittenberg (2000) for more information). For example, let's say we want to examine the effect of increasing the percent of draftees educated from 5 to 15.  To do so, we set our predictor value using the setx() method:
 
 .. {r, eval = TRUE}
 # set education to 5
@@ -99,7 +99,7 @@ z5$setx1(Education = 15)
 summary(z5)
 .. ..
 
-After setting our covariate values, we simulate using the sim() method:
+After setting our predictor value, we simulate using the sim() method:
 
 .. {r, eval = TRUE}	
 # run simulations and estimate quantities of interest
@@ -109,7 +109,7 @@ z5$sim()
 summary(z5)
 .. ..
 
-At this point, we've estimated a model, set covariate values, and estimated easily interpretable quantities of interest. The summary() method shows us our quantities of interest, in this case our expected values and predicted values at each level of education, as well as our first differences--the difference in expected values at the set levels of education.
+At this point, we've estimated a model, set the predictor value, and estimated easily interpretable quantities of interest. The summary() method shows us our quantities of interest, namely, our expected and predicted values at each level of education, as well as our first differences--the difference in expected values at the set levels of education.
 
 ------------
 
