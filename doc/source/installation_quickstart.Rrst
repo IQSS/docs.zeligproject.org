@@ -40,7 +40,7 @@ Development versions contain the latest code in-development, and may not be full
 install.packages("devtools")
 # This loads devtools   	
 library(devtools)
-# This downloads Zelig 5.0-1 from the IQSS Github repo
+# This downloads Zelig 5.0-3 from the IQSS Github repo
 install_github('IQSS/Zelig')
 .. ..	
 
