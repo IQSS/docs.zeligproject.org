@@ -33,3 +33,17 @@ iframe {
 a.headerlink {
 	display: none;
 }
+
+#sidebar.bs-sidenav {
+	background-color: #E0E5E0;
+}
+
+.bs-sidenav .nav > li > a:hover, .bs-sidenav .nav > li > a:focus {
+    background-color: #E0E0E5;
+    border-right: 1px solid #dbd8e0;
+    text-decoration: none;
+}
+
+#sidebar.bs-sidenav.affix {
+	position: static;
+}
