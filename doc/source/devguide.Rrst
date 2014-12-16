@@ -188,7 +188,7 @@ tree, executing all commands inside initialize() and after callSuper(),
 first in Zelig, then Zelig-glm, then Zelig-binchoice, and lastly
 Zelig-logit. We can see a picture of this in Figure [fig:zelig].
 
-|image| [fig:zelig]
+.. image:: _static/zelig_initialize.pdf [fig:zelig]
 
 So, to summarize: upon executing :math:`z5 \leftarrow zlogit\$new()`, we
 callSuper() inside initialize(), beginning at the end of the inheritance
