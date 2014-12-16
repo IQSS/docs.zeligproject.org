@@ -43,8 +43,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Zelig Documentation'
-copyright = u'2014, The Zelig Team'
+project = u'Zelig'
+copyright = u'2014 The President and Fellows of Harvard College'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
