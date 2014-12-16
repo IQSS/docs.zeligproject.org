@@ -5,14 +5,19 @@ setwd("source/")
 lf <- list.files(".", pattern = ".Rrst")
 
 for (f in lf) {
-  knit(f)
-  purl(f)
+    knit(f)
+    purl(f)
 }
 
-## lfmd <- list.files(".", pattern = ".Rmd")
 
-## for (f in lfmd) {
-##   knitr::knit2html(f)
-## }
+lf <- list.files(".", pattern = "\\.rst$")
+
+for (f in lf) {
+    input <- readLines(f)
+    input <- c(".. raw:: html",
+               "    :file: zelignav.html\n",
+               input)
+    writeLines(input, f)
+}
 
 setwd("..")

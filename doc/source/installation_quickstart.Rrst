@@ -1,4 +1,3 @@
-
 .. _installation_quickstart:
 
 Installation and Quickstart
@@ -135,8 +134,4 @@ z5$help()
 z5 <- zlogit$new()
 z5$help()
 .. ..
-
-
-
-
 
