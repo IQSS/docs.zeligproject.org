@@ -25,7 +25,7 @@ With **three simple commands**, Zelig’s intuitive **model bridging** interface
                 <p class="help-block">Inheritance Tree</p>
 
 .. raw:: html
-   :file: http://zeligproject.org/_static/modelstree.html
+   :file: _static/modelstree.html
 
 .. raw:: html
 

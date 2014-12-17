@@ -1,0 +1,810 @@
+{
+    "zelig5models": {
+        "ls": {
+            "name": [
+                "ls"
+            ],
+            "description": [
+                "Least Squares Regression for Continuous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "continous"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-ls.html"
+            ],
+            "wrapper": [
+                "ls"
+            ],
+            "tree": [
+                "Zelig-ls"
+            ]
+        },
+        "logit": {
+            "name": [
+                "logit"
+            ],
+            "description": [
+                "Logistic Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "binary"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-logit.html"
+            ],
+            "wrapper": [
+                "logit"
+            ],
+            "tree": [
+                "Zelig-logit",
+                "Zelig-binchoice",
+                "Zelig-glm"
+            ]
+        },
+        "probit": {
+            "name": [
+                "probit"
+            ],
+            "description": [
+                "Probit Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "binary"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-probit.html"
+            ],
+            "wrapper": [
+                "probit"
+            ],
+            "tree": [
+                "Zelig-probit",
+                "Zelig-binchoice",
+                "Zelig-glm"
+            ]
+        },
+        "poisson": {
+            "name": [
+                "poisson"
+            ],
+            "description": [
+                "Poisson Regression for Event Count Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "discrete"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-poisson.html"
+            ],
+            "wrapper": [
+                "poisson"
+            ],
+            "tree": [
+                "Zelig-poisson",
+                "Zelig-glm"
+            ]
+        },
+        "normal": {
+            "name": [
+                "normal"
+            ],
+            "description": [
+                "Normal Regression for Continuous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "continuous"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-normal.html"
+            ],
+            "wrapper": [
+                "normal"
+            ],
+            "tree": [
+                "Zelig-normal",
+                "Zelig-glm"
+            ]
+        },
+        "gamma": {
+            "name": [
+                "gamma"
+            ],
+            "description": [
+                "Gamma Regression for Continuous, Positive Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "continous"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-gamma.html"
+            ],
+            "wrapper": [
+                "gamma"
+            ],
+            "tree": [
+                "Zelig-gamma",
+                "Zelig-glm"
+            ]
+        },
+        "negbin": {
+            "name": [
+                "negbin"
+            ],
+            "description": [
+                "Negative Binomial Regression for Event Count Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "discrete"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-negbin.html"
+            ],
+            "wrapper": [
+                "negbin"
+            ],
+            "tree": [
+                "Zelig-negbin"
+            ]
+        },
+        "exp": {
+            "name": [
+                "exp"
+            ],
+            "description": [
+                "Exponential Regression for Duration Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "continous"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-exp.html"
+            ],
+            "wrapper": [
+                "exp"
+            ],
+            "tree": [
+                "Zelig-exp"
+            ]
+        },
+        "lognorm": {
+            "name": [
+                "lognorm"
+            ],
+            "description": [
+                "Log-Normal Regression for Duration Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "discrete"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-lognorm.html"
+            ],
+            "wrapper": [
+                "lognorm"
+            ],
+            "tree": [
+                "Zelig-lognorm"
+            ]
+        },
+        "tobit": {
+            "name": [
+                "tobit"
+            ],
+            "description": [
+                "Linear regression for Left-Censored Dependent Variable"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "continous"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-tobit.html"
+            ],
+            "wrapper": [
+                "tobit"
+            ],
+            "tree": [
+                "Zelig-tobit"
+            ]
+        },
+        "quantile": {
+            "name": [
+                "quantile"
+            ],
+            "description": [
+                "Quantile Regression for Continuous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "continuous"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-quantile.html"
+            ],
+            "wrapper": [
+                "wrapper"
+            ],
+            "tree": [
+                "Zelig-quantile"
+            ]
+        },
+        "logitgee": {
+            "name": [
+                "logit-gee"
+            ],
+            "description": [
+                "General Estimating Equation for Logistic Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-logit-gee.html"
+            ],
+            "wrapper": [
+                "wrapper"
+            ],
+            "tree": [
+                "Zelig-logit-gee",
+                "Zelig-binchoice-gee",
+                "Zelig-gee",
+                "Zelig-binchoice"
+            ]
+        },
+        "probitgee": {
+            "name": [
+                "probit-gee"
+            ],
+            "description": [
+                "General Estimating Equation for Probit Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-probit-gee.html"
+            ],
+            "wrapper": [
+                "probit.gee"
+            ],
+            "tree": [
+                "Zelig-probit-gee",
+                "Zelig-binchoice-gee",
+                "Zelig-gee",
+                "Zelig-binchoice"
+            ]
+        },
+        "gammagee": {
+            "name": [
+                "gamma-gee"
+            ],
+            "description": [
+                "General Estimating Equation for Gamma Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-gamma-gee.html"
+            ],
+            "wrapper": [
+                "gamma.gee"
+            ],
+            "tree": [
+                "Zelig-gamma-gee",
+                "Zelig-gee",
+                "Zelig-gamma"
+            ]
+        },
+        "normalgee": {
+            "name": [
+                "normal-gee"
+            ],
+            "description": [
+                "General Estimating Equation for Normal Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-normal-gee.html"
+            ],
+            "wrapper": [
+                "wrapper"
+            ],
+            "tree": [
+                "Zelig-normal-gee",
+                "Zelig-gee",
+                "Zelig-normal"
+            ]
+        },
+        "poissongee": {
+            "name": [
+                "poisson-gee"
+            ],
+            "description": [
+                "General Estimating Equation for Poisson Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-poisson-gee.html"
+            ],
+            "wrapper": [
+                "poisson.gee"
+            ],
+            "tree": [
+                "Zelig-poisson-gee",
+                "Zelig-gee",
+                "Zelig-poisson"
+            ]
+        },
+        "factorbayes": {
+            "name": [
+                "factor-bayes"
+            ],
+            "description": [
+                "Bayesian Factor Analysis"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-factor-bayes.html"
+            ],
+            "wrapper": [
+                "factor.bayes"
+            ],
+            "tree": [
+                "Zelig-factor-bayes"
+            ]
+        },
+        "logitbayes": {
+            "name": [
+                "logit-bayes"
+            ],
+            "description": [
+                "Bayesian Logistic Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-logit-bayes.html"
+            ],
+            "wrapper": [
+                "logit.bayes"
+            ],
+            "tree": [
+                "Zelig-logit-bayes",
+                "Zelig-bayes",
+                "Zelig-logit"
+            ]
+        },
+        "mlogitbayes": {
+            "name": [
+                "mlogit-bayes"
+            ],
+            "description": [
+                "Bayesian Multinomial Logistic Regression for Dependent Variables with Unordered Categorical Values"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-mlogit-bayes.html"
+            ],
+            "wrapper": [
+                "mlogit.bayes"
+            ],
+            "tree": [
+                "Zelig-mlogit-bayes",
+                "Zelig-bayes"
+            ]
+        },
+        "normalbayes": {
+            "name": [
+                "normal-bayes"
+            ],
+            "description": [
+                "Bayesian Normal Linear Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-normal-bayes.html"
+            ],
+            "wrapper": [
+                "wrapper"
+            ],
+            "tree": [
+                "Zelig-normal-bayes",
+                "Zelig-bayes",
+                "Zelig-normal"
+            ]
+        },
+        "oprobitbayes": {
+            "name": [
+                "oprobit-bayes"
+            ],
+            "description": [
+                "Bayesian Probit Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-oprobit-bayes.html"
+            ],
+            "wrapper": [
+                "oprobit.bayes"
+            ],
+            "tree": [
+                "Zelig-oprobit-bayes",
+                "Zelig-bayes"
+            ]
+        },
+        "poissonbayes": {
+            "name": [
+                "poisson-bayes"
+            ],
+            "description": [
+                "Bayesian Poisson Regression"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-poisson-bayes.html"
+            ],
+            "wrapper": [
+                "poisson.bayes"
+            ],
+            "tree": [
+                "Zelig-poisson-bayes",
+                "Zelig-bayes",
+                "Zelig-poisson"
+            ]
+        },
+        "probitbayes": {
+            "name": [
+                "probit-bayes"
+            ],
+            "description": [
+                "Bayesian Probit Regression for Dichotomous Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-probit-bayes.html"
+            ],
+            "wrapper": [
+                "wrapper"
+            ],
+            "tree": [
+                "Zelig-probit-bayes",
+                "Zelig-bayes",
+                "Zelig-probit"
+            ]
+        },
+        "tobitbayes": {
+            "name": [
+                "tobit-bayes"
+            ],
+            "description": [
+                "Bayesian Tobit Regression for a Censored Dependent Variable"
+            ],
+            "outcome": {
+                "modelingType": [
+                    ""
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-tobit-bayes.html"
+            ],
+            "wrapper": [
+                "tobit.bayes"
+            ],
+            "tree": [
+                "Zelig-tobit-bayes",
+                "Zelig-bayes",
+                "Zelig-tobit"
+            ]
+        },
+        "weibull": {
+            "name": [
+                "weibull"
+            ],
+            "description": [
+                "Weibull Regression for Duration Dependent Variables"
+            ],
+            "outcome": {
+                "modelingType": [
+                    "bounded"
+                ]
+            },
+            "explanatory": {
+                "modelingType": [
+                    "continuous",
+                    "discrete",
+                    "nominal",
+                    "ordinal",
+                    "binary"
+                ]
+            },
+            "vignette.url": [
+                "http://docs.zeligproject.org/zelig-weibull.html"
+            ],
+            "wrapper": [
+                "weibull"
+            ],
+            "tree": [
+                "Zelig-weibull"
+            ]
+        }
+    }
+}
