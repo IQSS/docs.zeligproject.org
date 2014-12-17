@@ -9,7 +9,7 @@ With **three simple commands**, Zelig’s intuitive **model bridging** interface
 
 	<div class="panel panel-default">
 	  <div class="panel-body text-center">
-	    <img src="_static/zeligmodels.png" alt="Zelig Models" />
+	    <img src="_static/images/zeligmodels.png" alt="Zelig Models" />
 	  </div>
 	  <div class="panel-footer">Explore all models supported in Zelig 5.</div>
 	</div>
