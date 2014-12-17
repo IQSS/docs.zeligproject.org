@@ -7,11 +7,10 @@ This is a guide for contributing to the Zelig Project by adding new
 statistical models into Zelig. Before getting started, familiarize
 yourself with R’s Reference Classes (RCs), as Zelig5 makes extensive use
 of RCs to allow for the straightforward addition of new models. Useful
-resources include Hadley Wickham’s ` <http://adv-r.had.co.nz/R5.html>`__
-chapter, and R’s
-` <https://stat.ethz.ch/R-manual/R-devel/library/methods/html/refClass.html>`__.
-Be sure to read for the underlying algorithm that is deployed in Zelig.
-Finally, explore ` <http://zeligproject.org>`__ to learn more about
+resources include Hadley Wickham’s `chapter on Reference Classes <http://adv-r.had.co.nz/R5.html/>`_, and R’s
+`ReferenceClasses documentation <https://stat.ethz.ch/R-manual/R-devel/library/methods/html/refClass.html>`_.
+Be sure to read `King, Tomz, and Wittenberg (2000) <http://gking.harvard.edu/files/making.pdf>`_ for the underlying algorithm that is deployed in Zelig.
+Finally, explore `zeligproject.org <http://zeligproject.org>`_ to learn more about
 Zelig and our plans for the future.
 
 In the abstract, Zelig is a tool for estimating and visualizing easily
