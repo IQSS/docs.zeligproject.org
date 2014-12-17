@@ -43,7 +43,7 @@ the method. ``zelig()`` is the method that calls the existing function,
 which for logistic regression is ``glm()``. The arguments we pass to
 ``zelig()`` are, minimally, the arguments we would pass to ``glm()`` if
 we were to call it directly. ``zelig()`` also accepts some arguments
-that may not be accepted by the existing function, such as ``by``. [1]_
+that may not be accepted by the existing function, such as **by**. [1]_
 ``setx()`` is a function that sets the predictor values at which we want
 to simulate. In most implementations, ``setx()`` is independent of the
 model and contributors need not be concerned with it. ``sim()`` is the
@@ -63,8 +63,8 @@ make it easier to see how the package works in its entirety.
 Getting Started
 ~~~~~
 
-Go to ` <http://www.rstudio.com>`__ to download and install the latest
-version of RStudio. Then, go to ` <https://github.com/IQSS/Zelig>`__ and
+Go to `RStudio <http://www.rstudio.com>`_ to download and install the latest
+version of RStudio. Then, go to `github.com/IQSS/Zelig <https://github.com/IQSS/Zelig>`_ and
 download Zelig.
 
 In the lower right panel of RStudio, click the Files tab, and open
@@ -72,8 +72,8 @@ In the lower right panel of RStudio, click the Files tab, and open
 *Zelig.Rproj*. In the upper right panel, click the Build tab, and then
 click Build & Reload. This rebuilds the package and loads it into R.
 
-Still in RStudio, in the upper left panel, open the following files,
-found in Zelig-master/R:
+Next, while still in RStudio, in the upper left panel, open the following files,
+found in *Zelig-master/R*:
 
 -  model-zelig.R
 
@@ -85,9 +85,9 @@ found in Zelig-master/R:
 
 If you’re new to RStudio or would like to better understand what’s going
 on, add a print statement and rebuild the package. For example, inside
-*model-zelig.R*, find ``zelig = function``. This is where the
+*model-zelig.R*, find "zelig = function". This is where the
 ``zelig()`` method is declared. Inside the ``zelig()`` method, add a
-line, ``cat(Zelig)``. Save, and then click Build & Reload in the upper
+line, ``cat('Zelig')``. Save, and then click Build & Reload in the upper
 right panel. In the R console:
 
 .. {r, eval = FALSE}
@@ -104,16 +104,16 @@ Reference Classes and Inheritance
 RCs have three important properties: (1) they contain fields, (2) they
 contain methods, and (3) they can inherit fields and methods from other
 RCs. See the Inheritance Tree at
-`nolinkurlhttp://zeligproject.org/models.html <http://zeligproject.org/models.html>`__.
+`zeligproject.org/models <http://zeligproject.org/models.html>`_.
 Notice that *Zelig-logit* inherits from *Zelig-binchoice*, *Zelig-glm*,
 and *Zelig*. Each of these nodes in the Inheritance Tree corresponds to
 a file that we have opened in RStudio.
 
-To contribute a new package, you’ll *minimally* inherit from Zelig. But,
+To contribute a new package, you’ll *minimally* inherit from *Zelig*. But,
 you may extend the inheritance or inherit additional classes, depending
 on the way your model relates to others. There is no correct answer to
 inheritance, only what’s logical. Consider logit’s inheritance.
-Zelig-glm inherits from Zelig, and the ``glm()`` function can be used to
+*Zelig-glm* inherits from *Zelig*, and the ``glm()`` function can be used to
 estimate the following five models: gamma, normal, poisson, probit, and
 logit. Look at these poisson, logit, and probit estimations:
 
@@ -123,19 +123,19 @@ fit.logit <- glm(vote ∼ age, data=turnout, family=binomial("logit"))
 fit.probit <- glm(vote ∼ age, data=turnout, family=binomial("probit"))
 .. ..
 
-The family argument is what distinguishes these three estimations, but
-notice that, while poisson’s family is poisson(), logit’s and probit’s
-family are both binomial(). So, while poisson may inherit from Zelig-glm
+The **family** argument is what distinguishes these three estimations, but
+notice that, while poisson’s **family** is ``poisson()``, logit’s and probit’s
+**family** are both ``binomial()``. So, while poisson may inherit from *Zelig-glm*
 and stop there, logit and probit go one step further and inherit from an
-intermediary class called Zelig-binchoice, which inherits from
-Zelig-glm.
+intermediary class called *Zelig-binchoice*, which inherits from
+*Zelig-glm*.
 
-The Zelig Archictecture
+The Zelig Methods
 ~~~~~
 
 A commonly used implementation of the logistic regression is the
-``glm()`` function in ``stats``. Load Zelig’s ``turnout`` data with
-``data(turnout)``, and estimate the :math:`vote \sim age` using
+``glm()`` function in ``stats``. Load Zelig’s 'turnout' data with
+``data(turnout)``, and estimate :math:`vote \sim age` using
 ``glm()``:
 
 .. {r, eval = FALSE}
@@ -156,60 +156,59 @@ We initialize the Zelig object when users enter
 :math:`z5 \leftarrow zlogit\$new()` in the R console. This is when all
 the information necessary to wrap the logit model using glm() is
 initialized, and is accomplished using the ``initialize()`` method. To
-understand how the Zelig object is initialized, we should first
-understand the inheritance. When we write an RC object, we can specify
-another RC object whose fields and methods will be inherited by our
-object. Recall logit’s inheritance:
+understand how the Zelig object is initialized, let's first
+explore the inheritance. When we write a RC, we can specify
+another RC whose fields and methods will be inherited by our
+RC. Recall logit’s inheritance:
 
 ``    Zelig ``\ :math:`\rightarrow`\ `` Zelig-glm ``\ :math:`\rightarrow`\ `` Zelig-binchoice ``\ :math:`\rightarrow`\ `` Zelig-logit ``
 
 Look at the first lines of code in each of the files opened in RStudio,
-and you’ll see ``setRefClass()``. The chain of inheritance is written
-using ``contains``. Starting at the end of the inheritance tree, the RC
-Zelig-logit contains, or inherits from, the RC Zelig-binchoice, which
-inherits from the RC Zelig-glm, which inherits from the RC Zelig. In
-Zelig, we establish our most basic fields and methods, and get more
+and you’ll see ``setRefClass()``. The chain of inheritance is passed
+using the **contains** argument. Starting at the end of the inheritance tree, the RC
+*Zelig-logit* contains, or inherits from, the RC *Zelig-binchoice*, which
+inherits from the RC *Zelig-glm*, which inherits from the *RC Zelig*. In
+*Zelig*, we establish our most basic fields and methods, and get more
 specific as we move down the inheritance.
 
-When ``zlogit$new()`` is called, we actually call initialize() first at
-the end of the inheritance, inside Zelig-logit. Look inside
-model-logit.R at initialize(). The first line is callSuper().
-callSuper() is a method that is common to all RCs, and useful
+When ``zlogit$new()`` is called, we actually call ``initialize()`` first at
+the end of the inheritance, inside *Zelig-logit*. Look inside
+*model-logit.R* at initialize(). The first line is callSuper().
+``callSuper()`` is a method that is common to all RCs, and useful
 particularly for inheritance. What it does it simple: it calls the same
 function in the parent object, or the object that the present object
-inherits from. So, since Zelig-logit inherits from Zelig-binchoice,
-callSuper() in initialize() calls initialize() inside Zelig-binchoice,
+inherits from. So, since *Zelig-logit inherits* from *Zelig-binchoice*,
+callSuper() in initialize() calls initialize() inside *Zelig-binchoice*,
 where the first command is also callSuper(), and so initialize() is
-called in Zelig-glm, where the first command is also callSuper(), and so
-initialize() is called in Zelig. Zelig is at the top of the tree, and so
+called in *Zelig-glm*, where the first command is also callSuper(), and so
+initialize() is called in *Zelig*. *Zelig* is at the top of the tree, and so
 now that we have climbed up the inheritance tree, we next climb down the
 tree, executing all commands inside initialize() and after callSuper(),
-first in Zelig, then Zelig-glm, then Zelig-binchoice, and lastly
-Zelig-logit. 
+first in *Zelig*, then *Zelig-glm*, then *Zelig-binchoice*, and lastly
+*Zelig-logit*.  See the figure below for a description of this process.
 
 .. image:: _static/zelig_initialize.pdf
 
 So, to summarize: upon executing :math:`z5 \leftarrow zlogit\$new()`, we
 callSuper() inside initialize(), beginning at the end of the inheritance
-(Zelig-logit) and climbing to the top (Zelig). Then, for each RC,
+(*Zelig-logit*) and climbing to the top (*Zelig*). Then, for each RC,
 everything below callSuper() inside initialize() is executed, beginning
-at the top of the inheritance (Zelig) and climbing down (Zelig-logit).
-This amounts to assigning values to fields, e.g., in Zelig
-``.self$authors \leftarrow Kosuke Imai, Gary King, and Olivia Lau``, and
-in Zelig-logit, ``.self$link \leftarrow logit``. Doing so initializes
-our Zelig object, which now waits for zelig() to be called.
+at the top of the inheritance (*Zelig*) and climbing down (*Zelig-logit*), assigning the RC's fields as we descend.
+For example, in *Zelig*
+``.self$authors <- "Kosuke Imai, Gary King, and Olivia Lau"``, and
+in *Zelig-logit*, ``.self$link <- "logit"``. Doing so initializes
+our Zelig object, which now waits for ``zelig()`` to be called.
 
 zelig()
 +++++
 
-zelig() is more interesting than initialize() and will help to make
-sense of why initialize() specifies the fields that it does. Look at
-zelig() inside model-glm.R, the last RC in the inheritance to modify
+``zelig()`` will help to make
+sense of why ``initialize()`` specifies the fields that it does. Let's look at
+zelig() inside *model-glm.R*, the last RC in the inheritance to modify
 zelig(). Recall that in initialize(), we started at the bottom of the
 inheritance, and because the first line is always callSuper(), we
-climbed to the top before executing the rest of the commands in
-initialize(). Well, here we don’t callSuper() until later. The first
-lines are:
+climbed to the top before executing any other commands in
+initialize(). Well, here we don’t callSuper() until later, meaning that the code above callSuper() is execute and then we callSuper() and climb to the parent object.  As we descend the inheritance, the code below callSuper() is executed. Let's have a look at the first lines of code in ``zelig()`` in *model-glm.R*:
 
 .. {r, eval = FALSE}
 .self$zelig.call <- match.call(expand.dots = TRUE)
@@ -218,73 +217,71 @@ lines are:
 
 
 The first command stores the user’s initial zelig() call as it is
-written by the user. In our example, the field ``zelig.call`` would now
+written by the user. In our example, the field **zelig.call** would now
 be ``z5$zelig(formula = vote ~ age, data = turnout)``. We now have
 the user’s call saved as zelig.call. You can see this by entering
-``z5$zelig.call`` in the console. That is, zelig.call is a field, and we
+``z5$zelig.call`` in the R console. Specifically, **zelig.call** is a field, and we
 can reach into z5 and pull out the field using the $ operator.
 
-But this is not the call we use to estimate our model, because zelig()
-is wrapping another function, glm(). To distinguish between the user’s
-zelig() call and the Zelig object’s glm() call, we assign zelig.call to
-a new field, ``model.call``. model.call is the field that will be made
+But this is not the call we use to estimate our model, because ``zelig()``
+is wrapping another function, ``glm()``. To distinguish between the user’s
+zelig() call and the Zelig object’s glm() call, we copy **zelig.call** to
+a new field, **model.call**. **model.call** is the field that will be made
 to appear exactly as if we were to call glm() directly. Thus, if you
 ever use Zelig and want to know how you would estimate the same model
 using the package that Zelig wraps, you’ll want to look at the
-model.call field.
+**model.call** field.
 
 Keep in mind that what we are doing is transforming the initial two user
 commands into an equivalent form of the glm() call,
-``fit \leftarrow glm(vote \sim age, data=turnout, family=binomial(logit))``.
-We are almost there, but still missing the ``family`` argument, an
-essential argument of glm() that must be of class ``family``. This is
+``fit <- glm(vote \sim age, data=turnout, family=binomial(logit))``.
+We are almost there, but still missing the **family** argument, an
+essential argument of glm() that must be of class family. This is
 accomplished with:
 
 .. {r, eval = FALSE}
 .self$model.call$family <- call(.self$family, .self$link)
 .. ..
 
-model.call does not have something called “family” prior to this line of
+**model.call** does not have something called “family” prior to this line of
 code, so it is created and assigned ``call(.self$family, .self$link)``,
 which is an object of class family. A little confusing, but consider the
-following:
+following example:
 
 .. {r, eval = FALSE}
 myfam <- binomial("logit")
 .. ..
 
 ``myfam`` is an object of class family, as returned by
-``binomial(logit)``. For the glm() family argument, ``binomial`` tells
-us the type of outcome, and it is stored in the field ``family``.
-``logit`` is the name of the link function, and it is stored in
-``link``. Where did .self$family and .self$link come from? Recall the
-inheritance of initialize(). family is written to our Zelig object in
-Zelig-binchoice, and link is written to our Zelig object in Zelig-logit.
-So, model.call is now:
+``binomial("logit")``. For the glm() family argument, ``binomial`` tells
+us the type of outcome, and it is stored in the field **family**.
+"logit" is the name of the link function, and it is stored in
+**link**. Where did ``.self$family`` and ``.self$link`` come from? Recall the
+inheritance of initialize(). **family** is written to our Zelig object in
+*Zelig-binchoice*, and **link** is written to our Zelig object in *Zelig-logit*.
+So, **model.call** is now:
 
 .. {r, eval = FALSE}
 z5$zelig(formula = vote ∼ age, data = turnout, family = binomial("logit"))
 .. ..
 
 If we want to specify a different link function, e.g., probit, then all
-we would have to change is ``.self$link \leftarrow logit`` to
-``.self$link \leftarrow probit``. In fact, in Zelig’s probit model,
+we would have to change is ``.self$link <- logit`` to
+``.self$link <- probit``. In fact, in Zelig’s probit model,
 *this is the only functional difference*. A couple other things are
 changed for descriptive purposes, such as the name to “probit”, but
-functionally, the difference is the link field.
+functionally, the difference is the **link** field.  And, indeed, in a call to glm(), logit and probit appear identical with the exception of the binomial argument, which is either "logit" or "probit".
 
-Lastly, we run callSuper(). Recall this is a method that is common to
-all RCs. It calls the method of the same name in the object that this
-object inherits from. So, after assigning zelig.call and model.call, we
-call zelig() in Zelig to actually compute the estimation.
+Lastly, we ``callSuper()``. Recall that this is a method that is common to
+all RCs; it calls the method of the same name in the object that this
+object inherits from. So, after assigning **zelig.call** and **model.call**, we
+call ``zelig()`` in *Zelig* to actually compute the estimation.
 
-zelig() inside Zelig, in the model-zelig.R script, is very dense, and
-includes code for working with multiple datasets from Amelia and the
-``by`` argument, for example. When contributing to Zelig,
-*model-zelig.R* should never be changed. It is possible that Zelig is
-the only RC that your model inherits. Regardless, it is helpful to see
-how Zelig works, and since we are looking at logit, the remainder of
-this section is only concerned with code explicitly related to
+Next, let's look at the ``zelig()`` method inside *Zelig*, seen in the *model-zelig.R* script.  When contributing to Zelig, *model-zelig.R* should never be altered.
+
+This method is very dense, and includes code for working with multiple datasets (e.g., those from Amelia) and the
+**by** argument, among other things. Let's focus on Zelig's logit model--the remainder of
+this section is only concerned with code in ``zelig()`` explicitly related to
 estimating a single logit model from a single dataset. Specifically,
 look at:
 
