@@ -289,9 +289,9 @@ look at:
 .self$model.call[[1]] <- .self$fn
 .. ..
 
-.self$model.call is a ``call``, and the element indexed by [[1]] is
+``.self$model.call`` is a ``call``, and the element indexed by [[1]] is
 literally the name of the function to be called. For example,
-``call(sum, c(1,1,3))`` would return an object of type call that looks
+``call(sum, c(1,1,3))`` would return an object of type ``call`` that looks
 exactly like the string ``sum(c(1,1,3))``, but contains elements that
 can be used to manipulate pieces of the string. Consider the following:
 
@@ -302,123 +302,123 @@ t[[1]] <- quote(prod)
 eval(t)
 .. ..
 
-The first eval(t) returns 5, the sum of the elements (1,1,3). The second
-eval(t) returns 3, the product of the elements (1,1,3). [2]_ In zelig(),
-the element of model.call we are manipulating is at [[1]], and it is the
+The first ``eval(t)`` returns 5, the sum of the elements ``(1,1,3)``. The second
+``eval(t)`` returns 3, the product of the elements ``(1,1,3)``. [2]_ In ``zelig()``,
+the element of **model.call** we are manipulating is at [[1]], and it is the
 function to be called. Or, more precisely, it is whatever precedes the
-first open parenthesis. So, prior to assigning .self$fn to
-.self$model.call[[1]], the “function” to be called is z5$zelig, and
-model.call looks like:
+first open parenthesis. So, prior to assigning ``.self$fn`` to
+``.self$model.call[[1]]``, the function to be called is ``z5$zelig``, and
+**model.call** looks like:
 
 .. {r, eval = FALSE}
 z5$zelig(formula = vote ∼ age, data = turnout, family = binomial("logit"))
 .. ..
 
-After assigning .self$fn to model.call[[1]], model.call looks like:
+After assigning ``.self$fn`` to ``model.call[[1]]``, model.call looks like:
 
 .. {r, eval = FALSE}
 stats::glm(formula = vote ∼ age, data = turnout, family = binomial("logit"))
 .. ..
 
 The final line of code that we are concerned with is the final line in
-zelig(), where model.call is being evaluated:
+``zelig()``, where **model.call** is evaluated:
 
 .. {r, eval = FALSE}
 do(z.out = eval(fn2(.self$model.call, quote(.))))
 .. ..
 
-Ignore do() and fn2(), these are functions that help us handle multiple
+Ignore ``do()`` and ``fn2()``, these are functions that help us handle multiple
 datasets, and are part of Zelig’s added value that comes free. All we
-are doing here is evaluating model.call, which, as is seen above, is now
-identical to the glm() call. Thus, we have wrapped glm() and estimated a
+are doing here is evaluating **model.call**, which, as is seen above, is now
+identical to the ``glm()`` call. Thus, we have wrapped ``glm()`` and estimated a
 logit model in the Zelig framework.
 
 sim()
 +++++
 
-King, Tomz and Wittenberg (2000) present a general framework for simulating easily interpretable
+`King, Tomz, and Wittenberg (2000) <http://gking.harvard.edu/files/making.pdf>`_ present a general framework for simulating easily interpretable
 quantities of interest. We first set our predictor values at which we
 want to simulate, and then we simulate the quantities of interest, e.g.,
 expected values, predicted values, and first differences. There are two
-simple commands to do this:
+simple Zelig commands to do this:
 
 .. {r, eval = FALSE}
-zlog$setx()
-zlog$sim()
+z5$setx()
+z5$sim()
 .. ..
 
 ``setx()`` is typically independent of the model, and so we are not
 concerned with its workings here. For now, suffice to say that on
-``setx()``, there is a boolean field called ``bsetx`` that is assigned
+``setx()``, there is a boolean field called **bsetx** that is assigned
 ``TRUE``. ``sim()``, on the other hand, is very much dependent on the
 model, and so this section describes ``sim()`` in detail.
 
-There are four methods that are relevant to sim(), and they are executed
+There are four methods that are relevant to ``sim()``, and they are executed
 in this order:
 
-#. ``sim()`` defined in Zelig
+#. ``sim()`` defined in *Zelig*
 
-#. ``param()`` defined in Zelig-glm
+#. ``param()`` defined in *Zelig-glm*
 
-#. ``simx()`` defined in Zelig
+#. ``simx()`` defined in *Zelig*
 
-#. ``qi()`` defined in Zelig-binchoice
+#. ``qi()`` defined in *Zelig-binchoice*
 
-``sim()`` calls ``param()``, and later ``simx()``. param() returns a
+``sim()`` calls ``param()``, and later ``simx()``. ``param()`` returns a
 matrix of draws from a multivariate normal via the following:
 
 .. {r, eval = FALSE}
 return(mvrnorm(.self$num, coef(z.out), vcov(z.out)))
 .. ..
 
-Recall that the z.out field is equivalent to fit in
-:math:`fit \leftarrow glm(vote \sim\ age, data=turnout, family=binomial("logit"))`.
+Recall that the **z.out** field is equivalent to **fit** in
+:math:`fit <- glm(vote \sim\ age, data=turnout, family=binomial("logit"))`.
 ``.self$num`` specifies the number of samples taken from the
-multivariate normal distribution. Inside sim(), the field ``simparam``
-is assigned the matrix returned by param(). Next, simx() is called,
-which assigns appropriate covariate values to ``mm``, and then calls
+multivariate normal distribution. Inside ``sim()``, the field **simparam**
+is assigned the matrix returned by ``param()``. Next, ``simx()`` is called,
+which assigns appropriate covariate values to **mm**, and then calls
 ``qi()``, a method whose arguments are a matrix of simulated parameters
-(``simparam``) and a set of covariate values (``mm``).
+(**simparam**) and a set of covariate values (**mm**).
 
 That is important: ``qi()`` is a method whose arguments are a matrix of
-simulated parameters (``simparam``) and a set of covariate values
-(``mm``). ``qi()`` is the real workhorse method when we use sim(), and
+simulated parameters (**simparam**) and a set of covariate values
+(**mm**). ``qi()`` is the real workhorse method when we use ``sim()``, and
 will likewise be the workhorse for any contributes models. Let’s walk
-through it line by line. The qi() method is written in Zelig-binchoice.
+through it line by line. The ``qi()`` method is written in *Zelig-binchoice*.
 
 .. {r, eval = FALSE}
 .self$linkinv <- eval(call(.self$family, .self$link))$linkinv
 .. ..
 
 This is the first, and one of the more important, lines of code. Here is
-where we assign the ``linkinv`` field, which is the inverse of the logit
+where we assign the **linkinv** field, which is the inverse of the logit
 link function. We know that ``.self$family`` is “binomial” and
 ``.self$link`` is “logit”, so perhaps this line is a bit easier to read
 like this:
-``.self$linkinv \leftarrow eval(call(binomial, logit))$linkinv``. Recall
+``.self$linkinv <- eval(call(binomial, logit))$linkinv``. Recall
 that we have seen ``call(.self$family, .self$link)`` before, when we
-assigned it to the family field in our Zelig object. Recall that it
+assigned it to the **family** field in our Zelig object. Recall that it
 evaluates to an object of class family, and, in our logit example, is
 equivalent to entering ``binomial(logit)`` into the R console.
 
 Only now we don’t want a family object, but we want the inverse of the
 link function, which is contained *inside* the family object. Hence,
-from our family object, we reach in and grab ``linkinv`` (via
-``$linkinv``), and assign it to the ``linkinv`` field in our Zelig
-object. ``linkinv`` is a function, specifically, the inverse of the link
+from our family object, we reach in and grab **linkinv** (via
+``$linkinv``), and assign it to the **linkinv** field in our Zelig
+object. **linkinv** is a function, specifically, the inverse of the link
 function. For your model, this function may not exist, and may need to
-be written separately. It
+be written separately.
 
-Enter the following in your R console, which is an R function that
+Just for clarification, enter the following in your R console, which is an R function that
 returns the inverse of the logit link:
 
 .. {r, eval = FALSE}
-L ← function(m) {
+L <- function(m) {
     return (1-(1/(1+exp(m))))
 }
 .. ..
 
-Next, enter ``L(.5)``. Now enter z5$linkinv(.5). Try it with any value
+Next, enter ``L(.5)``. Now enter ``z5$linkinv(.5)``. The values returned will be identical.  Try it with any value
 you like. This will work exactly the same way, with a different link
 function of course, regardless of which Zelig model is selected. Look at
 the next three lines in ``qi()``:
@@ -429,9 +429,9 @@ eta <- simparam %*% t(mm)
 eta <- Filter(function (y) !is.na(y), eta)
 .. ..
 
-``coeff`` is a copy of simparam, and ``eta`` is the matrix
-multiplication of simparam and mm, which produces a matrix of dimension
-``nrow(simparam) \times 1``. By default, nrow(simparam) is 1000. The
+**coeff** is a copy of **simparam**, and **eta** is the matrix
+multiplication of **simparam** and **mm**, which produces a matrix of dimension
+``nrow(simparam) \times 1``. By default, ``nrow(simparam)`` is 1000. The
 final line drops any NAs in eta, and coerces the object from a matrix of
 one column to a numerical vector.
 
@@ -439,14 +439,14 @@ one column to a numerical vector.
 theta <- matrix(.self$linkinv(eta), nrow = nrow(coeff))
 ev <- matrix(.self$linkinv(eta), ncol = ncol(theta))
 pv <- matrix(nrow = nrow(ev), ncol = ncol(ev)).
-. ..
+.. ..
 
-Here, we construct a :math:`1000 \times 1` matrix and assign it to
-``theta``. ``.self$linkinv(eta)`` is simply the inverse link applied to
-each value in the eta vector, and this fills in the values of the theta
+Here, we construct a 1000x1 matrix and assign it to
+**theta**. ``.self$linkinv(eta)`` is simply the inverse link applied to
+each value in the eta vector, and this fills in the values of the **theta**
 matrix. The number of rows in the matrix theta are the number of
 simulations, or the number of rows in the matrix of simulated
-parameters. ``ev`` and ``pv`` have a number of rows equal to the number
+parameters. **ev** and **pv** have a number of rows equal to the number
 of observations in eta after NAs are dropped, and a number of columns
 equal to 1.
 
@@ -456,11 +456,11 @@ for (j in 1:ncol(ev))
 return(list(ev = ev, pv = pv))
 .. ..
 
-Next, we iterate over the columns in the ev matrix, and assign predicted
+Next, we iterate over the columns in the **ev** matrix, and assign predicted
 values one column at a time. For the default number of simulations
 (1000) and the logit, this is 1000 draws from a binomial distribution,
 each with a trial size of 1 and a probability of drawing 1 equal to the
-value in the corresponding cell in the :math:`j^{th}` column of ev.
+value in the corresponding cell in the :math:`j^{th}` column of **ev**.
 Lastly, we return a list with two objects, each a matrix, holding our
 expected values and predicted values.
 
