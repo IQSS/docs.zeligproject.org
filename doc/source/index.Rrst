@@ -5,6 +5,14 @@ Zelig — Everyone's Statistical Software
 
 With **three simple commands**, Zelig’s intuitive **model bridging** interface presents results for **wide ranging statistical models**, automates **graphics**, and translates statistical estimates into interpretable **quantities of interest**. Zelig makes the **power of R accessible** for all users.
 
+.. raw:: html
+
+	<div class="panel panel-default">
+	  <div class="panel-body text-center">
+	    <img src="_static/zeligmodels.png" alt="Zelig Models" />
+	  </div>
+	  <div class="panel-footer">Explore all models supported in Zelig 5.</div>
+	</div>
  
 .. toctree::
    :hidden:
