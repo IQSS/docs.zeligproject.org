@@ -188,7 +188,7 @@ data(macro)
 Estimating model and presenting summary:
 
 .. {r, eval = FALSE}
-z.out <- zelig(unem   gdp + capmob + trade, model =
+z.out <- zelig(unem ~ gdp + capmob + trade, model =
                        "normal.gee", id = "country", data = macro,
 		       robust = TRUE, corstr = "AR-M", Mv = 1)
 summary(z.out)
