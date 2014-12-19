@@ -1,0 +1,377 @@
+.. _zquantile:
+
+zelig-quantile
+~~~~~~
+
+Quantile Regression for Continuous Dependent Variables
+
+Use a linear programming implementation of quantile regression to
+estimate a linear predictor of the :math:`\tau`\ th conditional quantile
+of the population.
+
+Syntax
++++++
+
+.. {r, eval = FALSE}
+z5 <- zquantile$new()
+z5$zelig(Y ~ X1 + X2, data = mydata, tau = 0.5)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, model = "quantile", data = mydata, tau = 0.5)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+
+
+Additional Inputs
++++++
+
+In addition to the standard inputs, zelig() takes the followingad
+ditional options for quantile regression:
+
+-  tau: defaults to 0.5. Specifies the conditional quantile(s) that will
+   be estimated. 0.5 corresponds to estimating the conditional median,
+   0.25 and 0.75 correspond to the conditional quartiles, etc. If tau is
+   a vector, the conditional quantile function at each tau is estimated.
+   If tau is set outside of the interval [0,1], zelig returns the
+   solution for all possible conditional quantiles given the data, but
+   does not support inference on this fit (setx and sim will fail).
+
+-  se: a string value that defaults to “nid”. Specifies the method by
+   which the covariance matrix of coefficients is estimated during the
+   sim stage of analysis. se can take the following values, which are
+   passed to the summary.rq function from the quantreg package. These
+   descriptions are copied from the summary.rq documentation.
+
+   -  “iid” which presumes that the errors are iid and computes an
+      estimate of the asymptotic covariance matrix as in KB(1978).
+
+   -  “nid” which presumes local (in tau) linearity (in x) of the the
+      conditional quantile functions and computes a Huber sandwich
+      estimate using a local estimate of the sparsity.
+
+   -  “ker” which uses a kernel estimate of the sandwich as proposed by
+      Powell(1990).
+
+-  …: additional options passed to rq when fitting the model. See
+   documentation for rq in the quantreg package for more information.
+
+Examples
++++++
+
+Basic Example with First Differences
+!!!!!
+
+Attach sample data, in this case a dataset pertaining to the
+efficiency of plants that convert ammonia to nitric acid. The
+dependent variable, stack.loss, is 10 times the percentage of ammonia that escaped unconverted:
+
+.. {r, eval = FALSE}
+data(stackloss)
+.. ..
+
+Estimate model:
+
+.. {r, eval = FALSE}
+z.out1 <- zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
+                         model = “quantile”, + data = stackloss, tau=0.5)
+.. ..
+
+Summarize regression coefficients:
+
+.. {r, eval = FALSE}
+summary(z.out1)
+.. ..
+
+Set explanatory variables to their default (mean/mode) values, with
+high (80th percentile) and low (20th percentile) values for the water
+temperature variable (the variable that indiates the temperature of water in the plant’s cooling coils):
+
+.. {r, eval = FALSE}
+x.high <- setx(z.out1, Water.Temp = quantile(stackloss$Water.Temp, 0.8))
+x.low <- setx(z.out1, Water.Temp = quantile(stackloss$Water.Temp, 0.2))
+.. ..
+
+Generate first differences for the effect of high versus low water temperature on stack loss:
+
+.. {r, eval = FALSE}
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+.. ..
+
+.. {r, eval = FALSE} 
+summary(s.out1)
+.. ..
+
+.. {r, eval = FALSE}
+plot(s.out1)
+.. ..
+
+Using Dummy Variables
+!!!!!
+
+We can estimate a model of unemployment as a function of macroeconomic
+indicators and fixed effects for each country (see for help with dummy
+variables). Note that you do not need to create dummy variables, as
+the program will automatically parse the unique values in the selected variable into discrete levels.
+
+.. {r, eval = FALSE}
+data(macro)
+z.out2 <- zelig(unem   gdp + trade + capmob + as.factor(country),
+                         model = “quantile”, tau=0.5, data = macro)
+.. ..
+
+Set values for the explanatory variables, using the default mean/mode
+values, with country set to the United States and Japan, respectively:
+
+.. {r, eval = FALSE}
+x.US <- setx(z.out2, country = "United States")
+x.Japan <- setx(z.out2, country = "Japan")
+.. ..
+
+Simulate quantities of interest:
+
+.. {r, eval = FALSE}
+s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
+.. ..
+
+.. {r, eval = FALSE}
+plot(s.out2)
+.. ..
+
+Estimating Multiple Quantiles
+!!!!!
+
+Using the Engel dataset on food expenditure as a function of income,
+we can use the “quantile” model to estimate multiple conditional quantiles:
+
+.. {r, eval = FALSE}
+data(engel)
+z.out3 <- zelig(foodexp   income, model = "quantile",
+                         tau=seq(0.1,0.9,by=0.1), data = engel)
+.. ..
+
+We can summarize the coefficient fits, or plot them to compare them to the least squares conditional mean estimator.
+
+.. {r, eval = FALSE}
+summary(z.out3)
+.. ..
+
+.. {r, eval = FALSE}
+plot(summary(z.out3))
+.. ..
+
+Set the value of income to the top quartile and the bottom quartile of the income distribution for each fit:
+
+.. {r, eval = FALSE}
+x.bottom <- setx(z.out3, income=quantile(engel$income, 0.25))
+x.top <- setx(z.out3, income=quantile(engel`\ income, 0.75))
+.. ..
+
+Simulate quantities of interest for each fit simultaneously:
+
+.. {r, eval = FALSE}
+s.out3 <- sim(z.out3, x = x.bottom, x1 = x.top)
+.. ..
+
+Summary
+
+.. {r, eval = FALSE}
+summary(s.out3)
+.. ..
+
+Model
++++++
+
+The quantile estimator is best introduced by considering the sample
+median estimator and comparing it to the sample mean estimator. To find
+the mean of a sample, we solve for the quantity :math:`\mu` which
+minimizes the sum squared residuals:
+
+.. math::
+
+   \begin{aligned}
+       \mu &=& \arg\min_\mu \sum_i (y_i-\mu)^2\end{aligned}
+
+Estimating a quantile is similar, but we solve for :math:`\xi` which
+minimizes the sum absolute residuals:
+
+.. math::
+
+   \begin{aligned}
+       \xi &=& \arg\min_\xi \sum_i |y_i-\xi|\end{aligned}
+
+One can confirm the equivalence of these optimization problems and the
+standard mean and median operators by taking the derivative with respect
+to the argument and setting it to zero.
+
+The relationship between quantile regression and ordinary least squares
+regression is analogous to the relationship between the sample median
+and the sample mean, except we are now solving for the conditional
+median or conditional mean given covariates and a linear functional
+form. The optimization problems for the sample mean and median are then
+easily generalized to optimization problems for estimating *conditional*
+means or medians by replacing :math:`\mu` or :math:`\xi` with a linear
+combination of covariates :math:`X'\beta`:
+
+.. math::
+
+   \begin{aligned}
+       \hat\beta_\mathrm{mean} &=& \arg\min_\beta \sum_i (Y_i-X_i'\beta)^2 \nonumber \\
+       \hat\beta_\mathrm{median} &=& \arg\min_\beta \sum_i |Y_i-X_i'\beta| \label{median}\end{aligned}
+
+Equation [median] can be generalized to provide any quantile of the
+conditional distribution, not just the median. We do this by weighting
+the aboslute value function asymmetrically in proportion to the
+requested :math:`\tau`\ th quantile:
+
+.. math::
+
+   \begin{aligned}
+       \hat\beta_{\tau} &=& \arg\max_\beta \sum \rho(Y_i-X_i'\beta) \label{beta}\\
+       \rho &=& \tau(1-I(Y-X_i'\beta > 0)) + (1-\tau)I(Y-X_i'\beta > 0) \nonumber\end{aligned}
+
+We call the asymmetric absolute value function a “check function”. This
+optimization problem has no closed form solution and is solved via
+linear programming.
+
+Equation [beta] now lets us define a conditional quantile estimator.
+Suppose that for a given set of covariates :math:`x`, the response
+variable :math:`Y` has as true conditional probability distribution
+:math:`f(\theta | x)` where :math:`f` can be any probability density
+function parametrized by a vector of parameters :math:`\theta`. This
+density function defines a value :math:`Q_\tau(\theta|x)`, the true
+:math:`\tau`\ th population quantile given :math:`x`. We can write our
+conditional quantile estimator :math:`\hat Q_\tau(\theta|x)` as:
+
+.. math::
+
+   \begin{aligned}
+   \hat Q_\tau(\theta|x) &=& x'\hat\beta_\tau\end{aligned}
+
+Where :math:`\hat\beta` is the vector that solves equation [beta].
+Because we solve for the estimator :math:`\hat Q_\tau` without
+constructing a likelihood function, it is not straightforward to specify
+a systematic and stochastic component for conditional quantile
+estimates. However, systematic and stochastic components do emerge
+asymptotically in the large-\ :math:`n` limit. Asymptotically,
+:math:`\hat Q_\tau` is normally distributed, and can be written with
+*stochastic component*
+
+.. math::
+
+   \begin{aligned}
+       \hat Q_\tau &\sim& \mathcal{N}(\mu, \sigma^2),\end{aligned}
+
+And *systematic components*
+
+.. math::
+
+   \begin{aligned}
+       \mu &=& x'\hat\beta_\tau\\
+       \sigma^2 &=& \frac{\tau(1-\tau)}{n f^2},\end{aligned}
+
+Where :math:`n` is the number of datapoints, and :math:`f` is the true
+population density at the :math:`\tau`\ th conditional quantile. Zelig
+uses this asymptotic approximation of stochastic and systematic
+components in simulation and numerically estimates the population
+density to derive :math:`\sigma^2`. The simulation results should thus
+be treated with caution when using small datasets as both this
+asymptotic approximation and the population density approximation can
+break down.
+
+Quantities of Interest
++++++
+
+-  The expected value (qi$ev) is the mean of simulations from the
+   stochastic component,
+
+   .. math:: E(\hat Q_\tau) = x_i \beta_\tau,
+
+   given a draw of :math:`\beta_\tau` from its sampling distribution.
+   Variation in the expected value distribution comes from estimation
+   uncertainty of :math:`\beta_\tau`.
+
+-  The predicted value (qi$pr) is the result of a single draw from the
+   stochastic component given a draw of :math:`\beta_\tau` from its
+   sampling distribution. The distribution of predicted values should be
+   centered around the same place as the expected values but have larger
+   variance because it includes both estimation uncertainty and
+   fundamental uncertainty.
+
+-  This model does not support conditional prediction.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. For example, if you run
+``z.out <- zelig(y ~ x, model = ls, data)``, then you may examine the
+available information in ``z.out`` by using ``names(z.out)``, see the
+coefficients by using z.out$coefficients, and a default summary of
+information through ``summary(z.out)``. Other elements available through
+the $ operator are listed below.
+
+-  zelig() will return an object z.out, which is of class rq (when tau
+   specifies a single quantile), rqs (when tau specifies multiple
+   quantiles), or rq.process (when tau is a value outside of
+   :math:`[0,1]`. The rq and rqs objects are supported by Zelig’s
+   prediction utilities, but rq.process is not. These objects maintain
+   the same functionality that they have in the quantreg package – for
+   example, one can call the summary or plot methods on them directly.
+   See documentation for rq from package quantreg for details. The
+   following information can be extracted directly from the z.out
+   object:
+
+   -  coefficients: parameter estimates for the explanatory variables.
+
+   -  residuals: vector of differences between :math:`Y` and
+      :math:`X'\beta_\tau`.
+
+   -  fitted.values: fitted values given by :math:`X'\beta_\tau`.
+
+   -  zelig.data: the input data frame if save.data = TRUE.
+
+-  When zelig was called with a single tau value, summary(z.out) returns
+   a summary.rq object. When zelig was called with :math:`\tau` as a
+   vector, summary(z.out) returns a list of summary.rq objects. From
+   each summary.rq object you may extract:
+
+   -  coefficients: the parameter estimates with their 95 percent
+      confidence intervals. The user can also obtain standard errors and
+      p-values by specifying the se argument to summary. See
+      documentation for summary.rq in the quantreg package for details.
+
+   -  rdf: the residual degrees of freedom.
+
+   -  cov: a :math:`k \times k` matrix of unscaled covariances. To
+      obtain this attribute, the user must specify cov=TRUE as an
+      argument to summary. See documentation for summary.rq in the
+      quantreg package for details.
+
+-  From the sim() output object s.out, you may extract quantities of
+   interest arranged as matrices indexed by simulation :math:`\times`
+   x-observation (for more than one x-observation). Available quantities
+   are:
+
+   -  qi$ev: the simulated expected values for the specified values of
+      x.
+
+   -  qi$pr: the simulated predicted values for the specified values of
+      x.
+
+   -  qi$fd: the simulated first differences (or differences in expected
+      values) for the specified values of x and x1.
+
+
+See also
++++++
+
+The quantile regression package quantreg by Richard Koenker. In
+addition, advanced users may wish to refer to ``help(rq)``,
+``help(summary.rq)`` and ``help(rq.object)``.
+
