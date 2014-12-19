@@ -3,6 +3,8 @@
 zelig-normalgee
 ~~~~~~
 
+Generalized Estimating Equation for Normal Regression
+
 The GEE normal estimates the same model as the standard normal
 regression. Unlike in normal regression, GEE normal allows for
 dependence within clusters, such as in longitudinal data, although its
@@ -18,7 +20,8 @@ errors can be obtained using a robust “sandwich” estimator even if the
 “working” correlation matrix is incorrectly specified. If the “working”
 correlation matrix is correctly specified, GEE models will give more
 efficient estimates of the parameters. GEE models measure
-population-averaged effects as opposed to cluster-specific effects.
+population-averaged effects as opposed to cluster-specific effects (See
+).
 
 Syntax
 +++++
@@ -27,8 +30,7 @@ With reference classes:
 
 .. {r, eval = FALSE}
 z5 <- znormalgee$new()
-z5$zelig(Y ~ X1 + X2, model = "normal.gee",
-         id = "X3", data = mydata)
+z5$zelig(Y ~ X1 + X2, id = "X3", data = mydat)
 z5$setx()
 z5$sim()
 .. ..
@@ -36,8 +38,8 @@ z5$sim()
 With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model = "logit.gee",
-               id = "X3", data = mydata)
+z.out <- zelig(Y ~ X1 + X2, model = "normal.gee",
+                       id = "X3", data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
@@ -186,11 +188,11 @@ data(macro)
 Estimating model and presenting summary:
 
 .. {r, eval = FALSE}
-z.out <- zelig(unem ~ gdp + capmob + trade,
-                       model = "normal.gee", id = "country",
-                       data = macro, robust=TRUE, corstr=“AR-M”, Mv=1)
+z.out <- zelig(unem   gdp + capmob + trade, model =
+                       "normal.gee", id = "country", data = macro,
+		       robust = TRUE, corstr = "AR-M", Mv = 1)
 summary(z.out)
-.. ..
+.. .. 
 
 Set explanatory variables to their default (mean/mode) values, with high (80th percentile) and low (20th percentile) values:
 
@@ -330,7 +332,7 @@ Output Values
 
 The output of each Zelig command contains useful information which you
 may view. For example, if you run
-``z.out <- zelig(y ~ x, model = normal.gee, id, data)``, then you may
+``z.out <- zelig(y ~ x, model = "normal.gee", id, data)``, then you may
 examine the available information in ``z.out`` by using
 ``names(z.out)``, see the coefficients by using z.out$coefficients, and
 a default summary of information through ``summary(z.out)``. Other
