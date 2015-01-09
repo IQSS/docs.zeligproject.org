@@ -71,7 +71,7 @@ Attach sample data, in this case a dataset pertaining to the
 efficiency of plants that convert ammonia to nitric acid. The
 dependent variable, stack.loss, is 10 times the percentage of ammonia that escaped unconverted:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(stackloss)
 .. ..
 
@@ -79,7 +79,7 @@ Estimate model:
 
 .. {r, eval = FALSE}
 z.out1 <- zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
-                         model = “quantile”, + data = stackloss, tau=0.5)
+                         model = "quantile", data = stackloss, tau=0.5)
 .. ..
 
 Summarize regression coefficients:
