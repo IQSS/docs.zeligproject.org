@@ -289,7 +289,7 @@ Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to ``help(geepack)`` and ``help(family)``.
 
 
-.. {r, eval = TRUE, echo=FALSE} program-output:: 
+.. {r, eval = TRUE, echo=FALSE, comment=NA} 
 z5 <- zpoissongee$new()
 print(citation(z5$packagename()), style = "text")
 .. ..
