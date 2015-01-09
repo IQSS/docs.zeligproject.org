@@ -93,7 +93,7 @@ Estimating linear regression using ``normal.bayes``:
 
 .. {r, eval = TRUE}
 z.out <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
-                      data = macro, verbose = TRUE)
+                      data = macro, verbose = FALSE)
 .. ..
 
 Checking for convergence before summarizing the estimates:
