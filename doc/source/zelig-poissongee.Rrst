@@ -291,6 +291,6 @@ to ``help(geepack)`` and ``help(family)``.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
 z5 <- zpoissongee$new()
-print(citation(z5$packagename()), style = "text")
+z5$references()
 .. ..
 
