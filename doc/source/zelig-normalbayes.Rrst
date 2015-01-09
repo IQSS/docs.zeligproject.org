@@ -85,14 +85,14 @@ Basic Example
 
 Attaching the sample dataset:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(macro)
 .. ..
 
 Estimating linear regression using ``normal.bayes``:
 
-.. {r, eval = FALSE}
-z.out <- zelig(unem   gdp + capmob + trade, model = "normal.bayes",
+.. {r, eval = TRUE}
+z.out <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
                       data = macro, verbose = TRUE)
 .. ..
 
@@ -104,19 +104,19 @@ heidel.diag(z.out$coefficients)
 raftery.diag(z.out$coefficients)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
 Setting values for the explanatory variables to their sample averages:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out <- setx(z.out)
 .. ..
 
 Simulating quantities of interest from the posterior distribution given ``x.out``:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out1 <- sim(z.out, x = x.out)
 summary(s.out1)
 .. ..
@@ -126,14 +126,14 @@ Simulating First Differences
 
 Set explanatory variables to their default(mean/mode) values, with high (80th percentile) and low (20th percentile) trade on GDP:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.high <- setx(z.out, trade = quantile(macro$trade, prob = 0.8))
 x.low <- setx(z.out, trade = quantile(macro$trade, prob = 0.2))
 .. ..
 
 Estimating the first difference for the effect of high versus low trade on unemployment rate:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out2 <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out2)
 .. ..
