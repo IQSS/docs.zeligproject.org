@@ -161,5 +161,5 @@ information through ``summary(z.out)``.
 See also
 +++++
 
-The probit model is part of the stats package by . Advanced users may
+The probit model is part of the stats package by the R Core Team. Advanced users may
 wish to refer to ``help(glm)`` and ``help(family)``.

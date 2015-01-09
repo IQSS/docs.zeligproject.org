@@ -377,6 +377,6 @@ elements available through the $ operator are listed below.
 See also
 +++++
 
-The gee function is part of the gee package by Vincent J. Carey, ported
-to R by Thomas Lumley and Brian Ripley. Advanced users may wish to refer
-to ``help(gee)`` and ``help(family)``.
+The geeglm function is part of the geepack package by Søren Højsgaard,
+Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
+to ``help(geepack)`` and ``help(family)``.

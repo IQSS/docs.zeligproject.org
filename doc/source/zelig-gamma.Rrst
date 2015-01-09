@@ -166,5 +166,5 @@ information through ``summary(z.out)``.
 See also
 +++++
 
-The gamma model is part of the stats package. Advanced users may
+The gamma model is part of the stats package by the R Core Team. Advanced users may
 wish to refer to ``help(glm)`` and ``help(family)``.
