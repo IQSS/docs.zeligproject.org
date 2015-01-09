@@ -290,6 +290,7 @@ to ``help(geepack)`` and ``help(family)``.
 
 
 .. {r, eval = TRUE, echo=FALSE}
+z5 <- zpoissongee$new()
 print(citation(z5$packagename()), style = "text")
 .. ..
 
