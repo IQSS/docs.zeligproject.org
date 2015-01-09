@@ -163,3 +163,8 @@ See also
 
 The probit model is part of the stats package by the R Core Team. Advanced users may
 wish to refer to ``help(glm)`` and ``help(family)``.
+
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+z5 <- zprobit$new()
+z5$references()
+.. ..

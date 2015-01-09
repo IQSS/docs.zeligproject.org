@@ -308,3 +308,8 @@ See also
 Bayesian probit regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+z5 <- zprobitbayes$new()
+z5$references()
+.. ..
