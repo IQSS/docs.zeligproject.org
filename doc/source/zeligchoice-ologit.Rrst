@@ -67,7 +67,7 @@ sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
 
 Estimate the model:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out <- zelig(ncost ~ mil + coop, model = "ologit",
                data = sanction)
 .. ..
