@@ -93,6 +93,14 @@ Attaching the sample dataset:
 data(sanction)
 .. ..
 
+Creating an ordered dependent variable:
+
+.. {r, eval = TRUE}
+sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
+      levels = c("net gain", "little effect", "modest loss", "major loss"))
+.. ..
+
+
 Estimating ordered probit regression using ``oprobit.bayes``:
 
 .. {r, eval = TRUE}
@@ -100,13 +108,6 @@ z.out <- zelig(ncost ~ mil + coop, model = "oprobit.bayes",
                data = sanction, verbose = FALSE)
 .. ..
 
-Creating an ordered dependent variable:
-
-.. {r, eval = TRUE}
-sanction$ncost <- factor(sanction ~ ncost, ordered = TRUE,
-                         levels = c("net gain", "little effect", "modest loss",
-                                     "major loss"))
-.. ..
 
 Checking for convergence before summarizing the estimates:
 
