@@ -136,41 +136,51 @@ information.
 Example
 +++++
 
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+.. .. 
+
 Attaching the sample dataset:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(swiss)
 names(swiss) <- c("Fert", "Agr", "Exam", "Educ", "Cath", "InfMort")
 .. ..
 
 Factor analysis:
-.. {r, eval = FALSE}
-z.out <- zelig(cbind(Agr, Exam, Educ, Cath, InfMort) ~ NULL,
-               model = "factor.bayes", data = swiss, factors = 2, verbose = TRUE,
-               a0 = 1, b0 = 0.15, burnin = 5000, mcmc = 50000)
+
+.. {r, eval = TRUE}
+z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
+               model = "factor.bayes", data = swiss,
+               factors = 2, verbose = FALSE,
+               a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
 .. ..
 
 Checking for convergence before summarizing the estimates:
 
-.. {r, eval = FALSE}
-algor <- try(geweke.diag(z.out$coefficients), silent=T)
+.. {r, eval = TRUE}
+algor <- try(lapply(z.out$zelig.out$z.out, geweke.diag), silent = TRUE)
 if (class(algor) == "try-error")
     print(algor)
 .. ..
 
 Since the algorithm did not converge, we now add some constraints on
 :math:`\Lambda` to optimize the algorithm:
-.. {r, eval = FALSE}
-z.out <- zelig(cbind(Agr, Exam, Educ, Cath, InfMort) ~ NULL,  
+
+.. {r, eval = TRUE}
+z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,  
                model = "factor.bayes", data = swiss, factors = 2,
-               lambda.constraints = list(Exam = list(1,"+"),
-                   Exam = list(2,"-"), Educ = c(2, 0),
-                   InfMort = c(1, 0)), 
-               verbose = TRUE, a0 = 1, b0 = 0.15, 
-               burnin = 5000, mcmc = 50000)
-geweke.diag(z.out$coefficients)
-heidel.diag(z.out$coefficients)
-raftery.diag(z.out$coefficients)
+               lambda.constraints =
+                   list(Exam = list(1,"+"),
+                        Exam = list(2,"-"),
+                        Educ = c(2, 0),
+                        InfMort = c(1, 0)), 
+               verbose = FALSE, a0 = 1, b0 = 0.15, 
+               burnin = 500, mcmc = 5000)
+lapply(z.out$zelig.out$z.out, geweke.diag)
+lapply(z.out$zelig.out$z.out, heidel.diag)
+lapply(z.out$zelig.out$z.out, raftery.diag)
 summary(z.out)
 .. ..
 
