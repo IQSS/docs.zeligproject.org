@@ -22,7 +22,7 @@ z5$sim()
 With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model = "quantile", data = mydata, tau = 0.5)
+z.out <- zelig(Y ~ X1 + X2, model = "rq", data = mydata, tau = 0.5)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
@@ -69,7 +69,13 @@ Basic Example with First Differences
 
 Attach sample data, in this case a dataset pertaining to the
 efficiency of plants that convert ammonia to nitric acid. The
-dependent variable, stack.loss, is 10 times the percentage of ammonia that escaped unconverted:
+dependent variable, stack.loss, is 10 times the percentage of ammonia
+that escaped unconverted:
+
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+.. .. 
 
 .. {r, eval = TRUE}
 data(stackloss)
@@ -77,14 +83,15 @@ data(stackloss)
 
 Estimate model:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out1 <- zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
-                         model = "quantile", data = stackloss, tau=0.5)
+                model = "rq", data = stackloss,
+                tau = 0.5)
 .. ..
 
 Summarize regression coefficients:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out1)
 .. ..
 
@@ -92,22 +99,22 @@ Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for the water
 temperature variable (the variable that indiates the temperature of water in the plant’s cooling coils):
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.high <- setx(z.out1, Water.Temp = quantile(stackloss$Water.Temp, 0.8))
 x.low <- setx(z.out1, Water.Temp = quantile(stackloss$Water.Temp, 0.2))
 .. ..
 
 Generate first differences for the effect of high versus low water temperature on stack loss:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 .. ..
 
-.. {r, eval = FALSE} 
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 plot(s.out1)
 .. ..
 
@@ -119,27 +126,32 @@ indicators and fixed effects for each country (see for help with dummy
 variables). Note that you do not need to create dummy variables, as
 the program will automatically parse the unique values in the selected variable into discrete levels.
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(macro)
-z.out2 <- zelig(unem   gdp + trade + capmob + as.factor(country),
-                         model = “quantile”, tau=0.5, data = macro)
+z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
+                model = "rq", tau = 0.5,
+                data = macro)
 .. ..
 
 Set values for the explanatory variables, using the default mean/mode
 values, with country set to the United States and Japan, respectively:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.US <- setx(z.out2, country = "United States")
 x.Japan <- setx(z.out2, country = "Japan")
 .. ..
 
 Simulate quantities of interest:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
+summary(s.out1)
+.. ..
+
+.. {r, eval = TRUE}
 plot(s.out2)
 .. ..
 
@@ -149,15 +161,15 @@ Estimating Multiple Quantiles
 Using the Engel dataset on food expenditure as a function of income,
 we can use the “quantile” model to estimate multiple conditional quantiles:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 data(engel)
-z.out3 <- zelig(foodexp   income, model = "quantile",
-                         tau=seq(0.1,0.9,by=0.1), data = engel)
+z.out3 <- zelig(foodexp ~ income, model = "rq",
+                tau = seq(0.1, 0.9, by = 0.1), data = engel)
 .. ..
 
 We can summarize the coefficient fits, or plot them to compare them to the least squares conditional mean estimator.
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out3)
 .. ..
 
@@ -169,7 +181,7 @@ Set the value of income to the top quartile and the bottom quartile of the incom
 
 .. {r, eval = FALSE}
 x.bottom <- setx(z.out3, income=quantile(engel$income, 0.25))
-x.top <- setx(z.out3, income=quantile(engel`\ income, 0.75))
+x.top <- setx(z.out3, income=quantile(engel$income, 0.75))
 .. ..
 
 Simulate quantities of interest for each fit simultaneously:
