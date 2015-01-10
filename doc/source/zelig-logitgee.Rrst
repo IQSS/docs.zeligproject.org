@@ -109,7 +109,7 @@ s.out1 <- sim(z.out1, x = x.out1)
 summary(s.out1)
 .. ..
 
-.. {r Zelig-logitgee1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-logitgee1"}
+.. {r Zelig-logitgee1, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-logitgee1"}
 plot(s.out1)
 .. ..
 
@@ -158,7 +158,7 @@ z.out2 <- zelig(vote ~ race + educate, model = "logit.gee",
 
 Viewing the regression output:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out2)
 .. ..
 
