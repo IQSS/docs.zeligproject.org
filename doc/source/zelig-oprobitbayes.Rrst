@@ -97,7 +97,8 @@ Creating an ordered dependent variable:
 
 .. {r, eval = TRUE}
 sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
-      levels = c("net gain", "little effect", "modest loss", "major loss"))
+                         levels = c("net gain", "little effect", "modest loss",
+                             "major loss"))
 .. ..
 
 
@@ -111,12 +112,12 @@ z.out <- zelig(ncost ~ mil + coop, model = "oprobit.bayes",
 
 Checking for convergence before summarizing the estimates:
 
-.. {r, eval = FALSE}
-heidel.diag(z.out$coefficients)
-raftery.diag(z.out$coefficients)
+.. {r, eval = TRUE}
+lapply(z.out$zelig.out$z.out, heidel.diag)
+lapply(z.out$zelig.out$z.out, raftery.diag)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
