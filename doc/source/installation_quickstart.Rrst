@@ -43,7 +43,7 @@ library(devtools)
 install_github('IQSS/Zelig')
 .. ..	
 
-If you have successfully installed the program, you will see a the following message: *"DONE (Zelig)"*.
+If you have successfully installed the program, you will see the following message: *"DONE (Zelig)"*.
 
 ------------
 
