@@ -275,41 +275,16 @@ Quantities of Interest
 Output Values
 +++++
 
-The output of each Zelig command contains useful information which you
-may view. For example, if you run:
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility 
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.  
 
-.. {r, eval = FALSE}
-z.out <- zelig(y ~ x, model = "tobit.bayes", data)
-.. ..
+In the example above ``z.out$getcoef()`` returns the estimated coefficients, 
+ ``z.out$getvcov()`` returns the estimated covariance matrix, and ``z.out$getpredict()``
+ provides predicted values for all observations in the dataset from the analysis.
 
-then you may examine the available information in ``z.out`` by using
-``names(z.out)``, see the draws from the posterior distribution of the
-``coefficients`` by using ``z.out$coefficients``, and view a default
-summary of information through ``summary(z.out)``. Other elements
-available through the ``$`` operator are listed below.
-
--  From the ``zelig()`` output object ``z.out``, you may extract:
-
-   -  ``coefficients``: draws from the posterior distributions of the
-      estimated parameters. The first :math:`k` columns contain the
-      posterior draws of the coefficients :math:`\beta`, and the last
-      column contains the posterior draws of the variance
-      :math:`\sigma^2`.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
-   -  ``seed``: the random seed used in the model.
-
--  From the ``sim()`` output object ``s.out``:
-
-   -  ``qi$ev``: the simulated expected value for the specified values
-      of ``x``.
-
-   -  ``qi$fd``: the simulated first difference in the expected values
-      given the values specified in ``x`` and ``x1``.
-
-   -  ``qi$att.ev``: the simulated average expected treatment effect for
-      the treated from conditional prediction models.
 
 See also
 +++++

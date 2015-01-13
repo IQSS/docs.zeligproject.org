@@ -238,12 +238,15 @@ Quantities of Interest
 Output Values
 +++++
 
-The output of each Zelig command contains useful information which you
-may view. For example, if you run
-``z.out <- zelig(Surv(Y, C) ~ X, model = exp, data)``, then you may
-examine the available information in ``z.out`` by using
-``names(z.out)``, see the coefficients by using z.out$coefficients, and
-a default summary of information through ``summary(z.out)``.
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility 
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.  
+
+In the example above ``z.out$getcoef()`` returns the estimated coefficients, 
+ ``z.out$getvcov()`` returns the estimated covariance matrix, and ``z.out$getpredict()``
+ provides predicted values for all observations in the dataset from the analysis.
 
 
 See also

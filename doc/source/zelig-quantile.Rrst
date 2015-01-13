@@ -320,64 +320,17 @@ Quantities of Interest
 Output Values
 +++++
 
-The output of each Zelig command contains useful information which you
-may view. For example, if you run
-``z.out <- zelig(y ~ x, model = ls, data)``, then you may examine the
-available information in ``z.out`` by using ``names(z.out)``, see the
-coefficients by using z.out$coefficients, and a default summary of
-information through ``summary(z.out)``. Other elements available through
-the $ operator are listed below.
 
--  zelig() will return an object z.out, which is of class rq (when tau
-   specifies a single quantile), rqs (when tau specifies multiple
-   quantiles), or rq.process (when tau is a value outside of
-   :math:`[0,1]`. The rq and rqs objects are supported by Zelig’s
-   prediction utilities, but rq.process is not. These objects maintain
-   the same functionality that they have in the quantreg package – for
-   example, one can call the summary or plot methods on them directly.
-   See documentation for rq from package quantreg for details. The
-   following information can be extracted directly from the z.out
-   object:
+The Zelig object stores fields containing everything needed to
+rerun the Zelig output, and all the results and simulations as they are generated.
+In addition to the summary commands demonstrated above, some simply utility 
+functions (known as *getters*) provide easy access to the raw fields most
+commonly of use for further investigation.  
 
-   -  coefficients: parameter estimates for the explanatory variables.
+In the example above ``z.out$getcoef()`` returns the estimated coefficients, 
+ ``z.out$getvcov()`` returns the estimated covariance matrix, and ``z.out$getpredict()``
+ provides predicted values for all observations in the dataset from the analysis.
 
-   -  residuals: vector of differences between :math:`Y` and
-      :math:`X'\beta_\tau`.
-
-   -  fitted.values: fitted values given by :math:`X'\beta_\tau`.
-
-   -  zelig.data: the input data frame if save.data = TRUE.
-
--  When zelig was called with a single tau value, summary(z.out) returns
-   a summary.rq object. When zelig was called with :math:`\tau` as a
-   vector, summary(z.out) returns a list of summary.rq objects. From
-   each summary.rq object you may extract:
-
-   -  coefficients: the parameter estimates with their 95 percent
-      confidence intervals. The user can also obtain standard errors and
-      p-values by specifying the se argument to summary. See
-      documentation for summary.rq in the quantreg package for details.
-
-   -  rdf: the residual degrees of freedom.
-
-   -  cov: a :math:`k \times k` matrix of unscaled covariances. To
-      obtain this attribute, the user must specify cov=TRUE as an
-      argument to summary. See documentation for summary.rq in the
-      quantreg package for details.
-
--  From the sim() output object s.out, you may extract quantities of
-   interest arranged as matrices indexed by simulation :math:`\times`
-   x-observation (for more than one x-observation). Available quantities
-   are:
-
-   -  qi$ev: the simulated expected values for the specified values of
-      x.
-
-   -  qi$pr: the simulated predicted values for the specified values of
-      x.
-
-   -  qi$fd: the simulated first differences (or differences in expected
-      values) for the specified values of x and x1.
 
 
 See also
