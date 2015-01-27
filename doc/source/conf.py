@@ -17,14 +17,14 @@ import sphinx_bootstrap_theme
 
 # @cchoirat: download model tree and navbar files from zeligproject.org
 import urllib
-urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/_static/zelig5models.json",
+urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/Zelig/master/inst/JSON/zelig5models.json",
                    "_static/zelig5models.json")
-urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/_static/zelig5choicemodels.json",
+urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/ZeligChoice/master/inst/JSON/zelig5choicemodels.json",
                    "_static/zelig5choicemodels.json")
 urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/_static/modelstree.html",
                    "_static/modelstree.html")
-urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/zelignav.html",
-                   "zelignav.html")
+#urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/zelignav.html",
+#                   "zelignav.html")
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
