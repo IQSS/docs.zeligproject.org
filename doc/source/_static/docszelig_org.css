@@ -26,8 +26,36 @@ iframe {
 	border:0;
 }
 
+.navbar-default {
+    background-image: none;
+    background-color: #f3f3f1;
+    border: 0;
+    min-height: 0;
+    padding-bottom: 8px;
+}
+
 .navbar-default a.navbar-brand, .navbar-default a.navbar-brand:hover {
-    color: #1D4125;
+    color: #303030;
+    font-family: Georgia,Baskerville,Palatino,"Palatino Linotype","Book Antiqua","Times New Roman",serif;
+    font-size: 20px;
+    padding: 8px;
+    margin-right: 20px;
+}
+
+.navbar-default .navbar-nav > li {
+    margin-right: 20px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #303030;
+    font-family: Georgia,Baskerville,Palatino,"Palatino Linotype","Book Antiqua","Times New Roman",serif;
+    font-size: 20px;
+    padding: 8px;
+}
+
+.navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li > a:hover {
+    background: none repeat scroll 0 0 #1e2540;
+    color: #fff;
 }
 
 a.headerlink {

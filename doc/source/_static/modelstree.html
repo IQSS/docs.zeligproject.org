@@ -36,7 +36,7 @@ var tree = d3.layout.tree()
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
 var svg = d3.select("#modelsModalWrap").append("div").append("svg")
-    .attr("width", width )
+    .attr("width", "1170" )
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -197,10 +197,10 @@ function click(d) {
       var v2 = "/";
       var vignette = v1 + v2 + v3;
       if(vignette.substr(vignette.length-8) == "gee.html") {
-          vignette = vignette.substr(0,vignette.length-9) + vignette.substr(vignette.length-8);
+          vignette = vignette.substr(0,vignette.length-8) + vignette.substr(vignette.length-8);
       }
       else if(vignette.substr(vignette.length-10) == "bayes.html") {
-          vignette = vignette.substr(0,vignette.length-11) + vignette.substr(vignette.length-10);
+          vignette = vignette.substr(0,vignette.length-10) + vignette.substr(vignette.length-10);
       }
       window.open(vignette, "_top");
   }
