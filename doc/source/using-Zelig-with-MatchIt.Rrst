@@ -1,0 +1,8 @@
+.. _using_Zelig_with_MatchIt:
+
+Using Zelig with the MatchIt Package for Matched Datasets
+=========================================================
+
+Zelig accepts the output object from the MatchIt package as the data argument
+
+

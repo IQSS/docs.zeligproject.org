@@ -1,0 +1,6 @@
+.. _using_Zelig_with_Amelia:
+
+Using Zelig with the Amelia Package for Missing Data
+======================================================
+
+Zelig accepts the output object from the Amelia package as the data argument
