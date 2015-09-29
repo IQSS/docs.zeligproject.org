@@ -39,5 +39,6 @@ With **three simple commands**, Zelig’s intuitive **model bridging** interface
 
    installation_quickstart.rst
    vignette.rst
+   features.rst
    faq.rst
    devguide.rst
