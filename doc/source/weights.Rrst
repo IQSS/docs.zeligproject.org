@@ -3,9 +3,8 @@
 Adding Weights to Zelig Models
 ==============================
 
-This is how you add weights to Zelig models.
+Weights are often added to statistical models to adjust the observed sample distribution in the data to an underlying population of interest.  For example, some types of observations may have been intentionally oversampled, and , or .
 
-.. toctree::
-   :glob:
 
+Weights that are creating using the matching mechanisms in the MatchIt package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, Using Zelig with MatchIt
 
