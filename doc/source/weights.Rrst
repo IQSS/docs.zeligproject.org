@@ -1,0 +1,11 @@
+.. _weights:
+
+Adding Weights to Zelig Models
+==============================
+
+This is how you add weights to Zelig models.
+
+.. toctree::
+   :glob:
+
+
