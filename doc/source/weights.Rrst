@@ -3,8 +3,18 @@
 Adding Weights to Zelig Models
 ==============================
 
-Weights are often added to statistical models to adjust the observed sample distribution in the data to an underlying population of interest.  For example, some types of observations may have been intentionally oversampled, and , or .
+Weights are often added to statistical models to adjust the observed sample distribution in the data to an underlying population of interest.  For example, some types of observations may have been intentionally oversampled, and need to be downweighted for population inferences, or weights may have been created by a matching procedure to create a dataset with treatment and control groups that resemble randomized designs and achieve balance in covariates.
 
+The weights argument, can be a vector of weight values, or a name of a variable in the dataset.  
+
+Some checking of the supplied weights are conducted, and warnings or error messages will be given to the user if, for example, the supplied weights are of the wrong length, or the variable name supplied is not present in the dataset.  Negative weights are treated as zero weights.
+
+Not all the R implementations of statistical models that Zelig uses have been written to accept weights or use them in estimation.  When weights have been supplied by the user, but weights are not written into the package for that model, Zelig is still able to use the weights by one of two procedures:  
+
+* If the supplied weights are all integer values, then Zelig rebuilds a new version of the dataset by duplicating observations according to their weight (and removing observations with zero weight).  
+* If the weights are continuously valued, Zelig bootstraps the supplied dataset, using the relative weights as bootstrap probabilities.
+
+Using Matching Weights from the MatchIt Package
++++++++++++++++++++++++++++++++++++++++++++++++
 
 Weights that are creating using the matching mechanisms in the MatchIt package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, Using Zelig with MatchIt
-
