@@ -1,0 +1,12 @@
+.. _features:
+
+Zelig Features
+==============
+
+This section includes references and examples of the utilities and features available in the Zelig package.
+
+.. toctree::
+   :glob:
+
+   weights.rst
+
