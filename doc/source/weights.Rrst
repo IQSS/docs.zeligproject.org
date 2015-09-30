@@ -45,6 +45,7 @@ Here we use a model where weights are not accepted by the underlying package, so
 .. {r, eval = FALSE}
 continuous.weights <- rep(x=c(0.6, 1, 1.4), times=30)
 z5.out <- zelig( y ~ x, model="ls", weights=continuous.weights, data=mydata)
+.. ..
 
 But when the weights happen to be integer valued, then Zelig can construct a dataset by a combination of duplicating and deleting observations.
 
@@ -58,4 +59,4 @@ z6.out <- zelig( y ~ x, model="ls", weights=integer.weights, times=30), data=myd
 Using Matching Weights from the MatchIt Package
 +++++++++++++++++++++++++++++++++++++++++++++++
 
-Weights that are creating using the matching mechanisms in the MatchIt package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, Using Zelig with MatchIt
+Weights that are creating using the matching mechanisms in the MatchIt package will be automatically employed in Zelig analyses if the output object from MatchIt is passed to Zelig as the data argument.  For more detail, see Using Zelig with MatchIt
