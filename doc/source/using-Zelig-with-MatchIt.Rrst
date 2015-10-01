@@ -3,23 +3,16 @@
 Using Zelig with the MatchIt Package for Matched Datasets
 =========================================================
 
-Zelig accepts the output object from the MatchIt package as the data argument
+Zelig accepts the output object from the MatchIt package as the data argument.
 
-library(MatchIt)
-
-data(lalonde)
-
-Examples
-+++++
-
-.. {r, eval = FALSE, echo = FALSE}	
+.. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
 
 First, using the MatchIt package, we attaching the lalonde example dataset, and run matching:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 library("MatchIt")
 data(turnout)
 m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
@@ -27,7 +20,7 @@ m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
 
 Then we can use the output object from the MatchIt package directly in the data argument for Zelig:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out <- zelig( educ ~ treat, model="ls", data=m.out)
 .. ..
 
@@ -35,7 +28,7 @@ Zelig will automatically extract the dataset and the weights from the MatchIt ob
 
 From the MatchIt object, it knows what matching method was used, and adds appropriate citations to the reference list accordingly, in addition to the other references it builds from models and utilities in Zelig:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 print(z.out$references)
 .. ..
 
