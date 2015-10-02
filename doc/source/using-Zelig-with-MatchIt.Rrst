@@ -12,7 +12,7 @@ set.seed(1234)
 
 First, using the MatchIt package, we attaching the lalonde example dataset, and run matching:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 library("MatchIt")
 data(turnout)
 m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
