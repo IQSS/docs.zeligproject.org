@@ -19,7 +19,7 @@ Examples
 Here we are building a simulated dataset where in the first fifty observations y has a positive relationship with x and in the next fifty observations a negative relationship.
 .. {r, eval = TRUE}
 x <- runif(90)
-y <- c( 2*x[1:45], -3*x[46:90] ) + rnorm(100)
+y <- c( 2*x[1:45], -3*x[46:90] ) + rnorm(90)
 z <- as.numeric(y>0)
 w1 <- c(rep(1.8, 45), rep(0.2,45))
 mydata <- data.frame(z,y,x,w1)
