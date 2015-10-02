@@ -8,6 +8,8 @@ Zelig accepts the output object from the MatchIt package as the data argument.
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
+install.packages("optmatch", repos="http://lib.stat.cmu.edu/R/CRAN/")
+library(optmatch)
 .. .. 
 
 First, using the MatchIt package, we attaching the lalonde example dataset, and run matching:
@@ -15,7 +17,7 @@ First, using the MatchIt package, we attaching the lalonde example dataset, and 
 .. {r, eval = TRUE}
 library("MatchIt")
 data(turnout)
-m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
+m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "optimal")
 .. ..
 
 Then we can use the output object from the MatchIt package directly in the data argument for Zelig:
@@ -29,6 +31,6 @@ Zelig will automatically extract the dataset and the weights from the MatchIt ob
 From the MatchIt object, it knows what matching method was used, and adds appropriate citations to the reference list accordingly, in addition to the other references it builds from models and utilities in Zelig:
 
 .. {r, eval = TRUE}
-print(z.out$references)
+print(z.out$references())
 .. ..
 
