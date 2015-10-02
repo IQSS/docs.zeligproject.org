@@ -19,7 +19,7 @@ Examples
 Here we are building a simulated dataset where in the first fifty observations y has a positive relationship with x and in the next fifty observations a negative relationship.
 .. {r, eval = TRUE}
 x <- runif(90)
-y <- c( 2*x[1:45], -3*x[46:90] )
+y <- c( 2*x[1:45], -3*x[46:90] ) + rnorm(100)
 z <- as.numeric(y>0)
 w1 <- c(rep(1.8, 45), rep(0.2,45))
 mydata <- data.frame(z,y,x,w1)
@@ -45,14 +45,14 @@ Here we use a model where weights are not accepted by the underlying package, so
 
 .. {r, eval = TRUE}
 continuous.weights <- rep(x=c(0.6, 1, 1.4), times=30)
-z5.out <- zelig( y ~ x, model="logit", weights=continuous.weights, data=mydata)
+z5.out <- zelig( z ~ x, model="logit", weights=continuous.weights, data=mydata)
 .. ..
 
 But when the weights happen to be integer valued, then Zelig can construct a dataset by a combination of duplicating and deleting observations.
 
 .. {r, eval = TRUE}
 integer.weights <- rep(x=c(0, 1, 2), times=30)
-z6.out <- zelig( y ~ x, model="logit", weights=integer.weights, times=30), data=mydata)
+z6.out <- zelig( z ~ x, model="logit", weights=integer.weights, times=30), data=mydata)
 .. ..
 
 
