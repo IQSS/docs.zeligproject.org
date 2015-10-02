@@ -8,8 +8,6 @@ Zelig accepts the output object from the MatchIt package as the data argument.
 .. {r, eval = TRUE, echo = FALSE}	
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
-install.packages("optmatch", repos="http://lib.stat.cmu.edu/R/CRAN/")
-library(optmatch)
 .. .. 
 
 First, using the MatchIt package, we attaching the lalonde example dataset, and run matching:
@@ -17,7 +15,7 @@ First, using the MatchIt package, we attaching the lalonde example dataset, and 
 .. {r, eval = TRUE}
 library("MatchIt")
 data(turnout)
-m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "optimal")
+m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
 .. ..
 
 Then we can use the output object from the MatchIt package directly in the data argument for Zelig:
