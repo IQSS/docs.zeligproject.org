@@ -20,15 +20,15 @@ m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
 
 Then we can use the output object from the MatchIt package directly in the data argument for Zelig:
 
-.. {r, eval = TRUE}
-z.out <- zelig( educ ~ treat, model="ls", data=m.out)
+.. {r, eval = FALSE}
+z.out <- zelig(educ ~ treat, model="ls", data=m.out)
 .. ..
 
 Zelig will automatically extract the dataset and the weights from the MatchIt object and use them in analysis.  For more details on how weights are used in Zelig across models, see the weights section.
 
 From the MatchIt object, it knows what matching method was used, and adds appropriate citations to the reference list accordingly, in addition to the other references it builds from models and utilities in Zelig:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 print(z.out$references)
 .. ..
 
