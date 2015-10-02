@@ -18,7 +18,7 @@ With reference classes:
 
 .. {r, eval = FALSE}
 z5 <- zweibull$new()
-z5$zelig(Surv(Y, C) ~ X, data = mydata)
+z5$zelig(Surv(Y, C) ~ X, weights = w, data = mydata)
 z5$setx()
 z5$sim()
 .. ..
@@ -26,7 +26,7 @@ z5$sim()
 With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
-z.out <- zelig(Surv(Y, C) ~ X, model = "weibull", data = mydata)
+z.out <- zelig(Surv(Y, C) ~ X, model = "weibull", weights = w, data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..

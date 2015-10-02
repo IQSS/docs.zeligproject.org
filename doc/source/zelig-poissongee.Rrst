@@ -33,7 +33,7 @@ With reference classes:
 .. {r, eval = FALSE}
 z5 <- zpoissongee$new()
 z5$zelig(Y ~ X1 + X2, model = "poisson.gee",
-         id = "X3", data = mydata)
+         id = "X3", weights = w, data = mydata)
 z5$setx()
 z5$sim()
 .. ..
@@ -42,7 +42,7 @@ With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "poisson.gee",
-               id = "X3", data = mydata)
+               id = "X3", weights = w, data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..

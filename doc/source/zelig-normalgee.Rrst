@@ -30,7 +30,7 @@ With reference classes:
 
 .. {r, eval = FALSE}
 z5 <- znormalgee$new()
-z5$zelig(Y ~ X1 + X2, id = "X3", data = mydat)
+z5$zelig(Y ~ X1 + X2, id = "X3", weights = w, data = mydat)
 z5$setx()
 z5$sim()
 .. ..
@@ -39,7 +39,7 @@ With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "normal.gee",
-                       id = "X3", data = mydata)
+                       id = "X3", weights = w, data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
