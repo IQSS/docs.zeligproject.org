@@ -27,16 +27,16 @@ mydata <- data.frame(z,y,x,w1)
 w2 <- rep(c(1.8,0.2), 45)
 .. ..
 
-In the first example below, we are passing the name of a variable included in the dataset.  
+In the first example below, we are passing the name of a variable included in the dataset.  We see the weights are correctly implemented as we are more heavily weighting the first 50 observations, where there is a positive relationship, and positive relationship is seen in the regression.
 
 .. {r, eval = TRUE}
-z1.out <- zelig( y ~ x, model="ls", weights="w1", data=mydata)
+z1.out <- zelig( y ~ x, cite=FALSE, model="ls", weights="w1", data=mydata)
 summary(z1.out)
 .. ..
 
-In our second example, the weights are a vector of the same length as the dataset.
+In our second example, the weights are provided as a separate vector of the same length as the dataset.  These weights give weight to both relationships present when we constructed the data, and we see the estimated relationship is now negative.
 .. {r, eval = TRUE}
-z2.out <- zelig( y ~ x, model="ls", weights=w2, data=mydata)
+z2.out <- zelig( y ~ x, cite=FALSE, model="ls", weights=w2, data=mydata)
 summary(z2.out)
 .. ..
 
