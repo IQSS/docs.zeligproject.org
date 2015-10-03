@@ -52,7 +52,7 @@ But when the weights happen to be integer valued, then Zelig can construct a dat
 
 .. {r, eval = TRUE}
 integer.weights <- rep(x=c(0, 1, 2), times=30)
-z6.out <- zelig( z ~ x, model="logit", weights=integer.weights, times=30), data=mydata)
+z6.out <- zelig( z ~ x, model="logit", weights=integer.weights, data=mydata)
 .. ..
 
 
