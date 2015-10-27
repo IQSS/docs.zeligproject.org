@@ -182,7 +182,7 @@ Quantities of Interest
    of the expected duration given :math:`x_i` and draws of :math:`\beta`
    from its posterior,
 
-   .. math:: E(Y) = \lambda_i = \exp(x_i \beta).
+   .. math:: E(Y) = \lambda_i^{-1} = 1/\exp(x_i \beta).
 
 -  The predicted values (qi$pr) are draws from the exponential
    distribution with rate equal to the expected value.
