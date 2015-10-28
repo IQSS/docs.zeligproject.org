@@ -4,15 +4,15 @@ setwd("source/")
 
 lf <- list.files(".", pattern = ".Rrst")
 
-for (f in lf) {
-    knit(f)
-    purl(f)
+for (file_Rrst in lf) {
+    knit(file_Rrst)
+    purl(file_Rrst)
 }
 
 
 lf <- list.files(".", pattern = "\\.rst$")
 
-for (f in lf) {
+for (file_rst in lf) {
     input <- readLines(f)
     input <- c(".. raw:: html",
                "    :file: zelignav.html\n",
