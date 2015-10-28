@@ -17,7 +17,7 @@ for (file_rst in lf) {
     input <- c(".. raw:: html",
                "    :file: zelignav.html\n",
                input)
-    writeLines(input, f)
+    writeLines(input, file_rst)
 }
 
 setwd("..")
