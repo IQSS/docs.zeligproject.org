@@ -15,7 +15,7 @@ First, using the MatchIt package, we attaching the lalonde example dataset, and 
 .. {r, eval = TRUE}
 library("MatchIt")
 data(turnout)
-m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "exact")
+m.out <- matchit(treat ~ educ + black + hispan, data=lalonde, method= "optimal")
 .. ..
 
 Then we can use the output object from the MatchIt package directly in the data argument for Zelig:
