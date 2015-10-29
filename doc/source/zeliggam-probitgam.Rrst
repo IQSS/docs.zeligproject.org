@@ -179,7 +179,7 @@ plot(z.out$zelig.out$z.out[[1]], pages = 1)
 
 A GAM with 3df regression spline term & 2 penalized terms:
 
-.. {r, eval = z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), min.sp = c(0.001, + 0.01, 0, 10), model = "probit.gam", data = my.data)}
+.. {r, eval = TRUE)}
 z.out <- zelig(y ~ s(x0, k = 4, fx = TRUE, bs = "tp") + s(x1, k = 12) + s(x2, k = 15), model = "probit.gam", data = my.data)
 summary(z.out)
 .. ..
