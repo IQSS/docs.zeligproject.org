@@ -13,7 +13,7 @@ for (file_Rrst in lf) {
 lf <- list.files(".", pattern = "\\.rst$")
 
 for (file_rst in lf) {
-    input <- readLines(f)
+    input <- readLines(file_rst)
     input <- c(".. raw:: html",
                "    :file: zelignav.html\n",
                input)
