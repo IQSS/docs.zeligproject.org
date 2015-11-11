@@ -20,7 +20,11 @@ To install R, go to `http://www.r-project.org/ <http://www.r-project.org/>`_  Se
 
 **Installing Zelig**
 
-Zelig 5 is not available on ``CRAN`` yet.
+Zelig 5 is available on CRAN.  To install from CRAN enter the following at the R prompt:
+.. {r, eval = FALSE}
+install.packages("Zelig")
+.. ..
+at which point you will be asked to select from a list a local CRAN mirror to use for downloading.
 
 *Beta Release*
 
