@@ -68,7 +68,7 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
-.. {r Zelig-poisson, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-poisson"}
+.. {r Zelig-poisson, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-poisson"}
 plot(s.out)
 .. ..
 

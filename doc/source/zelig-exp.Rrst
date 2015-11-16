@@ -115,7 +115,7 @@ Summarize quantities of interest and produce some plots:
 summary(s.out)
 .. ..
 
-.. {r Zelig-exp, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-exp"}
+.. {r Zelig-exp, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-exp"}
 plot(s.out)
 .. ..
 

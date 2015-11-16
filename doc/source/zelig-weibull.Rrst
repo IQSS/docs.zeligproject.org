@@ -104,7 +104,7 @@ s.out <- sim(z.out, x = x.low, x1 = x.high)
 summary(s.out)
 .. ..
 
-.. {r Zelig-weibull, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-weibull"}
+.. {r Zelig-weibull, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-weibull"}
 plot(s.out)
 .. ..
 

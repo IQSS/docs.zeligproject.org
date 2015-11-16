@@ -82,7 +82,7 @@ summary(s.out1)
 
 A visual summary of quantities of interest:
 
-.. {r Zelig-normal, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-normal"}
+.. {r Zelig-normal, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-normal"}
 plot(s.out1)
 .. ..
 

@@ -209,7 +209,7 @@ summary(s.out)
 
 Generate a plot of quantities of interest:
 
-.. {r, eval = TRUE}
+.. {r, eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-normalgee"}
 plot(s.out)
 .. ..
 

@@ -108,7 +108,7 @@ s.out <- sim(z.out, x = x.low, x1 = x.high)
 summary(s.out)
 .. ..
 
-.. {r, eval = TRUE, Zelig-oprobit-1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-oprobit-1"}
+.. {r, eval = TRUE, Zelig-oprobit-1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-oprobit-1"}
 plot(s.out)
 .. ..
 

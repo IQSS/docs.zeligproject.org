@@ -76,7 +76,7 @@ s.out <- sim(z.out, x = x.low, x1 = x.high)
 summary(s.out)
 .. ..
 
-.. {r Zelig-gamma, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zelig-gamma"}
+.. {r Zelig-gamma, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-gamma"}
 plot(s.out)
 .. ..
 
