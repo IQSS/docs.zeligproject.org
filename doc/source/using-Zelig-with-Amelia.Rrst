@@ -3,4 +3,30 @@
 Using Zelig with the Amelia Package for Missing Data
 ======================================================
 
-Zelig accepts the output object from the Amelia package as the data argument
+Zelig accepts the output object from the Amelia package as the data argument.
+
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+.. .. 
+
+First, using the Amelia package, we multiply impute a dataset with missing values:
+
+..{r, eval = TRUE}
+library("Amelia")
+data(africa)
+a.out <- amelia(x = africa, cs = "country", ts = "year", logs = "gdp_pc")
+.. ..
+
+Then we can use the output object from the Amelia package directly in the data argument for Zelig:
+
+..{r, eval = TRUE}
+z.out <- zelig(gdp_pc ~ trade + civlib, model="ls", data=a.out)
+.. ..
+
+Zelig will automatically extract the imputed datasets from the Amelia object, and run the requested model in each of them.  When the estimated model parameters are summarized, the results from each imputed dataset are available, but more importantly, the combined answer across the imputed datasets calculated by ``Rubin's Rules'' are automatically presented:
+
+..{r, eval = TRUE}
+summary(z.out)
+.. ..
+
