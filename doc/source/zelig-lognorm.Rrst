@@ -237,8 +237,8 @@ functions (known as *getters*) provide easy access to the raw fields most
 commonly of use for further investigation.  
 
 In the example above ``z.out$getcoef()`` returns the estimated coefficients, 
- ``z.out$getvcov()`` returns the estimated covariance matrix, and ``z.out$getpredict()``
- provides predicted values for all observations in the dataset from the analysis.
+``z.out$getvcov()`` returns the estimated covariance matrix, and ``z.out$getpredict()``
+provides predicted values for all observations in the dataset from the analysis.
 
 
 See also
