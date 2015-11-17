@@ -116,7 +116,7 @@ heidel.diag(z.out`\ coefficients)
 raftery.diag(z.out..coefficients)
 .. ..
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(z.out)
 .. ..
 
