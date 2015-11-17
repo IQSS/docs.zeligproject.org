@@ -117,7 +117,7 @@ lapply(z.out$zelig.out$z.out, heidel.diag)
 lapply(z.out$zelig.out$z.out, raftery.diag)
 .. ..
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(z.out)
 .. ..
 
