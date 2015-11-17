@@ -116,7 +116,7 @@ heidel.diag(z.out`\ coefficients)
 raftery.diag(z.out..coefficients)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
@@ -132,7 +132,7 @@ Simulating quantities of interest from the posterior distribution given ``x.out`
 s.out1 <- sim(z.out, x = x.out)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
