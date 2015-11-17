@@ -31,3 +31,8 @@ Zelig will automatically extract the imputed datasets from the Amelia object, an
 summary(z.out)
 .. ..
 
+To see the result from an individual imputed dataset, we use the subset argument as:
+
+.. {r, eval = TRUE}
+summary(z.out, subset = 2:3)
+.. ..
