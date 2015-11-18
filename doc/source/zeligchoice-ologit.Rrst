@@ -88,6 +88,10 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
+.. {r, eval = TRUE}
+plot(s.out)
+.. ..
+
 First Differences
 !!!!!
 
@@ -116,6 +120,10 @@ Generate simulated fitted values and first differences, and view the results:
 .. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.low, x1 = x.high)
 summary(s.out)
+.. ..
+
+.. {r, eval = TRUE}
+plot(s.out)
 .. ..
 
 Model

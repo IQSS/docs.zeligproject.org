@@ -83,6 +83,10 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
+.. {r, eval = TRUE}
+plot(s.out)
+.. ..
+
 First Differences
 !!!!!
 
