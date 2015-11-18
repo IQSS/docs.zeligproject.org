@@ -42,6 +42,6 @@ When quantities of interest are plotted, such as expected and predicted values a
 .. {r, eval = TRUE}
 z.out$setx()
 z.out$sim()
-plot(s.out)
+plot(z.out)
 .. ..
 
