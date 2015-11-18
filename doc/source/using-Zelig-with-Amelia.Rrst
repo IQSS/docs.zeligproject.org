@@ -39,7 +39,7 @@ summary(z.out, subset = 2:3)
 
 When quantities of interest are plotted, such as expected and predicted values and first differenences, these are correctly pooled across those from each of the m imputed datasets:
 
-.. {r, eval = TRUE}
+.. {r, eval = TRUE, fig.cap = ""}
 z.out$setx()
 z.out$sim()
 plot(z.out)
