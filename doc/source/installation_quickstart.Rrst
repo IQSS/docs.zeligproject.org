@@ -34,6 +34,12 @@ Beta releases are updated with the latest fixes and newest experimental features
 install.packages("Zelig", type = "source", repos = "http://r.iq.harvard.edu/")
 .. ..
 
+The ZeligChoice package, containing additional Zelig models described in on this site, is presently only available in beta, so if you wish to use these models, similarly install this as:
+
+.. {r, eval = FALSE}
+install.packages("ZeligChoice", type = "source", repos = "http://r.iq.harvard.edu/")
+.. ..
+
 *Development Release*
 
 Development versions contain the latest code in-development, and may not be fully tested. To download this release:
