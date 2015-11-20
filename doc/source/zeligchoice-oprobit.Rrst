@@ -101,8 +101,8 @@ summary(z.out)
 Set the explanatory variables to their means, with mil set to 0 (no military action in addition to sanctions) in the baseline case and set to 1 (military action in addition to sanctions) in the alternative case:
 
 .. {r, eval = TRUE}
-x.low <- setx(z.out, mil = 0)
-x.high <- setx(z.out, mil = 1)
+x.low <- setx(z.out, coop = 1)
+x.high <- setx(z.out, coop = 4)
 .. ..
 
 Generate simulated fitted values and first differences, and view the results:
