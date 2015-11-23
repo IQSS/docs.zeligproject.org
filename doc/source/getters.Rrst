@@ -1,0 +1,32 @@
+.. _getters:
+
+Extracting Quantities of Interest from Zelig Objects
+==============================
+
+Zelig has a number of utilities available to easily extract items of interest from all the results stored in the Zelig object.  These are called "getters".  Each getter is a method that begins with "get".
+
+As a key example, the ``getqi()`` method extracts simulated quantities of interest.  It has two arguments.  The first ``qi`` is the name of quantity of interest desired, typically, "ev" for expected values, "pv" for predicted values or "fd" for first differences.  The second argument  ``xvalue`` states which of the set values of x should be used for getting the quantity of interest.  The values of x are typically "x" or "x1".  If you supply an argument value that does not exist in the Zelig object, Zelig will give you a warning message listing all the names present.
+
+Here is the example from the Poisson model:
+
+.. {r, eval = TRUE, echo = FALSE}	
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+.. .. 
+
+
+.. {r, eval = TRUE}
+data(sanction)
+z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
+summary(z.out)
+z.out$setx()
+z.out$sim()
+.. ..
+
+To extract the quantities of interest that have been simulated we can use the getter as:
+
+.. {r, eval = TRUE}
+my.ev <- z.out$getqi(qi="ev", xvalue="x")
+my.pv <- z.out$getqi(qi="pv", xvalue="x")
+.. ..
+
