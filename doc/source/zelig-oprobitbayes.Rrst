@@ -80,7 +80,7 @@ Examples
 +++++
 
 .. {r, eval = TRUE, echo = FALSE}
-rm(list=ls(pattern=".out"))	
+rm(list=ls(pattern="\\.out"))	
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 

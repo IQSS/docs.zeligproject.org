@@ -93,7 +93,7 @@ Zelig users may wish to refer to ``help(MCMCmnl)`` for more information.
 Examples
 +++++
 .. {r, eval = TRUE, echo = FALSE}
-rm(list=ls(pattern=".out")) 
+rm(list=ls(pattern="\\.out")) 
 suppressPackageStartupMessages(suppressWarnings(library(Zelig)))
 set.seed(1234)
 .. ..

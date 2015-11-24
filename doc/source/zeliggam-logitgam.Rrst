@@ -69,7 +69,7 @@ Examples
 +++++
 
 .. {r, eval = FALSE, echo = FALSE}	
-rm(list=ls(pattern=".out"))
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(ZeligGAM)))
 set.seed(1234)
 .. .. 
