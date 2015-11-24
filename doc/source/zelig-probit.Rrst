@@ -31,7 +31,8 @@ s.out <- sim(z.out, x = x.out, x1 = NULL)
 Example
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}	
+.. {r, eval = TRUE, echo = FALSE}
+rm(list=ls())	
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 

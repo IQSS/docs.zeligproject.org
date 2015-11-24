@@ -81,6 +81,7 @@ Examples
 +++++
 
 .. {r, eval = TRUE, echo = FALSE}	
+rm(list=ls())
 suppressWarnings(suppressMessages(library(Zelig)))	
 suppressWarnings(suppressMessages(library(ZeligChoice)))
 set.seed(1234)
