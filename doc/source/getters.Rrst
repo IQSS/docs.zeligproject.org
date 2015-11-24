@@ -41,7 +41,6 @@ If one asks the getter for a qi or xvalue that does not exist in the zelig objec
 .. {r, eval = TRUE}
 my.fd <- z.out$getqi(qi="fa", xvalue="x1")
 my.fd <- z.out$getqi(qi="fd", xvalue="x2")
-
 .. ..
 
 
