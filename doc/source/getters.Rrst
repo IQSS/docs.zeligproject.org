@@ -31,7 +31,6 @@ my.pv.lowcoop <- z.out$getqi(qi="pv", xvalue="x")
 my.ev.lowcoop <- z.out$getqi(qi="ev", xvalue="x")
 my.ev.highcoop <- z.out$getqi(qi="ev", xvalue="x1")
 my.fd <- z.out$getqi(qi="fd", xvalue="x1")
-
 .. ..
 
 The ``qi`` argument is the name of any quantity of interest simulated  in the object by ``sim``.  Depending on the model, this will generally be "ev", "pv", or "fd" for expected values, predicted values, or first differences, respectively.  The ``xvalue`` argument is the level of x for which that quantity of interest was simulated, either "x" or "x1".  Note that first differences, the difference between expected values with covariates at "x" and with covariates at "x1" are associated with the xvalue of "x1".
