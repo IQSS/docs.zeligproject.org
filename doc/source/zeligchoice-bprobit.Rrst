@@ -99,6 +99,7 @@ data(sanction)
 .. {r, eval = TRUE}
 z.out1 <- zelig(cbind(import, export) ~ coop + cost + target, 
                 model = "bprobit", data = sanction)
+summary(z.out1)
 .. ..
 
 

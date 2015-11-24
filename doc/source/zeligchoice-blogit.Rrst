@@ -90,6 +90,7 @@ data(sanction)
 .. {r, eval = TRUE}
 z.out1 <- zelig(cbind(import, export) ~ coop + cost + target,
                 model = "blogit", data = sanction)
+summary(z.out1)
 .. ..
 
 By default, zelig() estimates two effect parameters for each
