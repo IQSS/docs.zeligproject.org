@@ -75,6 +75,12 @@ z.out1 <- zelig(as.factor(vote88) ~ pristr + othcok + othsocok,
                 model = "mlogit", data = mexico)
 .. ..
 
+Summarize estimated paramters:
+
+.. {r, eval = TRUE}
+summary(z.out1)
+.. ..
+
 Set the explanatory variables to their default values, with `pristr`
 (for the strength of the PRI) equal to 1 (weak) in the baseline
 values, and equal to 3 (strong) in the alternative values:
