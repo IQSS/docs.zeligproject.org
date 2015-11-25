@@ -92,6 +92,7 @@ Estimating parameter values:
 .. {r, eval = TRUE}
 z.out1 <- zelig(vote ~ race + educate, model = "logit.gee",
                 id = "cluster", data = sorted.turnout)
+summary(z.out1)
 .. ..
 
 Setting values for the explanatory variables to their default values:
