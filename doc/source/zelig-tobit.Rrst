@@ -88,6 +88,12 @@ Estimating linear regression using ``tobit``:
 z.out <- zelig(durable ~ age + quant, model = "tobit", data = tobin)
 .. ..
 
+Summarize estimated paramters:
+
+.. {r, eval = TRUE}
+summary(z.out)
+.. ..
+
 Setting values for the explanatory variables to their sample averages:
 
 .. {r, eval = TRUE}
