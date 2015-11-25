@@ -73,6 +73,12 @@ z.out <- zelig(ncost ~ mil + coop, model = "ologit",
                data = sanction)
 .. ..
 
+Summarize estimated paramters:
+
+.. {r, eval = TRUE}
+summary(z.out)
+.. ..
+
 Set the explanatory variables to their observed values:
 
 .. {r, eval = TRUE}

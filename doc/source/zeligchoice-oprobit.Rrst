@@ -68,6 +68,11 @@ Estimate the model:
 
 .. {r, eval = TRUE}
 z.out <- zelig(ncost ~ mil + coop, model = "oprobit", data = sanction)
+.. ..
+
+Summarize estimated paramters:
+
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
