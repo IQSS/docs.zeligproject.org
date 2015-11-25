@@ -50,6 +50,7 @@ Estimating parameter values for the logistic regression:
 
 .. {r, eval = TRUE}
 z.out1 <- zelig(vote ~ age + race, model = "logit", data = turnout)
+summary(z.out1)
 .. ..
 
 Setting values for the explanatory variables:
