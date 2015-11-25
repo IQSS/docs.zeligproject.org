@@ -123,7 +123,7 @@ Simulate fitted values and first differences:
 s.out1 <- sim(z.out1, x = x.low, x1 = x.high)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
