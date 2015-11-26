@@ -88,15 +88,15 @@ x.out <- setx(z.out, fn = NULL)
 Simulate fitted values given x.out and view the results:
 
 .. {r, eval = TRUE}
-s.out <- sim(z.out, x = x.out)
+s.out.ologit <- sim(z.out, x = x.out)
 .. ..
 
 .. {r, eval = TRUE}
-summary(s.out)
+summary(s.out.ologit)
 .. ..
 
 .. {r, eval = TRUE}
-plot(s.out)
+plot(s.out.ologit)
 .. ..
 
 First Differences
@@ -124,12 +124,12 @@ x.high <- setx(z.out, coop = 4)
 Generate simulated fitted values and first differences, and view the results:
 
 .. {r, eval = TRUE}
-s.out <- sim(z.out, x = x.low, x1 = x.high)
-summary(s.out)
+s.out.ologit2 <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out.ologit2)
 .. ..
 
 .. {r, eval = TRUE}
-plot(s.out)
+plot(s.out.ologit2)
 .. ..
 
 Model
