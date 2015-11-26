@@ -97,7 +97,7 @@ z.out1 <- zelig(vote ~ race + educate, model = "probit.gee",
 Summarize estimated paramters:
 
 .. {r, eval = TRUE}
-summary(z.out1}
+summary(z.out1)
 .. ..
 
 Setting values for the explanatory variables to their default values:
