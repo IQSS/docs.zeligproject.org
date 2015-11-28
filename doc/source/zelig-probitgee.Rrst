@@ -335,7 +335,7 @@ elements available through the $ operator are listed below.
    -  qi$att.ev: the simulated average expected treatment effect for the
       treated from conditional prediction models.
 
-See also
+See also:
 +++++
 
 The geeglm function is part of the geepack package by Søren Højsgaard,
