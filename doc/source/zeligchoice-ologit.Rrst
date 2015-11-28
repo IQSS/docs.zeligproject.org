@@ -124,12 +124,12 @@ x.high <- setx(z.out, coop = 4)
 Generate simulated fitted values and first differences, and view the results:
 
 .. {r, eval = TRUE}
-s.out.ologit2 <- sim(z.out, x = x.low, x1 = x.high)
-summary(s.out.ologit2)
+s.out <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out)
 .. ..
 
 .. {r, eval = TRUE}
-plot(s.out.ologit2)
+plot(s.out)
 .. ..
 
 Model
