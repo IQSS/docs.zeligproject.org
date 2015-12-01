@@ -82,7 +82,7 @@ summary(z.out)
 Set the explanatory variables to their observed values:
 
 .. {r, eval = TRUE}
-x.out <- setx(z.out, fn = NULL)
+x.out <- setx(z.out)
 .. ..
 
 Simulate fitted values given x.out and view the results:
