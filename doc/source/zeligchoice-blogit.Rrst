@@ -21,6 +21,13 @@ functions of (possibly different) sets of explanatory variables.
 Syntax
 +++++
 
+First load packages:
+
+.. {r, eval = FALSE}
+library("Zelig")
+library("ZeligChoice")
+.. ..
+
 With reference classes:
 
 .. {r, eval = FALSE}
