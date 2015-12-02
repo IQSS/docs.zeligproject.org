@@ -20,11 +20,12 @@ To install R, go to `http://www.r-project.org/ <http://www.r-project.org/>`_  Se
 
 **Installing Zelig**
 
-Zelig 5 is available on CRAN.  To install from CRAN enter the following at the R prompt:
+Zelig 5 is available on CRAN, as is the ZeligChoice package containing additional models.  To install from CRAN enter the following at the R prompt:
 .. {r, eval = FALSE}
 install.packages("Zelig")
+install.packages("ZeligChoice")
 .. ..
-at which point you will be asked to select from a list a local CRAN mirror to use for downloading.
+at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  
 
 *Beta Release*
 
@@ -34,15 +35,15 @@ Beta releases are updated with the latest fixes and newest experimental features
 install.packages("Zelig", type = "source", repos = "http://r.iq.harvard.edu/")
 .. ..
 
-The ZeligChoice package, containing additional Zelig models described in on this site, is presently only available in beta, so if you wish to use these models, similarly install this as:
+The ZeligGAM package, containing additional Zelig models described on this site, is presently only available in beta, so if you wish to use these models, similarly install this as:
 
 .. {r, eval = FALSE}
-install.packages("ZeligChoice", type = "source", repos = "http://r.iq.harvard.edu/")
+install.packages("ZeligGAM", type = "source", repos = "http://r.iq.harvard.edu/")
 .. ..
 
 *Development Release*
 
-Development versions contain the latest code in-development, and may not be fully tested. To download this release:
+Development versions contain the latest code in-development, and may not be fully tested. The following example downloads Zelig, and substitute the desired package name for any other package:
 
 .. {r, eval = FALSE}
 # This installs devtools package, if not already installed
