@@ -45,12 +45,12 @@ suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
 
-Example 1: User has Existing Sample Weights #####
+Example 1: User has Existing Sample Weights
 !!!!!!!
 
 Attach sample data and variable names:  
 
-.. {r, eval = TRUE
+.. {r, eval = TRUE}
 data(api, package="survey")
 .. ..
 
