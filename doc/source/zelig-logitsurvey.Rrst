@@ -1,11 +1,11 @@
-.. _zprobitsurvey:
+.. _zlogitsurvey:
 
-zelig-probitsurvey
+zelig-logitsurvey
 ~~~~~~
 
-Probit Regression for Dichotomous Dependent Variables with Survey Weights
+Logit Regression for Dichotomous Dependent Variables with Survey Weights
 
-Use probit regression to model binary dependent variables specified as a
+Use logit regression to model binary dependent variables specified as a
 function of a set of explanatory variables.
 
 Syntax
@@ -14,7 +14,7 @@ Syntax
 With reference classes:
 
 .. {r, eval = FALSE}
-z5 <- zprobitsurvey$new()
+z5 <- zlogitsurvey$new()
 z5$zelig(Y ~ X1 + X ~ X, weights = w, data = mydata)
 z5$setx()
 z5$sim()
@@ -23,7 +23,7 @@ z5$sim()
 With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
-z.out <- zelig(Y ~ X1 + X2, model = "probit.survey", weights = w, data = mydata)
+z.out <- zelig(Y ~ X1 + X2, model = "logit.survey", weights = w, data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out, x1 = NULL)
 .. ..
@@ -48,7 +48,7 @@ to predict whether each California public school
 attends classes year round.
 
 .. {r, eval = TRUE}
-z.out1 <- zelig(yr.rnd ~ meals + mobility, model = "probit.survey", weights=~pw, data = apistrat)
+z.out1 <- zelig(yr.rnd ~ meals + mobility, model = "logit.survey", weights=~pw, data = apistrat)
 summary(z.out1)
 .. ..
 
@@ -91,7 +91,7 @@ selected and the size of the finite sample from
 which each observation was selected.
 
 .. {r, eval = TRUE}
-z.out2 <- zelig(yr.rnd ~ meals + mobility, model = "probit.survey", strata=~stype, fpc=~fpc, data = apistrat)
+z.out2 <- zelig(yr.rnd ~ meals + mobility, model = "logit.survey", strata=~stype, fpc=~fpc, data = apistrat)
 summary(z.out2)
 .. ..
 
@@ -134,7 +134,7 @@ BRRrep<-2*cbind(c(1,0,1,0,1,0), c(1,0,0,1,0,1), c(0,1,1,0,0,1), c(0,1,0,1,1,0))
 Estimate the model using Zelig:
 
 .. {r, eval = TRUE}
-z.out3 <- zelig(formula=sued ~ arrests + alive , model = "probit.survey", 
+z.out3 <- zelig(formula=sued ~ arrests + alive , model = "logit.survey", 
   repweights=BRRrep, type="BRR", data=scd)
 summary(z.out3)
 .. ..
@@ -167,49 +167,53 @@ The user should also refer to the probit model demo, since probit.survey models 
 
 
 
-
 Model
 +++++
 
-Let :math:`Y_i` be the observed binary dependent variable for
-observation :math:`i` which takes the value of either 0 or 1.
+Let :math:`Y_i` be the binary dependent variable for observation
+:math:`i` which takes the value of either 0 or 1.
 
 -  The *stochastic component* is given by
 
-   .. math:: Y_i \; \sim \; \textrm{Bernoulli}(\pi_i),
+   .. math::
+
+      \begin{aligned}
+      Y_i &\sim& \textrm{Bernoulli}(y_i \mid \pi_i) \\
+          &=& \pi_i^{y_i} (1-\pi_i)^{1-y_i}\end{aligned}
 
    where :math:`\pi_i=\Pr(Y_i=1)`.
 
--  The *systematic component* is
+-  The *systematic component* is given by:
 
-   .. math:: \pi_i \; = \; \Phi (x_i \beta)
+   .. math:: \pi_i \; = \; \frac{1}{1 + \exp(-x_i \beta)}.
 
-   where :math:`\Phi(\mu)` is the cumulative distribution function of
-   the Normal distribution with mean 0 and unit variance.
+   where :math:`x_i` is the vector of :math:`k` explanatory variables
+   for observation :math:`i` and :math:`\beta` is the vector of
+   coefficients.
 
 Quantities of Interest
 +++++
 
--  The expected value (qi$ev) is a simulation of predicted probability
-   of success
+-  The expected values (qi$ev) for the logit model are simulations of
+   the predicted probability of a success:
 
    .. math::
 
-      E(Y) = \pi_i = \Phi(x_i
-        \beta),
+      E(Y) =
+        \pi_i= \frac{1}{1 + \exp(-x_i \beta)},
 
-   given a draw of :math:`\beta` from its sampling distribution.
+   given draws of :math:`\beta` from its sampling distribution.
 
--  The predicted value (qi$pr) is a draw from a Bernoulli distribution
-   with mean :math:`\pi_i`.
+-  The predicted values (qi$pr) are draws from the Binomial distribution
+   with mean equal to the simulated expected value :math:`\pi_i`.
 
--  The first difference (qi$fd) in expected values is defined as
+-  The first difference (qi$fd) for the logit model is defined as
 
    .. math:: \textrm{FD} = \Pr(Y = 1 \mid x_1) - \Pr(Y = 1 \mid x).
 
 -  The risk ratio (qi$rr) is defined as
 
-   .. math:: \textrm{RR} = \Pr(Y = 1 \mid x_1) / \Pr(Y = 1 \mid x).
+   .. math:: \textrm{RR} = \Pr(Y = 1 \mid x_1) \ / \ \Pr(Y = 1 \mid x).
 
 -  In conditional prediction models, the average expected treatment
    effect (att.ev) for the treatment group is
@@ -233,7 +237,7 @@ Quantities of Interest
    .. math::
 
       \frac{1}{\sum_{i=1}^n t_i}\sum_{i:t_i=1}^n \left\{ Y_i(t_i=1) -
-            \widehat{Y_i(t_i=0)} \right\},
+            \widehat{Y_i(t_i=0)}\right\},
 
    where :math:`t_i` is a binary explanatory variable defining the
    treatment (:math:`t_i=1`) and control (:math:`t_i=0`) groups.
@@ -259,10 +263,10 @@ In the example above ``z.out$getcoef()`` returns the estimated coefficients, ``z
 See also
 +++++
 
-The probitsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
+The logitsurvey model is part of the survey package by Thomas Lumley, which in turn depends heavily on the glm package. Advanced users may
 wish to refer to ``help(glm)`` and ``help(family)``.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
-z5 <- zprobitsurvey$new()
+z5 <- zlogitsurvey$new()
 z5$references()
 .. ..
