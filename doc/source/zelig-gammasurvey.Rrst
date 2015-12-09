@@ -42,7 +42,7 @@ suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
 
-Example 1: User has Existing Sample Weights #####
+Example 1: User has Existing Sample Weights
 !!!!!!!
 
 Attach sample data and variable names:  
@@ -122,12 +122,13 @@ Example 3: User has Replicate Weights
 
 Suppose that the survey house that published 
 these data withheld details about the survey 
-design and instead published replication weights
+design and instead published replication weights.
 
 For the purpose of illustration, create a set of
 jk1 replicate weights
 
 .. {r, eval = TRUE}
+library("survey")
 jk1reps <- jk1weights(psu=apistrat$dnum)
 .. ..
 
