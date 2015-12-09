@@ -65,8 +65,8 @@ a high (80th percentile) and low (20th percentile) value for the
 measure of academic performance, "api00":
 
 .. {r, eval = TRUE}
-x.low <- setx(z.out1, api00= quantile(apistrat$api00, 0.2))
-x.high <- setx(z.out1, api00= quantile(apistrat$api00, 0.8))
+x.low <- setx(z.out1, api99= quantile(apistrat$api99, 0.2))
+x.high <- setx(z.out1, api99= quantile(apistrat$api99, 0.8))
 .. ..
 
 Generate first differences for the effect of high versus low "meals" 
