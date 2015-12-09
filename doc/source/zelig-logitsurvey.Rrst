@@ -45,10 +45,13 @@ In this example, we will estimate a model using
 the percentages of students who receive subsidized 
 lunch and the percentage who are new to a school
 to predict whether each California public school 
-attends classes year round.
+attends classes year round.  We first make a numeric
+version of the variable in the example dataset, which 
+you may not need to do in another dataset.
 
 .. {r, eval = TRUE}
-z.out1 <- zelig(yr.rnd ~ meals + mobility, model = "logit.survey", weights=~pw, data = apistrat)
+apistrat$yr.rnd.numeric <- as.numeric(apistrat$yr.rnd=="Yes")
+z.out1 <- zelig(yr.rnd.numeric ~ meals + mobility, model = "logit.survey", weights=~pw, data = apistrat)
 summary(z.out1)
 .. ..
 

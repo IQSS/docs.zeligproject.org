@@ -125,7 +125,7 @@ these data withheld details about the survey
 design and instead published replication weights.
 
 For the purpose of illustration, create a set of
-jk1 replicate weights
+jk1 replicate weights:
 
 .. {r, eval = TRUE}
 library("survey")
