@@ -94,7 +94,7 @@ selected and the size of the finite sample from
 which each observation was selected.
 
 .. {r, eval = TRUE}
-z.out2 <- zelig(yr.rnd ~ meals + mobility, model = "logit.survey", strata=~stype, fpc=~fpc, data = apistrat)
+z.out2 <- zelig(yr.rnd.numeric ~ meals + mobility, model = "logit.survey", strata=~stype, fpc=~fpc, data = apistrat)
 summary(z.out2)
 .. ..
 
@@ -123,7 +123,7 @@ has been sued (an indicator variable artificially created
 here for the purpose of illustration).
 
 .. {r, eval = TRUE}
-data(scd)
+data(scd, package="survey")
 scd$sued <- as.vector(c(0,0,0,1,1,1))
 .. ..
 
