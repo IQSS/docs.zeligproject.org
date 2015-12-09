@@ -1,6 +1,6 @@
 .. _zprobit:
 
-zelig-probit-survey
+zelig-probitsurvey
 ~~~~~~
 
 Probit Regression for Dichotomous Dependent Variables with Survey Weights
@@ -29,8 +29,11 @@ s.out <- sim(z.out, x = x.out, x1 = NULL)
 .. ..
 
 
+Examples
+++++++++
+
 Example 1: User has Existing Sample Weights 
-++++++
+!!!!!!!
 
 Our example dataset comes from the survey package:
 
@@ -74,7 +77,7 @@ plot(s.out1)
 
 
 Example 2: User has Details about Complex Survey Design (but not sample weights)       
-+++++++
+!!!!!!!
 
 
 Suppose that the survey house that provided
@@ -107,7 +110,7 @@ described in Example 1.
 
 
 Example 3: User has Replicate Weights 
-+++++++
+!!!!!!!
 
 
 Load data for a model using the number of out-of-hospital
