@@ -40,7 +40,7 @@ If you do not already have Zelig installed, and anticipate having missing packag
 .. {r, eval = FALSE}
 install.packages("Zelig", type = "both", repos = c("http://r.iq.harvard.edu/", "http://cran.stat.ucla.edu/"))
 .. ..
-(perhaps substituting the name of your favorite `local CRAN mirror <https://cran.r-project.org/mirrors.html>`_).  When prompted, answer yes to the question of whether "to install from sources the package which needs compilation?"
+(perhaps substituting the URL of your favorite `local CRAN mirror <https://cran.r-project.org/mirrors.html>`_).  When prompted, answer yes to the question of whether "to install from sources the package which needs compilation?"
 
 The ZeligGAM package, containing additional Zelig models described on this site, is presently only available in beta, so if you wish to use these models, similarly install this as:
 
