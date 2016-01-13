@@ -29,11 +29,18 @@ at which point you will be asked to select from a list a local CRAN mirror to us
 
 *Beta Release*
 
-Beta releases are updated with the latest fixes and newest experimental features, and generally reflect a copy currently being tested before release on CRAN. To download this release, enter the following into an R console:
+Beta releases are updated with the latest fixes and newest experimental features, and generally reflect a copy currently being tested before release on CRAN. To download this release, enter one of the following into an R console:
 
+If you already have all of the Zelig dependencies installed (for example, if you have a prior version of Zelig running and are seeking to replace it with the Beta version):
 .. {r, eval = FALSE}
 install.packages("Zelig", type = "source", repos = "http://r.iq.harvard.edu/")
 .. ..
+
+If you do not already have Zelig installed, and anticipate having missing packages dependencies, then add CRAN as a secondary repository by using:
+.. {r, eval = FALSE}
+install.packages("Zelig", type = "both", repos = c("http://r.iq.harvard.edu/", "http://cran.stat.ucla.edu/"))
+.. ..
+(perhaps substituting the name of your favorite `local CRAN mirror <https://cran.r-project.org/mirrors.html>`_).  When prompted, answer yes to the question of whether "to install from sources the package which needs compilation?"
 
 The ZeligGAM package, containing additional Zelig models described on this site, is presently only available in beta, so if you wish to use these models, similarly install this as:
 
