@@ -1,0 +1,28 @@
+.. _zarima:
+
+zelig-arima
+~~~~~~
+
+Autoregressive and Moving-Average Models with Integration for Time-Series Data
+
+
+Syntax
++++++
+
+With reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zarima$new()
+z5$zelig(Y ~ X1 + X ~ X, order=c(1,0,0), weights = w, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(Y ~ X1 + X2, order=c(1,0,0), model = "arima", weights = w, data = mydata)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+
