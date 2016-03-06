@@ -8,8 +8,8 @@ This section includes references and examples of the utilities and features avai
 .. toctree::
    :glob:
 
+   getters*
    weights*
    bootst*
-   getters*
    using-*
    
