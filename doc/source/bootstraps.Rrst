@@ -1,6 +1,6 @@
 .. _bootstraps:
 
-Using the Nonparametric Bootstrap with Zelig Models
+Nonparametric Bootstraps in Zelig Models
 ==============================
 
 Bootstrapping is often used to obtain a robust estimate of the uncertainty of a parameter due to sampling error.  
