@@ -1,0 +1,52 @@
+.. _bootstraps:
+
+Using the (Nonparametric) Bootstrap with Zelig Models
+==============================
+
+Bootstrapping is often used to obtain a robust estimate of the uncertainty of a parameter due to sampling error.  New datasets are iteratively created by resampling with replacement from the original dataset.  Resampling from the available sample data gives an approximation of sampling new datasets from the original population.  The model of interest is rerun in each newly constructed dataset, and the distribution of parameter estimates shows the variance of the sampling distribution.  This can create a robust numerical confidence interval for the sampling uncertainty of this parameter, and indeed recover a confidence interval when such is not analytically tractable.
+
+The bootstrap argument has a default of FALSE, and can be set to TRUE or a numeric value giving the number of bootstraps to run.  If set to TRUE the default is 100 bootstraps.
+
+Not all the R implementations of statistical models that Zelig uses have been written to accept weights or use them in estimation.  When weights have been supplied by the user, but weights are not written into the package for that model, Zelig is still able to use the weights by one of two procedures:  
+
+* If a dataset of $N$ observations is supplied with weights, the bootstrap will provide a new dataset of size $N$, with probability of each observation being resampled directly proportional to the weighting on that observation.
+* Presently, if the data is multiply imputed, the bootstrap function is disabled.  We are currently researching correct interaction and implementation of the bootstrap across imputed datasets.
+* Presently, the bootstrap is available for all models implemented in Zelig, except the ARIMA model.  All of Zelig's other models make the assumption that the observations present in the sample are drawn independently and identically (iid) from the population.  However, the serial correlation assumptions in ARIMA models violate this assumption, and make appropriate bootstrap designs more complicated.  Zelig does not presently have a time-series appropriate bootstrap design (such residual bootstraps or the block bootstrap), so the bootstrap is not an option for this one model. 
+
+
+Examples 
+--------
+
+
+.. {r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))	
+suppressWarnings(suppressMessages(library(Zelig)))
+set.seed(1234)
+.. .. 
+
+Attach sample data:
+
+.. {r, eval = TRUE}
+data(macro)
+.. ..
+
+Estimate the model, setting the number of bootstrapped datasets to construct:
+
+.. {r, eval = TRUE}
+z.out <- zls$new()
+z.out$zelig(unem ~ gdp + capmob +
+ trade, data = macro, bootstrap=500)
+.. ..
+
+Summary by default shows the average across all the bootstrapped datasets.
+
+.. {r, eval = TRUE}
+summary(z.out)
+.. ..
+
+If we want to inspect particular individual results, the subset argument is available:
+
+.. {r, eval = TRUE}
+summary(z.out, subset=13:15)
+.. ..
+
