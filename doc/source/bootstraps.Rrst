@@ -48,7 +48,7 @@ Summary by default shows the point parameter estimates, with the standard errors
 summary(z.out)
 .. ..
 
-We can instead if see the *bagging* estimator, that is, the average parameter value across all the bootstrapped datasets.  Bagging generally trades bias for a reduction in variance that results in lower mean squared error (notably in non-linear models).  The bagging estimator can be obtained as:
+We can instead choose to show the *bagging* estimator, that is, the average parameter value across all the bootstrapped datasets.  Bagging generally trades bias for a reduction in variance that results in lower mean squared error (notably in non-linear models).  The bagging estimator can be obtained as:
 
 .. {r, eval = TRUE}
 summary(z.out, bagging=TRUE)
