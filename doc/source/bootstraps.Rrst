@@ -61,7 +61,7 @@ If we want to inspect particular individual results, the subset argument is avai
 summary(z.out, subset=13:15)
 .. ..
 
-If :math:`B` bootstraps were obtained, the first :math:`B` results are those models on the bootstrapped data, and the :math:`B+1`-th result is the model estimated on the original data.  The value of :math:`B` is stored in a field in the Zelig object, named ``bootstrap.num``.  In our running example this was 500:
+If :math:`B` bootstraps were obtained, the first :math:`B` results are those models on the bootstrapped data, and the :math:`B+1`*-th* result is the model estimated on the original data.  The value of :math:`B` is stored in a field in the Zelig object, named ``bootstrap.num``.  In our running example this was 500:
 
 .. {r, eval = TRUE}
 summary(z.out, subset=(z.out$bootstrap.num + 1))
