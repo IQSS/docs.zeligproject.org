@@ -138,34 +138,7 @@ summary(s.out1)
 plot(s.out1)
 .. ..
 
-Joint Estimation of a Model with Different Sets of Explanatory Variables
-!!!!!
 
-Using the sample data ``sanction``, estimate the statistical model,
-with import a function of coop in the first equation and export a function of cost and target in the second equation:
-
-.. {r, eval = FALSE}
-fml2 <- list(mu1 = import ~ coop, mu2 = export ~ cost + target)
-z.out2 <- zelig(fml2, model = "bprobit", data = sanction)
-summary(z.out2)
-.. ..
-
-Set the explanatory variables to their means:
-
-.. {r, eval = FALSE}
-x.out2 <- setx(z.out2)
-.. ..
-
-Simulate draws from the posterior distribution:
-
-.. {r, eval = FALSE}
-s.out2 <- sim(z.out2, x = x.out2)
-summary(s.out2)
-.. ..
-
-.. {r, eval = FALSE}
-plot(s.out2)
-.. ..
 
 
 Model
