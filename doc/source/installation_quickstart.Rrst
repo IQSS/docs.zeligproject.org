@@ -20,12 +20,15 @@ To install R, go to `http://www.r-project.org/ <http://www.r-project.org/>`_  Se
 
 **Installing Zelig**
 
-Zelig 5 is available on CRAN, as is the ZeligChoice package containing additional models.  To install from CRAN enter the following at the R prompt:
+Zelig 5 is available on CRAN, as is the ZeligChoice package containing additional models.  However, recently two Zelig dependencies themselves created a dependence on packages from the Bioconductor repository.   To install from Zelig presently requires entering the following at the R prompt:
 .. {r, eval = FALSE}
+source("http://bioconductor.org/biocLite.R")
+biocLite("graph")
+biocLite("Rgraphviz")
 install.packages("Zelig")
 install.packages("ZeligChoice")
 .. ..
-at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  
+at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  A simplified installation procedure will be available in the next Zelig release (5.0-11).
 
 *Beta Release*
 
