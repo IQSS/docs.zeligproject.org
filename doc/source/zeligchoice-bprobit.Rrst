@@ -168,37 +168,6 @@ plot(s.out2)
 .. ..
 
 
-Joint Estimation of a Parametrically and Stochastically Dependent Model
-!!!!!
-
-Using the sample data ``sanction``. The bivariate model is
-parametrically dependent if :math:`Y_1` and :math:`Y_2` share some or
-all explanatory variables, *and* the effects of the shared explanatory
-variables are jointly estimated. For example,
-
-
-.. {r, eval = FALSE}
-fml3 <- list(mu1 = import   tag(coop,“coop”) + tag(cost,“cost”) + tag(target,“target”),
-             mu2 = export   tag(coop,“coop”) + tag(cost,“cost”) + tag(target,“target”))
-z.out3 <- zelig(fml3, model = “bprobit”, data = sanction)
-summary(z.out3)
-.. ..
-
-Note that this model only returns one parameter estimate for each of
-coop, cost, and target. Contrast this t Example which returns two
-parameter estimates for each of the explanatory variables. Set values for the explanatory variables:
-
-.. {r, eval = FALSE}
-x.out3 <- setx(z.out3, cost = 1:4)
-.. ..
-
-Draw simulated expected values:
-
-.. {r, eval = FALSE}
-s.out3 <- sim(z.out3, x = x.out3)
-summary(s.out3)
-.. ..
-
 Model
 +++++
 

@@ -126,60 +126,6 @@ summary(s.out1)
 plot(s.out1)
 .. ..
    
-Joint Estimation of a Model with Different Sets of Explanatory Variables
-!!!!!
-
-Using sample data ``sanction``, estimate the statistical model, with
-import a function of coop in the first equation and export a function of cost and target in the second equation:
-
-.. {r, eval = TRUE}
-z.out2 <- zelig(cbind(import, export) ~ coop, model = "blogit", data = sanction)
-summary(z.out2)
-.. ..
-
-Set the explanatory variables to their means:
-
-.. {r, eval = TRUE}
-x.out2 <- setx(z.out2)
-.. ..
-
-Simulate draws from the posterior distribution:
-
-.. {r, eval = TRUE}
-s.out2 <- sim(z.out2, x = x.out2)
-summary(s.out2)
-.. ..
-
-.. {r, eval = TRUE, Zelig-blogit-2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-blogit-2"}
-plot(s.out2)
-.. ..
-
-Joint Estimation of a Parametrically and Stochastically Dependent Model
-!!!!!
-
-Using the sample data ``sanction`` The bivariate model is
-parametrically dependent if :math:`Y_1` and :math:`Y_2` share some or
-all explanatory variables, *and* the effects of the shared explanatory variables are jointly estimated. For example,
-
-.. {r, eval = FALSE}
-z.out3 <- zelig(list(import ~ tag(coop, "coop") + tag(cost, "cost") + tag(target, "target"),
-                     export ~ tag(coop, "coop") + tag(cost, "cost") + tag(target, "target")),
-                model = "blogit", data = sanction)
-summary(z.out3)
-.. .. 
-
-Note that this model only returns one parameter estimate for each of coop, cost, and target. Contrast this to Example [basic.bl] which returns two parameter estimates for each of the explanatorvvariables. Set values for the explanatory variables:
-
-.. {r, eval = FALSE}
-x.out3 <- setx(z.out3, cost = 1:4)
-.. ..
-
-Draw simulated expected values:
-
-.. {r, eval = FALSE}
-s.out3 <- sim(z.out3, x = x.out3)
-summary(s.out3)
-.. ..
 
 Model
 !!!!!
