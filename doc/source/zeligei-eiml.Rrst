@@ -10,15 +10,19 @@ Syntax
 
 The EI models accept several different formula syntaxes.  If :math:`C1` and :math:`C2` are the column totals, and :math:`R1` and :math:`R2` are the row totals, and :math:`N=R1_i + R2_i = C1_i + C2_i` is the total in unit :math:`i`, then the formula can be expressed with just one row and one column, with the totals provided separately as:
 
-``z.out <- zelig(C1 ~ R1, N=N, data=data)``
+.. {r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N=N, data=data)
+.. ..
 
 The argument ``N`` can be either a numeric vector of the total in each *i*-th unit, or the character name of a variable in the dataset that contains these values.
 
 Or with both rows and columns coupled together, and omitting the totals:
 
-``z.out <- zelig( cbind(C1,C2) ~ cbind(R1,R2), data=data)``
+.. {r, eval = FALSE}
+z.out <- zelig( cbind(C1,C2) ~ cbind(R1,R2), data=data)
+.. ..
 
-Additionally, if ``C1``,``C2``,``R1``,``R2`` are percentages rather than counts, then either formula method above is acceptable, however, ``N`` must always be provided.
+Additionally, if ``C1``, ``C2``, ``R1``, ``R2`` are percentages rather than counts, then either formula method above is acceptable, however, ``N`` must always be provided.
 
 
 First load packages:
