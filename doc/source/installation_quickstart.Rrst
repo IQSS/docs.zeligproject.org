@@ -3,7 +3,7 @@
 Installation and Quickstart
 =========================
 
-This guide is designed to get you up and running with the current release of Zelig (5.0-11). 
+This guide is designed to get you up and running with the current release of Zelig (|version|). 
 
 ------------
 
@@ -28,7 +28,7 @@ biocLite("Rgraphviz")
 install.packages("Zelig")
 install.packages("ZeligChoice")
 .. ..
-at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  A simplified installation procedure will be available in the next Zelig release (5.0-11).
+at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  A simplified installation procedure will be available in the next Zelig release (5.0-12).
 
 *Beta Release*
 

@@ -3,7 +3,7 @@
 Model Reference and Vignettes
 =============================
 
-This section includes technical information on the models currently implemented in Zelig (5.0-11). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
+This section includes technical information on the models currently implemented in Zelig (|version|). This includes a reference with a list of supported models as well as individual model vignettes with detailed information on the model, quantities of interest and syntax.
 
 
 .. toctree::
