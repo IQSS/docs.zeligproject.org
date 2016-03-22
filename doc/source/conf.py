@@ -21,6 +21,8 @@ urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/Zelig/master/inst/JSO
                    "_static/zelig5models.json")
 urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/ZeligChoice/master/inst/JSON/zelig5choicemodels.json",
                    "_static/zelig5choicemodels.json")
+urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/ZeligEI/master/inst/JSON/zelig5eimodels.json",
+                   "_static/zelig5eimodels.json")
 urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/_static/modelstree.html",
                    "_static/modelstree.html")
 #urllib.urlretrieve("https://raw.githubusercontent.com/IQSS/zeligproject.org/master/Sphinx/source/zelignav.html",
