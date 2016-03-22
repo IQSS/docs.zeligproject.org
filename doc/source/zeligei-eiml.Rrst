@@ -49,3 +49,14 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
 
+See also
++++++
+
+This model is part of the ei package by Gary King and Molly Roberts. Advanced users may wish to refer to
+``help(ei)`` in the ei package.
+
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+library("ZeligEI")
+z5 <- zeiml$new()
+z5$references()
+.. ..

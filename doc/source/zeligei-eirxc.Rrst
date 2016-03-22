@@ -47,3 +47,14 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
 
+See also
++++++
+
+This model is part of the eiPack package by Olivia Lau, Ryan T. Moore and Michael Kellerman. Advanced users may wish to refer to
+``help(ei.MD.bayes)`` in the eiPack package.
+
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+library("ZeligEI")
+z5 <- zeirxc$new()
+z5$references()
+.. ..
