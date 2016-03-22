@@ -54,7 +54,6 @@ This model is part of the eiPack package by Olivia Lau, Ryan T. Moore and Michae
 ``help(ei.MD.bayes)`` in the eiPack package.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
-library("ZeligEI")
 z5 <- zeirxc$new()
 z5$references()
 .. ..

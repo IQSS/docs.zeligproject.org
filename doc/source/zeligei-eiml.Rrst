@@ -56,7 +56,7 @@ This model is part of the ei package by Gary King and Molly Roberts. Advanced us
 ``help(ei)`` in the ei package.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
-library("ZeligEI")
+
 z5 <- zeiml$new()
 z5$references()
 .. ..
