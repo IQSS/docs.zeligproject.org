@@ -56,7 +56,6 @@ The Quinn dynamic model is part of the MCMCpack package by Andrew Martin, Kevin 
 ``help(MCMCdynamicEI)`` in the MCMCpack package.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
-library("ZeligEI")
 z5 <- zeidynamic$new()
 z5$references()
 .. ..
