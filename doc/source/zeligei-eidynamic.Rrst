@@ -49,4 +49,14 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
 
+See also
++++++
 
+The Quinn dynamic model is part of the MCMCpack package by Andrew Martin, Kevin Quinn, and Jong Hee Park". Advanced users may wish to refer to
+``help(MCMCdynamicEI)`` in the MCMCpack package.
+
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+library("ZeligEI")
+z5 <- zeidynamic$new()
+z5$references()
+.. ..
