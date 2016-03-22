@@ -33,7 +33,7 @@ library("ZeligEI")
 Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:
 
 .. {r, eval = FALSE}
-z5 <- zeihier$new()
+z5 <- zeirxc$new()
 z5$zelig(C1 ~ R1, N=myN, weights = w, data = myData)
 z5$setx()
 z5$sim()
