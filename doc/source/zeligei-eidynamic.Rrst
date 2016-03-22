@@ -49,6 +49,15 @@ x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
 
+Examples
++++++
+
+.. {r, eval = TRUE, echo = FALSE}	
+rm(list=ls(pattern="\\.out"))
+suppressWarnings(suppressMessages(library(ZeligEI)))
+set.seed(1234)
+.. .. 
+
 See also
 +++++
 
