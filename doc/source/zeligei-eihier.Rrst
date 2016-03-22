@@ -1,0 +1,51 @@
+.. _zeihier:
+
+zeligei-eihier
+~~~~~~
+
+Wakefield's Hierarchical Ecological Inference Model
+
+Syntax
++++++
+
+The EI models accept several different formula syntaxes.  If :math:`C1` and :math:`C2` are the column totals, and :math:`R1` and :math:`R2` are the row totals, and :math:`N=R1_i + R2_i = C1_i + C2_i` is the total in unit :math:`i`, then the formula can be expressed with just one row and one column, with the totals provided separately as:
+
+.. {r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N=N, data=data)
+.. ..
+
+The argument ``N`` can be either a numeric vector of the total in each *i*-th unit, or the character name of a variable in the dataset that contains these values.
+
+Or with both rows and columns coupled together, and omitting the totals:
+
+.. {r, eval = FALSE}
+z.out <- zelig( cbind(C1,C2) ~ cbind(R1,R2), data=data)
+.. ..
+
+Additionally, if ``C1``, ``C2``, ``R1``, ``R2`` are percentages rather than counts, then either formula method above is acceptable, however, ``N`` must always be provided.
+
+
+First load packages:
+
+.. {r, eval = FALSE}
+library("Zelig")
+library("ZeligEI")
+.. ..
+
+Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zeihier$new()
+z5$zelig(C1 ~ R1, N=myN, weights = w, data = myData)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers this looks like:
+
+.. {r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N=N, model = "eihier", weights = w, data = myData)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+

@@ -1,0 +1,49 @@
+.. _zeirxc:
+
+zeligei-eirxc
+~~~~~~
+
+Multinomial Dirichlet model for Ecological Inference in RxC tables
+
+Syntax
++++++
+
+Unlike other EI models in Zelig, in the :math:`RxC` case, all the row and column variables need to specified.  Let's assume :math:`C1` through :math:`CC` are the column totals, and :math:`R1` through :math:`RR` are the row totals, and :math:`N=R1_i + R2_i + \ldots + RR_i = C1_i + C2_i + \ldots + CC_i` is the total in unit :math:`i`.  In the case with three row variables and three column variables, the syntax is:
+
+.. {r, eval = FALSE}
+z.out <- zelig( cbind(C1,C2,C3) ~ cbind(R1,R2,R3), data=data)
+.. ..
+
+Additionally, if ``C1``, ``C2``, ``R1``, ``R2`` are percentages rather than counts, then either formula method above is acceptable, however, you must also provide ``N`` the unit totals as:
+
+.. {r, eval = FALSE}
+z.out <- zelig( cbind(C1,C2,C3) ~ cbind(R1,R2,R3), N=N, data=data)
+.. ..
+
+The argument ``N`` can be either a numeric vector of the total in each *i*-th unit, or the character name of a variable in the dataset that contains these values.
+
+
+First load packages:
+
+.. {r, eval = FALSE}
+library("Zelig")
+library("ZeligEI")
+.. ..
+
+Here is an example of all the syntax for the analysis using the first syntax method, and the direct use of the reference classes:
+
+.. {r, eval = FALSE}
+z5 <- zeihier$new()
+z5$zelig(C1 ~ R1, N=myN, weights = w, data = myData)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers this looks like:
+
+.. {r, eval = FALSE}
+z.out <- zelig(C1 ~ R1, N=N, model = "eihier", weights = w, data = myData)
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+
