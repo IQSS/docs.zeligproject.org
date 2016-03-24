@@ -104,10 +104,10 @@ z.out <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
 
 Checking for convergence before summarizing the estimates:
 
-.. {r, eval = FALSE}
-lapply(z.out$zelig.out$z.out, geweke.diag)
-lapply(z.out$zelig.out$z.out, heidel.diag)
-lapply(z.out$zelig.out$z.out, raftery.diag)
+.. {r, eval = TRUE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
 .. ..
 
 .. {r, eval = TRUE}
