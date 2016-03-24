@@ -22,11 +22,32 @@ z.out <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
                data = macro, verbose = FALSE)
 .. ..
 
-You can check for convergence before summarizing the estimates with three diagnostic tests:  
+You can check for convergence before summarizing the estimates with three diagnostic tests.  
+
+Geweke Diagnostic
+!!!!!!
+
+The Geweke diagnostic tests the null hypothesis that the Markov chain is in the stationary distribution and produces z-statistics for each estimated parameter.
 
 .. {r, eval = TRUE}
 z.out$geweke.diag()
+.. ..
+
+Heidelberger-Welch Diagnostic
+!!!!!!
+
+The Heidelberger-Welch diagnostic first tests the null hypothesis that the Markov Chain is in the stationary distribution and produces *p*-values for each estimated parameter. Calling this diagnostic also produces output that indicates whether the mean of a marginal posterior distribution can be estimated with sufficient precision, assuming that the Markov Chain is in the stationary distribution.
+
+.. {r, eval = TRUE}
 z.out$heidel.diag()
+.. ..
+
+Raftery Diagnostic
+!!!!!!
+
+The Raftery diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distri- butions sufficiently representative of the stationary distribution.
+
+.. {r, eval = TRUE}
 z.out$raftery.diag()
 .. ..
 
