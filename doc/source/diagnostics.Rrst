@@ -51,11 +51,13 @@ The Raftery diagnostic indicates how long the Markov Chain should run before con
 z.out$raftery.diag()
 .. ..
 
+See also
++++++
 
 Bayesian normal regression is part of the MCMCpack library by Andrew D.
 Martin and Kevin M. Quinn . The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
 
-.. {r, eval = TRUE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
 z.out$references()
 .. ..
