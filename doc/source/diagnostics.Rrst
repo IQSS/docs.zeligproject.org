@@ -1,6 +1,6 @@
 .. _diagnostics:
 
-Diagnostic Tests for Zelig Models
+Diagnostics for Zelig Models
 ==============================
 
 Diagnostics for MCMC convergence.
