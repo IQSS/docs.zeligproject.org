@@ -111,11 +111,12 @@ z.out <- zelig(ncost ~ mil + coop, model = "oprobit.bayes",
 .. ..
 
 
-Checking for convergence before summarizing the estimates:
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
 
-.. {r, eval = TRUE}
-lapply(z.out$zelig.out$z.out, heidel.diag)
-lapply(z.out$zelig.out$z.out, raftery.diag)
+.. {r, eval = FALSE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
 .. ..
 
 .. {r, eval = FALSE}

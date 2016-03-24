@@ -115,10 +115,12 @@ z.out <- zelig(vote88 ~ pristr + othcok + othsocok,
                verbose = FALSE)
 .. ..
 
-Checking for convergence before summarizing the estimates:
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
 
 .. {r, eval = FALSE}
-raftery.diag(z.out$coefficients)
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
 .. ..
 
 .. {r, eval = FALSE}

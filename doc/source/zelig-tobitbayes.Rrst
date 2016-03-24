@@ -119,18 +119,12 @@ z.out <- zelig(durable ~ age + quant, model = "tobit.bayes",
                data = tobin, verbose = FALSE)
 .. ..
 
-Checking for convergence before summarizing the estimates:
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
 
 .. {r, eval = FALSE}
-geweke.diag(z.out$coefficients)
-.. ..
-
-.. {r, eval = FALSE}
-heidel.diag(z.out$coefficients)
-.. ..
-
-.. {r, eval = FALSE}
-raftery.diag(z.out$coefficients)
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
 .. ..
 
 .. {r, eval = FALSE}
