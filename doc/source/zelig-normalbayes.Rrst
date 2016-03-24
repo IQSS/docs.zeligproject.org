@@ -102,9 +102,9 @@ z.out <- zelig(unem ~ gdp + capmob + trade, model = "normal.bayes",
                data = macro, verbose = FALSE)
 .. ..
 
-Checking for convergence before summarizing the estimates:
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out$geweke.diag()
 z.out$heidel.diag()
 z.out$raftery.diag()
