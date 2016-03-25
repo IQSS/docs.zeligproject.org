@@ -36,16 +36,16 @@ z.out$geweke.diag()
 Heidelberger-Welch Diagnostic
 !!!!!!
 
-The Heidelberger-Welch diagnostic first tests the null hypothesis that the Markov Chain is in the stationary distribution and produces *p*-values for each estimated parameter. Calling this diagnostic also produces output that indicates whether the mean of a marginal posterior distribution can be estimated with sufficient precision, assuming that the Markov Chain is in the stationary distribution.
+The Heidelberger and Welch diagnostic first tests the null hypothesis that the Markov Chain is in the stationary distribution and produces *p*-values for each estimated parameter. Calling this diagnostic also produces output that indicates whether the mean of a marginal posterior distribution can be estimated with sufficient precision, assuming that the Markov Chain is in the stationary distribution.
 
 .. {r, eval = TRUE}
 z.out$heidel.diag()
 .. ..
 
-Raftery Diagnostic
+Raftery-Lewis Diagnostic
 !!!!!!
 
-The Raftery diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distri- butions sufficiently representative of the stationary distribution.
+The Raftery and Lewis diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distri- butions sufficiently representative of the stationary distribution.
 
 .. {r, eval = TRUE}
 z.out$raftery.diag()
@@ -54,9 +54,10 @@ z.out$raftery.diag()
 See also
 +++++
 
-Bayesian normal regression is part of the MCMCpack library by Andrew D.
-Martin and Kevin M. Quinn . The convergence diagnostics are part of the
+The convergence diagnostics are part of the
 CODA library by Martyn Plummer, Nicky Best, Kate Cowles, and Karen Vines.
+Bayesian normal regression is part of the MCMCpack library by Andrew D.
+Martin and Kevin M. Quinn. 
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
 z.out$references()
