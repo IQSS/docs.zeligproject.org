@@ -60,6 +60,7 @@ set.seed(1234)
 data(senc)
 z.out <- zeirxc$new()
 z.out$zelig(cbind(dem, rep, non) ~ cbind(black, white, natam), n="total", data = senc)
+summary(z.out)
 .. ..
 
 You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
@@ -69,6 +70,8 @@ z.out$geweke.diag()
 z.out$heidel.diag()
 z.out$raftery.diag()
 .. ..
+
+
 
 
 See also

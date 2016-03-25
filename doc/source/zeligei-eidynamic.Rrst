@@ -58,6 +58,14 @@ suppressWarnings(suppressMessages(library(ZeligEI)))
 set.seed(1234)
 .. .. 
 
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
+
+.. {r, eval = FALSE}
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
+.. ..
+
 See also
 +++++
 
