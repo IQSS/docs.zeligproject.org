@@ -60,7 +60,7 @@ set.seed(1234)
 
 We'll use a dataset from the ``ei`` package, of black and non-black turnout in 141 precincts.
 .. {r, eval = TRUE}	
-library("ei", quietly=TRUE))
+library("ei", quietly=TRUE)
 data(sample)
 .. ..
 
