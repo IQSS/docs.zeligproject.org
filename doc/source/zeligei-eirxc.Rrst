@@ -69,12 +69,15 @@ z.out$zelig(cbind(dem, rep, non) ~ cbind(black, white, natam), N="total", data =
 summary(z.out)
 .. ..
 
-You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
+You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for more examples of these tests, and interpretation of their meaning.  For brevity we only show the first set of parameters, the $\alpha$'s, as there are twice as many $\beta$'s as there are precincts:
 
 .. {r, eval = FALSE}
-z.out$geweke.diag()
-z.out$heidel.diag()
-z.out$raftery.diag()
+gd <- z.out$geweke.diag()
+print(gd[[1]])
+hd <- z.out$heidel.diag()
+print(hd[[1]])
+rd <-z.out$raftery.diag()
+print(rd[[1]])
 .. ..
 
 
