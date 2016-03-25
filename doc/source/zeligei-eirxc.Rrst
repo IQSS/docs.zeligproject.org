@@ -57,9 +57,10 @@ set.seed(1234)
 .. .. 
 
 .. {r, eval = TRUE}	
+library("ei")
 data(senc)
 z.out <- zeirxc$new()
-z.out$zelig(cbind(dem, rep, non) ~ cbind(black, white, natam), n="total", data = senc)
+z.out$zelig(cbind(dem, rep, non) ~ cbind(black, white, natam), N="total", data = senc)
 summary(z.out)
 .. ..
 

@@ -59,6 +59,16 @@ set.seed(1234)
 .. .. 
 
 
+.. {r, eval = TRUE}	
+library("ei")
+data(sample)
+myn <- sample$n
+ze <- zeiml$new()
+ze$zelig(t~x, N="n", data=sample)
+ze$references()
+summary(ze)
+.. ..
+
 See also
 +++++
 
