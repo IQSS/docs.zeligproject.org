@@ -56,9 +56,14 @@ suppressWarnings(suppressMessages(library(ZeligEI)))
 set.seed(1234)
 .. .. 
 
+We'll use a dataset from the ``eiPack`` package, of registration data for White, Black, and Native American voters in 277 districts in eight counties of south-eastern North Carolina in 2001.
 .. {r, eval = TRUE}	
 library("ei")
 data(senc)
+.. ..
+
+Here is the model estimated in Zelig.
+.. {r, eval = TRUE}	
 z.out <- zeirxc$new()
 z.out$zelig(cbind(dem, rep, non) ~ cbind(black, white, natam), N="total", data = senc)
 summary(z.out)
