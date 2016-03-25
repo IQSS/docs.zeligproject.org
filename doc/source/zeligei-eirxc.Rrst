@@ -71,7 +71,7 @@ summary(z.out)
 
 You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for more examples of these tests, and interpretation of their meaning.  For brevity we only show the first set of parameters, the $\alpha$'s, as there are twice as many $\beta$'s as there are precincts:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 gd <- z.out$geweke.diag()
 print(gd[[1]])
 hd <- z.out$heidel.diag()
