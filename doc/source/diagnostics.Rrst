@@ -45,7 +45,7 @@ z.out$heidel.diag()
 Raftery-Lewis Diagnostic
 !!!!!!
 
-The Raftery and Lewis diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distri- butions sufficiently representative of the stationary distribution.
+The Raftery and Lewis diagnostic indicates how long the Markov Chain should run before considering draws from the marginal posterior distributions sufficiently representative of the stationary distribution.
 
 .. {r, eval = TRUE}
 z.out$raftery.diag()
