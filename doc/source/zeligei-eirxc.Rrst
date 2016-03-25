@@ -58,7 +58,7 @@ set.seed(1234)
 
 We'll use a dataset from the ``eiPack`` package, of registration data for White, Black, and Native American voters, and party voteshare, in 277 precincts in eight counties of south-eastern North Carolina in 2001.
 .. {r, eval = TRUE}	
-library("ei")
+library("eiPack", quietly=TRUE)
 data(senc)
 .. ..
 
