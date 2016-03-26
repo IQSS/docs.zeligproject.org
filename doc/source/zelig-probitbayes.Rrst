@@ -112,7 +112,7 @@ z.out$heidel.diag()
 z.out$raftery.diag()
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
@@ -129,7 +129,7 @@ Simulating quantities of interest from the posterior distribution given: ``x.out
 s.out1 <- sim(z.out, x = x.out)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out1)
 .. ..
 
@@ -149,7 +149,7 @@ x.low <- setx(z.out, educate = quantile(turnout$educate, prob = 0.25))
 s.out2 <- sim(z.out, x = x.high, x1 = x.low)
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out2)
 .. ..
 
