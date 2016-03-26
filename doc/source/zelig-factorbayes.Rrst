@@ -158,12 +158,10 @@ z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
                a0 = 1, b0 = 0.15, burnin = 500, mcmc = 5000)
 .. ..
 
-Checking for convergence before summarizing the estimates:
+Checking for convergence before summarizing the estimates.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
 
 .. {r, eval = TRUE}
-algor <- try(lapply(z.out$zelig.out$z.out, geweke.diag), silent = TRUE)
-if (class(algor) == "try-error")
-    print(algor)
+z.out$geweke.diag()
 .. ..
 
 Since the algorithm did not converge, we now add some constraints on
@@ -179,9 +177,9 @@ z.out <- zelig(~ Agr + Exam + Educ + Cath + InfMort,
                         InfMort = c(1, 0)), 
                verbose = FALSE, a0 = 1, b0 = 0.15, 
                burnin = 500, mcmc = 5000)
-lapply(z.out$zelig.out$z.out, geweke.diag)
-lapply(z.out$zelig.out$z.out, heidel.diag)
-lapply(z.out$zelig.out$z.out, raftery.diag)
+z.out$geweke.diag()
+z.out$heidel.diag()
+z.out$raftery.diag()
 summary(z.out)
 .. ..
 
