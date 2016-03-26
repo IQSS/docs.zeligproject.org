@@ -111,7 +111,7 @@ z.out$heidel.diag()
 z.out$raftery.diag()
 .. ..
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(z.out)
 .. ..
 
