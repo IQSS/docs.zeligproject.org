@@ -58,6 +58,20 @@ suppressWarnings(suppressMessages(library(ZeligEI)))
 set.seed(1234)
 .. .. 
 
+We'll use a dataset from the ``ei`` package, of black and non-black turnout in 141 precincts.
+.. {r, eval = TRUE}	
+library("ei", quietly=TRUE)
+data(sample)
+.. ..
+
+Here is the model estimated in Zelig.
+.. {r, eval = TRUE}	
+z.out <- zeihier$new()
+z.out$zelig(t~x, N="n", data=sample)
+summary(z.out)
+.. ..
+
+
 You can check for convergence before summarizing the estimates with three diagnostic tests.  See the section :ref:`Diagnostics for Zelig Models <diagnostics>` for examples of the output with interpretation:
 
 .. {r, eval = FALSE}
