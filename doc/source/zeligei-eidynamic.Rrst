@@ -59,9 +59,10 @@ In addition, Zelig accepts the following additional inputs for ``eidynamic`` to 
 * ``mcmc``: number of the MCMC iterations after burnin (defaults to 50,000).
 * ``thin``: thinning interval for the Markov chain. Only every ``thin``-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
 * ``verbose``: defaults to FALSE. If TRUE, the progress of the sampler (every 10%) is printed to the screen.
-158
 * ``seed``: seed for the random number generator. The default is NA which corresponds to a random seed of 12345.
-The model also accepts the following additional arguments to specify priors and other pa- rameters:
+
+The model also accepts the following additional arguments to specify priors and other parameters:
+
 * ``W``: a :math:`p` × :math:`p` numeric matrix describing the structure of the temporal dependence among elements of :math:`\theta_0` and :math:`\theta_1`. The default value is 0, which constructs a weight matrix corresponding to random walk priors for :math:`\theta_0` and :math:`\theta_1` (assuming that the tables are equally spaced throughout time, and that the elements of :math:`t_0`, :math:`t_1`, :math:`x_0`, :math:`x_1` are temporally ordered).
 * ``a0``: :math:`a0/2` is the shape parameter for the Inverse Gamma prior on :math:`\sigma_{02}`. The default is 0.825.
 * ``b0``: :math:`b0/2` is the scale parameter for the Inverse Gamma prior on :math:`\sigma_{02}`. The default is 0.0105.

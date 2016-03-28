@@ -59,7 +59,6 @@ In addition, Zelig accepts the following additional inputs for ``eihier`` to mon
 * ``mcmc``: number of the MCMC iterations after burnin (defaults to 50,000).
 * ``thin``: thinning interval for the Markov chain. Only every ``thin``-th draw from the Markov chain is kept. The value of mcmc must be divisible by this value. The default value is 1.
 * ``verbose``: defaults to FALSE. If TRUE, the progress of the sampler (every 10%) is printed to the screen.
-158
 * ``seed``: seed for the random number generator. The default is NA which corresponds to a random seed of 12345.
 
 The model also accepts the following additional arguments to specify prior parameters used in the model:
