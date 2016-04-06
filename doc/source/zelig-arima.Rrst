@@ -77,7 +77,7 @@ The dataset contains similar series for 11 different OECD countries, and we coul
 
 .. {r, eval = TRUE}
 z.out <- zarima$new()
-z.out$zelig(unemp ~ leftseat, order=c(1,0,1), , ts="year", cs="country", data = seatshare)
+z.out$zelig(unemp ~ leftseat, order=c(1,0,1), ts="year", cs="country", data = seatshare)
 summary(z.out)
 .. ..
 
