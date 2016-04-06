@@ -38,6 +38,8 @@ In addition, Zelig accepts the following additional inputs for ``arima`` to spec
 Examples
 +++++
 
+Single Series
+!!!!!!!
 
 .. {r, eval = TRUE, echo = FALSE}	
 rm(list=ls(pattern="\\.out")) 
@@ -45,7 +47,7 @@ suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
 
-Attach sample data, which has left party seat share and unemployment across time in 11 OECD countries.  We will subset to just those observations from the United Kingdom:
+Attach sample data, which has left party seat share and unemployment across time in several countries.  We will subset to just those observations from the United Kingdom:
 
 .. {r, eval = TRUE}
 data(seatshare)
@@ -62,6 +64,20 @@ z.out$zelig(unemp ~ leftseat, order=c(2,0,1), data = subset)
 Summarize estimated model parameters:
 
 .. {r, eval = TRUE}
+summary(z.out)
+.. ..
+
+These preliminary results suggest the first order AR and MA terms are warranted in the model.
+
+Multiple Series
+!!!!!!!
+
+The dataset contains similar series for 11 different OECD countries, and we could run the same model on each country's data.  Here we need to specify the ``ts`` and ``cs`` arguments to identify the names of variables that give the time and cross-section of each observation in the dataset 
+
+
+.. {r, eval = TRUE}
+z.out <- zarima$new()
+z.out$zelig(unemp ~ leftseat, order=c(1,0,1), , ts="year", cs="country", data = seatshare)
 summary(z.out)
 .. ..
 
