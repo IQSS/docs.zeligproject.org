@@ -58,7 +58,7 @@ Estimate model:
 
 .. {r, eval = TRUE}
 z.out <- zarima$new()
-z.out$zelig(unemp ~ leftseat, order=c(2,0,1), data = subset)
+z.out$zelig(unemp ~ leftseat, order=c(1,0,1), data = subset)
 .. ..
 
 Summarize estimated model parameters:
@@ -67,7 +67,6 @@ Summarize estimated model parameters:
 summary(z.out)
 .. ..
 
-These preliminary results suggest the first order AR and MA terms are warranted in the model.
 
 Multiple Series
 !!!!!!!
@@ -80,6 +79,16 @@ z.out <- zarima$new()
 z.out$zelig(unemp ~ leftseat, order=c(1,0,1), ts="year", cs="country", data = seatshare)
 summary(z.out)
 .. ..
+
+Next we simulate what happens when leftseat share drops from a moderately high level of 75 percent, to a rather low level of 25 percent:
+
+.. {r, eval = TRUE}
+z.out$setx(leftseat = 0.75)
+z.out$setx1(leftseat = 0.25)
+z.out$sim()
+plot(z.out)
+.. ..
+
 
 
 See Also
