@@ -29,7 +29,7 @@ s.out <- sim(z.out, x = x.out)
 Additional Inputs
 !!!!!!
 
-In addition, Zelig accepts the following additional inputs for ``arima`` to specify variables that 
+In addition, Zelig accepts the following additional inputs for ``arima`` to specify variables that provide the time index and any cross-sectional element if there are multiple time-series in the same dataset:
 
 * ``ts``: Name of a variable that denotes the time element of the data.  As a variable name, this should be in quotes.  If this is not provided, Zelig will assume that the data is already ordered by time, but if provided, the dataset will be sorted by this variable before estimation.
 * ``cs``: Name of a variable that denotes the cross-sectional element of the data, for example, country name in a dataset with time-series across different countries.  As a variable name, this should be in quotes.  If this is not provided, Zelig will assume that all observations come from the same unit over time, and should be pooled, but if provided, individual models will be run in each cross-section.  If ``cs`` is given as an argument, ``ts`` must also be provided.
