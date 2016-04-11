@@ -116,7 +116,7 @@ s.out1 <- sim(z.out1, x = x.out1)
 summary(s.out1)
 .. ..
 
-.. {r Zelig-probitgee1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-probitgee1"}
+.. {r Zelig-probitgee1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Probit GEE Model"}
 plot(s.out1)
 .. ..
 
@@ -139,7 +139,7 @@ s.out2 <- sim(z.out1, x = x.high, x1 = x.low)
 summary(s.out2)
 .. ..
 
-.. {r Zelig-probitgee2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-probitgee2"}
+.. {r Zelig-probitgee2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Probit GEE Model"}
 plot(s.out2)
 .. ..
 

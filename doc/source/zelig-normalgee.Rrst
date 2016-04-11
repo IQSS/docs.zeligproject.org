@@ -216,7 +216,7 @@ summary(s.out)
 
 Generate a plot of quantities of interest:
 
-.. {r Zelig-gee, eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal GEE Model"}
+.. {r Zelig-normalgee, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal GEE Model"}
 plot(s.out)
 .. ..
 

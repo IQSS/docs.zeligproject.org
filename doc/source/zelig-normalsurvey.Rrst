@@ -85,7 +85,7 @@ summary(s.out1)
 
 Generate a second set of fitted values and a plot:
 
-.. {r, eval = TRUE}
+.. {r Zelig-normalsurvey1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal Survey Model"}
 plot(s.out1)
 .. ..
 
@@ -163,7 +163,7 @@ summary(s.out3)
 
 Generate a second set of fitted values and a plot:
 
-.. {r, eval = TRUE}
+.. {r Zelig-normalsurvey1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal Survey Model"}
 plot(s.out3)
 .. ..
 
