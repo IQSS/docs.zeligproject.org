@@ -74,6 +74,9 @@ Next we simulate what happens when leftseat share drops from a moderately high l
 ts.out$setx(leftseat = 0.75)
 ts.out$setx1(leftseat = 0.25)
 ts.out$sim()
+.. ..
+
+.. {r Zelig-arima, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for ARIMA models"}
 plot(ts.out)
 .. ..
 
@@ -95,6 +98,8 @@ summary(ts.out2)
 
 See Also
 +++++
+
+The estimator used for ARIMA models is part of the stats package by William N. Venables and Brian D. Ripley .In addition, advanced users may wish to refer to ``help(arima)``.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
 z5 <- zarima$new()

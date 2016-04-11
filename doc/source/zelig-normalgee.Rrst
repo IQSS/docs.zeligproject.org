@@ -60,7 +60,8 @@ correlations within clusters:
 -  ``corstr``: defaults to “independence”. It can take on the following
    arguments:
 
-   -  Independence (``corstr = independence``): :math:`{\rm
+   -  Independence (``corstr = independence``): 
+      .. math::`{\rm
           cor}(y_{it}, y_{it'})=0`, :math:`\forall t, t'` with
       :math:`t\ne t'`. It assumes that there is no correlation within
       the clusters and the model becomes equivalent to standard normal
@@ -97,9 +98,7 @@ correlations within clusters:
 
    -  Non-stationary :math:`m` dependent (``corstr = non_stat_M_dep``):
 
-      .. math::
-
-         {\rm cor}(y_{it}, y_{it'})=\left\{\begin{array}{ccc}
+      .. math:: {\rm cor}(y_{it}, y_{it'})=\left\{\begin{array}{ccc}
                \alpha_{tt'} & {\rm if} & |t-t'|\le m \\ 0 & {\rm if}
                & |t-t'| > m
              \end{array}\right.
@@ -120,9 +119,11 @@ correlations within clusters:
       0 & 0 & \alpha_{35} & \alpha_{45} & 1
       \end{array} \right) `
 
-   -  Exchangeable (``corstr = exchangeable``): :math:`{\rm
-          cor}(y_{it}, y_{it'})=\alpha`, :math:`\forall t, t'` with
-      :math:`t\ne t'`. Choose this option if the correlations are
+   -  Exchangeable (``corstr = exchangeable``): 
+
+      .. math::`{\rm cor}(y_{it}, y_{it'})=\alpha`, 
+
+      :math:`\forall t, t'` with :math:`t\ne t'`. Choose this option if the correlations are
       assumed to be the same for all observations within the cluster.
 
       | Sample “working” correlation for Exchangeable
@@ -215,7 +216,7 @@ summary(s.out)
 
 Generate a plot of quantities of interest:
 
-.. {r, eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-normalgee"}
+.. {r Zelig-gee, eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal GEE Model"}
 plot(s.out)
 .. ..
 

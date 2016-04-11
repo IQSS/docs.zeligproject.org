@@ -82,7 +82,7 @@ summary(s.out1)
 
 Generate a second set of fitted values and a plot:
 
-.. {r, eval = TRUE}
+.. {r Zelig-gammasurvey, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Gamma Survey"}
 plot(s.out1)
 .. ..
 
