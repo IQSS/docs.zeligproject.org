@@ -96,7 +96,7 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
-.. {r, eval = TRUE}
+.. {r Zelig-oprobit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Probit"}
 plot(s.out)
 .. ..
 
@@ -122,12 +122,12 @@ x.high <- setx(z.out, coop = 4)
 Generate simulated fitted values and first differences, and view the results:
 
 .. {r, eval = TRUE}
-s.out <- sim(z.out, x = x.low, x1 = x.high)
-summary(s.out)
+s.out2 <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out2)
 .. ..
 
-.. {r, eval = TRUE, Zelig-oprobit-1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-oprobit-1"}
-plot(s.out)
+.. {r Zelig-oprobit2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Probit"}
+plot(s.out2)
 .. ..
 
 Model

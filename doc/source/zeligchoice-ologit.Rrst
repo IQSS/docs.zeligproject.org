@@ -51,7 +51,7 @@ Example
 +++++
 
 .. {r, eval = TRUE, echo = FALSE}	
-rm(list=ls(pattern="out"))
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))	
 suppressWarnings(suppressMessages(library(ZeligChoice)))
 set.seed(1234)
@@ -95,15 +95,15 @@ x.out <- setx(z.out)
 Simulate fitted values given x.out and view the results:
 
 .. {r, eval = TRUE}
-s.out.ologit <- sim(z.out, x = x.out)
+s.out <- sim(z.out, x = x.out)
 .. ..
 
 .. {r, eval = TRUE}
-summary(s.out.ologit)
+summary(s.out)
 .. ..
 
-.. {r, eval = TRUE}
-plot(s.out.ologit)
+.. {r Zelig-ologit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Logit"}
+plot(s.out)
 .. ..
 
 First Differences
@@ -131,12 +131,12 @@ x.high <- setx(z.out, coop = 4)
 Generate simulated fitted values and first differences, and view the results:
 
 .. {r, eval = TRUE}
-s.out <- sim(z.out, x = x.low, x1 = x.high)
-summary(s.out)
+s.out2 <- sim(z.out, x = x.low, x1 = x.high)
+summary(s.out2)
 .. ..
 
-.. {r, eval = TRUE}
-plot(s.out)
+.. {r Zelig-ologit2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Ordered Logit"}
+plot(s.out2)
 .. ..
 
 Model

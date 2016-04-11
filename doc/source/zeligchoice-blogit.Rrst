@@ -122,7 +122,7 @@ s.out1 <- sim(z.out1, x = x.low, x1 = x.high)
 summary(s.out1)
 .. ..
 
-.. {r, eval = TRUE, Zelig-blogit-1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-blogit-1"}
+.. {r Zelig-blogit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Bivariate Logit"}
 plot(s.out1)
 .. ..
    
