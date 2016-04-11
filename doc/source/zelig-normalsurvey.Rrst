@@ -36,9 +36,6 @@ s.out <- sim(z.out, x = x.out)
 Examples
 +++++
 
-
-
-
 .. {r, eval = TRUE, echo = FALSE}	
 rm(list=ls(pattern="\\.out")) 
 suppressWarnings(suppressMessages(library(Zelig)))
@@ -163,7 +160,7 @@ summary(s.out3)
 
 Generate a second set of fitted values and a plot:
 
-.. {r Zelig-normalsurvey1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal Survey Model"}
+.. {r Zelig-normalsurvey3, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Normal Survey Model"}
 plot(s.out3)
 .. ..
 
