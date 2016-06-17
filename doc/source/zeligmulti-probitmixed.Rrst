@@ -1,0 +1,257 @@
+.. _zmultiprobitmixed:
+
+.. warning:: ``ZeligMultilevel`` is currently under development.  We
+	     are working on the model vignettes of the package.
+
+zeligmulti-probitmixed
+~~~~~~
+
+probit.mixed: Mixed effects probit Regression
+
+Use generalized multi-level linear regression if you have covariates
+that are grouped according to one or more classification factors. The
+logit model is appropriate when the dependent variable is dichotomous.
+
+While generally called multi-level models in the social sciences, this
+class of models is often referred to as mixed-effects models in the
+statistics literature and as hierarchical models in a Bayesian setting.
+This general class of models consists of linear models that are
+expressed as a function of both *fixed effects*, parameters
+corresponding to an entire population or certain repeatable levels of
+experimental factors, and *random effects*, parameters corresponding to
+individual experimental units drawn at random from a population.
+
+Syntax
++++++
+
+.. {r, eval = FALSE}
+z5 <- zprobitmixed$new()
+z5$zelig(formula= y ~ x1 + x2 + (z1 + z2 | g), weights = w, data = mydata)
+z5$setx()
+z5$sim()
+.. ..
+
+With the Zelig 4 compatibility wrappers:
+
+.. {r, eval = FALSE}
+z.out <- zelig(formula= y ~ x1 + x2 + (z1 + z2 | g),
+               data = mydata, weights = w, model = "probit.mixed")
+x.out <- setx(z.out)
+s.out <- sim(z.out, x = x.out)
+.. ..
+
+Inputs
++++++
+
+zelig() takes the following arguments for multi:
+
+-  | formula: a two-sided linear formula object describing the
+     systematic component of the model, with the response on the left of
+     a :math:`\tilde{}` operator and the fixed effects terms, separated
+     by + operators, on the right. Any random effects terms are included
+     with the notation (z1 + ... + zn | g) with z1 + ... + zn
+     specifying the model for the random effects and g the grouping
+     structure. Random intercept terms are included with the notation
+     (1 | g).
+
+Additional Inputs
++++++
+
+Additionally, users may wish to refer to glmer in the package lme4 for
+more information, including control parameters for the estimation
+algorithm and their defaults.
+
+Examples
++++++
+
+.. {r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))	
+suppressWarnings(suppressMessages(library(Zelig)))
+suppressWarnings(suppressMessages(library(ZeligMultilevel)))
+set.seed(1234)
+.. ..
+
+Basic Example with First Differences
+!!!!!
+
+Attach sample data:
+
+.. {r, eval = TRUE}
+data(voteincome)
+.. ..
+
+Estimate model:
+
+.. {r, eval = TRUE}
+z.out <- zelig(vote ~ education + age + female + (1 | state),
+               data = voteincome, model = "probit.mixed")
+.. ..
+
+Summarize regression coefficients and estimated variance of random effects:
+
+.. {r, eval = TRUE}
+summary(z.out)
+.. ..
+
+Set explanatory variables to their default values, with high (80th percentile) and low (20th percentile) values for education:
+
+.. {r, eval = TRUE}
+x.high <- setx(z.out, education = quantile(voteincome$education, 0.8))
+x.low <- setx(z.out, education = quantile(voteincome$education, 0.2))
+.. ..
+
+Generate first differences for the effect of high versus low education on voting:
+
+.. {r, eval = TRUE}
+s.out <- sim(z.out, x = x.high, x1 = x.low)
+summary(s.out)
+.. ..
+
+.. {r ZeligMultilevel-logitmixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Linear Mixed Model"}
+plot(s.out)
+.. ..
+
+Mixed effects Probit Regression Model
++++++
+
+Let :math:`Y_{ij}` be the binary dependent variable, realized for
+observation :math:`j` in group :math:`i` as :math:`y_{ij}` which takes
+the value of either 0 or 1, for :math:`i = 1, \ldots, M`,
+:math:`j = 1, \ldots, n_i`.
+
+-  The *stochastic component* is described by a Bernoulli distribution
+   with mean vector :math:`\pi_{ij}`.
+
+   .. math::
+      Y_{ij} \sim \mathrm{Bernoulli}(y_{ij} | \pi_{ij}) = \pi_{ij}^{y_{ij}} (1 - \pi_{ij})^{1 - y_{ij}}
+
+    where
+
+   .. math::
+      \pi_{ij} = \mathrm{Pr}(Y_{ij} = 1)
+
+-  The :math:`q`-dimensional vector of *random effects*, :math:`b_i`, is
+   restricted to be mean zero, and therefore is completely characterized
+   by the variance covarance matrix :math:`\Psi`, a :math:`(q \times q)`
+   symmetric positive semi-definite matrix.
+
+   .. math::
+      b_i \sim Normal(0, \Psi)
+
+-  The *systematic component* is
+
+   .. math::
+      \pi_{ij} \equiv \frac{1}{1 + \exp(-(X_{ij} \beta + Z_{ij} b_i))}
+
+   where :math:`X_{ij}` is the :math:`(n_i \times p \times M)` array of
+   known fixed effects explanatory variables, :math:`\beta` is the
+   :math:`p`-dimensional vector of fixed effects coefficients,
+   :math:`Z_{ij}` is the :math:`(n_i \times q \times M)` array of known
+   random effects explanatory variables and :math:`b_i` is the
+   :math:`q`-dimensional vector of random effects.
+
+Quantities of Interest
++++++
+
+-  The predicted values are draws from the Binomial distribution
+   with mean equal to the simulated expected value, :math:`\pi_{ij}` for
+
+   .. math::
+      \pi_{ij} = \Phi(X_{ij} \beta + Z_{ij} b_i)
+
+   given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of of
+   :math:`\beta` and :math:`b_i` from their posterior distributions. The
+   estimated variance covariance matrices are taken as correct and are
+   themselves not simulated.
+
+-  The expected values (qi$ev) are simulations of the predicted
+   probability of a success given draws of :math:`\beta` from its
+   posterior:
+
+   .. math::
+      E(Y_{ij} | X_{ij}) = \pi_{ij} = \Phi(X_{ij} \beta).
+
+-  The first difference (qi$fd) is given by the difference in predicted
+   probabilities, conditional on :math:`X_{ij}` and
+   :math:`X_{ij}^\prime`, representing different values of the
+   explanatory variables.
+
+   .. math::
+      FD(Y_{ij} | X_{ij}, X_{ij}^\prime) = Pr(Y_{ij} = 1 | X_{ij}) - Pr(Y_{ij} = 1 | X_{ij}^\prime)
+
+-  The risk ratio is defined as
+
+   .. math::
+      RR(Y_{ij} | X_{ij}, X_{ij}^{\prime}) = \frac{Pr(Y_{ij} = 1 | X_{ij})}{Pr(Y_{ij} = 1 | X_{ij}^{\prime})}
+
+-  In conditional prediction models, the average predicted treatment
+   effect (qi$att.pr) for the treatment group is given by
+
+   .. math::
+      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i =
+      1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) -
+      \widehat{Y_{ij}(t_{ij} = 0)} \},
+
+   where :math:`t_{ij}` is a binary explanatory variable defining the
+   treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
+   groups. Variation in the simulations is due to uncertainty in
+   simulating :math:`Y_{ij}(t_{ij} = 0)`, the counterfactual predicted
+   value of :math:`Y_{ij}` for observations in the treatment group,
+   under the assumption that everything stays the same except that the
+   treatment indicator is switched to :math:`t_{ij} = 0`.
+
+-  In conditional prediction models, the average expected treatment
+   effect for the treatment group is given by
+
+   .. math::
+      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
+
+   where :math:`t_{ij}` is a binary explanatory variable defining the
+   treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
+   groups. Variation in the simulations is due to uncertainty in
+   simulating :math:`E[Y_{ij}(t_{ij} = 0)]`, the counterfactual expected
+   value of :math:`Y_{ij}` for observations in the treatment group,
+   under the assumption that everything stays the same except that the
+   treatment indicator is switched to :math:`t_{ij} = 0`.
+
+Output Values
++++++
+
+The output of each Zelig command contains useful information which you
+may view. You may examine the available information in ``z.out`` by using
+getters (http://docs.zeligproject.org/en/latest/getters.html), see the
+fixed effect coefficients by using ``z.out$getcoef()``, and a default
+summary of information through ``summary(z.out)``. Other elements available are listed below.
+
+-  From the ``zelig()`` output stored in ``summary(z.out)``, you may extract:
+
+   -  ``fixef``: numeric vector containing the conditional estimates of the
+      fixed effects.
+
+   -  ``ranef``: numeric vector containing the conditional modes of the
+      random effects.
+
+-  From the ``sim()`` output stored in ``s.out``, you may extract quantities of
+   interest via getters:
+
+   -  ``s.out$getqi(qi = "pv")``: the simulated predicted values drawn
+      from the distributions defined by the expected values.
+
+   -  ``s.out$getqi(qi = "ev")``: the simulated expected values for the
+      specified values of x.
+
+   -  ``s.out$getqi(qi = "fd")``: the simulated first differences in
+      the expected values for the values specified in x and x1.
+
+   -  ``s.out$getqi(treatment)``: the simulated average predicted
+      treatment effect for the treated from conditional prediction models.
+
+See also
++++++
+
+Mixed effects linear regression is part of lme4 package.
+
+.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+z5 <- zprobitmixed$new()
+z5$references()
+.. ..
