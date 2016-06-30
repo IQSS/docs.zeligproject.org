@@ -126,7 +126,7 @@ prior parameters:
    uniquenesses is ``a0/2``. It can take a scalar value or a vector. The
    default value is 0.001.
 
--  ``b0``: the shape parameter of the Inverse Gamma prior for the
+-  ``b0``: the scale parameter of the Inverse Gamma prior for the
    uniquenesses is ``b0/2``. It can take a scalar value or a vector. The
    default value is 0.001.
 
