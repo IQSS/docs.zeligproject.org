@@ -1,17 +1,16 @@
-.. _zmultipoissonmixed:
+.. _zmultigammamixed:
 
 .. warning:: ``ZeligMultilevel`` is currently under development.  We
 	     are working on the model vignettes of the package.
 
-zeligmulti-poissonmixed
+zeligmulti-gammamixed
 ~~~~~~
 
-poisson.mixed: Mixed effects poisson Regression
+gamma.mixed: Mixed effects gamma regression
 
 Use generalized multi-level linear regression if you have covariates
-that are grouped according to one or more classification factors.
-Poisson regression applies to dependent variables that represent the
-number of independent events that occur during a fixed period of time.
+that are grouped according to one or more classification factors. Gamma
+regression models a continuous, positive dependent variable.
 
 While generally called multi-level models in the social sciences, this
 class of models is often referred to as mixed-effects models in the
@@ -26,7 +25,7 @@ Syntax
 +++++
 
 .. {r, eval = FALSE}
-z5 <- zpoissonmixed$new()
+z5 <- zgammamixed$new()
 z5$zelig(formula= y ~ x1 + x2 + (z1 + z2 | g), weights = w, data = mydata)
 z5$setx()
 z5$sim()
@@ -36,7 +35,7 @@ With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
 z.out <- zelig(formula= y ~ x1 + x2 + (z1 + z2 | g),
-               data = mydata, weights = w, model = "poisson.mixed")
+               data = mydata, weights = w, model = "gamma.mixed")
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 .. ..
@@ -44,29 +43,55 @@ s.out <- sim(z.out, x = x.out)
 Inputs
 +++++
 
-zelig() takes the following arguments for multi:
+takes the following arguments for mixed:
 
 -  | formula: a two-sided linear formula object describing the
-     systematic component of the model, with the response on the left of
-     a :math:`\tilde{}` operator and the fixed effects terms, separated
-     by + operators, on the right. Any random effects terms are included
-     with the notation (z1 + ... + zn | g) with z1 + ... + zn
-     specifying the model for the random effects and g the grouping
-     structure. Random intercept terms are included with the notation
-     (1 | g).
+   systematic component of the model, with the response on the left of a
+   :math:`\tilde{}` operator and the fixed effects terms, separated by +
+   operators, on the right. Any random effects terms are included with
+   the notation tag(z1 + ... + zn \| g) with z1 + ... + zn specifying
+   the model for the random effects and g the grouping structure. Random
+   intercept terms are included with the notation tag(1 \| g).
+   | Alternatively, formula may be a list where the first entry, mu, is
+   a two-sided linear formula object describing the systematic component
+   of the model, with the repsonse on the left of a :math:`\tilde{}`
+   operator and the fixed effects terms, separated by + operators, on
+   the right. Any random effects terms are included with the notation
+   tag(z1, delta \| g) with z1 specifying the individual level model for
+   the random effects, g the grouping structure and delta references the
+   second equation in the list. The delta equation is one-sided linear
+   formula object with the group level model for the random effects on
+   the right side of a :math:`\tilde{}` operator. The model is specified
+   with the notation tag(w1 + ... + wn \| g) with w1 + ... + wn
+   specifying the group level model and g the grouping structure.
 
 Additional Inputs
 +++++
 
-Additionally, users may wish to refer to glmer in the package lme4 for
+In addition, zelig() accepts the following additional arguments for
+model specification:
+
+-  data: An optional data frame containing the variables named in
+   formula. By default, the variables are taken from the environment
+   from which zelig() is called.
+
+-  method: a character string. The criterion is always the
+   log-likelihood but this criterion does not have a closed form
+   expression and must be approximated. The default approximation is
+   “PQL” or penalized quasi-likelihood. Alternatives are “Laplace” or
+   “AGQ” indicating the Laplacian and adaptive Gaussian quadrature
+   approximations respectively.
+
+-  na.action: A function that indicates what should happen when the data
+   contain NAs. The default action (na.fail) causes zelig() to print an
+   error message and terminate if there are any incomplete observations.
+
+Additionally, users may with to refer to lmer in the package lme4 for
 more information, including control parameters for the estimation
 algorithm and their defaults.
 
 Examples
 +++++
-
-Basic Example
-!!!!!
 
 .. {r, eval = TRUE, echo = FALSE}
 rm(list=ls(pattern="\\.out"))	
@@ -75,76 +100,78 @@ suppressWarnings(suppressMessages(library(ZeligMultilevel)))
 set.seed(1234)
 .. ..
 
+
+Basic Example with First Differences
+!!!!!
+
 Attach sample data:
 
 .. {r, eval = TRUE}
-data(homerun)
+data(coalition2)
 .. ..
 
-Estimate model:
+Estimate model using optional arguments to specify approximation
+method for the log-likelihood, and the log link function for the Gamma family:
 
 .. {r, eval = TRUE}
-z.out <- zelig(homeruns ~ player + (player - 1 | month),
-               data = homerun, model = "poisson.mixed")
+z.out1 <- zelig(duration ~ invest + fract + polar + numst2 + crisis + (1 | country),
+                data=coalition2, model = "gamma.mixed")
 .. ..
 
 Summarize regression coefficients and estimated variance of random effects:
 
 .. {r, eval = TRUE}
-summary(z.out)
+summary(z.out1)
 .. ..
 
-Set explanatory variables to their default values:
+Set the baseline values (with the ruling coalition in the minority)
+and the alternative values (with the ruling coalition in the majority) for X:
 
 .. {r, eval = TRUE}
-x.out <- setx(z.out)
+x.high <- setx(z.out1, numst2 = 1)
+x.low <- setx(z.out1, numst2 = 0)
 .. ..
 
-Simulate draws using the default bootstrap method and view simulated
-quantities of interest:
+Simulate expected values and first differences:
 
 .. {r, eval = TRUE, echo = FALSE}
-s.out <- Zelig::sim(z.out) # to avoid potential issues with arm::sim
-summary(s.out)
+s.out1 <- Zelig::sim(z.out1, x = x.high, x1 = x.low)
+summary(s.out1)
 .. ..
 
 .. {r, eval = FALSE}
-s.out <- sim(z.out, x = x.out)
-summary(s.out)
+s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
+summary(s.out1)
 .. ..
 
-Mixed effects Poisson Regression Model
+Mixed effects gamma regression Model
 +++++
 
-Let :math:`Y_{ij}` be the number of independent events that occur during
-a fixed time period, realized for observation :math:`j` in group
-:math:`i` as :math:`y_{ij}`, which takes any non-negative integer as its
-value, for :math:`i = 1, \ldots, M`, :math:`j = 1, \ldots, n_i`.
+Let :math:`Y_{ij}` be the continuous, positive dependent variable,
+realized for observation :math:`j` in group :math:`i` as :math:`y_{ij}`,
+for :math:`i = 1, \ldots, M`, :math:`j = 1, \ldots, n_i`.
 
--  The *stochastic component* is described by a Poisson distribution
-   with mean and variance parameter :math:`\lambda_{ij}`.
+-  The *stochastic component* is described by a Gamma model with scale
+   parameter :math:`\alpha`.
 
-   .. math::
-      Y_{ij} \sim \mathrm{Poisson}(y_{ij} | \lambda_{ij}) =
-      \frac{\exp(-\lambda_{ij}) \lambda_{ij}^{y_{ij}}}{y_{ij}!}
+   .. math:: Y_{ij} \sim \mathrm{Gamma}(y_{ij} | \lambda_{ij}, \alpha)
 
    where
 
-   .. math::
-      y_{ij} = 0, 1, \ldots
+   .. math:: Gamma(y_{ij} | \lambda_{ij}, \alpha) = \frac{1}{\alpha^{\lambda_{ij}} \Gamma \lambda_{ij}} y_{ij}^{\lambda_{ij} - 1} \exp (- \{ \frac{y_{ij}}{\alpha} \})
+
+   for :math:`\alpha, \; \lambda_{ij}, \; y_{ij} \; > 0`.
 
 -  The :math:`q`-dimensional vector of *random effects*, :math:`b_i`, is
    restricted to be mean zero, and therefore is completely characterized
    by the variance covarance matrix :math:`\Psi`, a :math:`(q \times q)`
    symmetric positive semi-definite matrix.
 
-   .. math::
-      b_i \sim Normal(0, \Psi)
+   .. math:: b_i \sim Normal(0, \Psi)
 
 -  The *systematic component* is
 
-   .. math::
-      \lambda_{ij} \equiv \exp(X_{ij} \beta + Z_{ij} b_i)
+   .. math:: \lambda_{ij} \equiv \frac{1}{X_{ij} \beta + Z_{ij} b_i}
 
    where :math:`X_{ij}` is the :math:`(n_i \times p \times M)` array of
    known fixed effects explanatory variables, :math:`\beta` is the
@@ -156,33 +183,32 @@ value, for :math:`i = 1, \ldots, M`, :math:`j = 1, \ldots, n_i`.
 Quantities of Interest
 +++++
 
--  The predicted values are draws from the poisson distribution
-   defined by mean :math:`\lambda_{ij}`, for
+-  The predicted values are draws from the gamma distribution
+   for each given set of parameters :math:`(\alpha, \lambda_{ij})`, for
 
-   .. math::
-      \lambda_{ij} = \exp(X_{ij} \beta + Z_{ij} b_i)
+   .. math:: \lambda_{ij} = \frac{1}{X_{ij} \beta + Z_{ij} b_i}
 
    given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of of
    :math:`\beta` and :math:`b_i` from their posterior distributions. The
    estimated variance covariance matrices are taken as correct and are
    themselves not simulated.
 
--  The expected values is the mean of simulations of the
-   stochastic component given draws of :math:`\beta` from its posterior:
+-  The expected values (qi$ev) are simulations of the mean of the
+   stochastic component given draws of :math:`\alpha`, :math:`\beta`
+   from their posteriors:
 
-   .. math:: E(Y_{ij} | X_{ij}) = \lambda_{ij} = \exp(X_{ij} \beta).
+   .. math:: E(Y_{ij} | X_{ij}) = \alpha \lambda_{ij} = \frac{\alpha}{X_{ij} \beta}.
 
--  The first difference is given by the difference in expected
+-  The first difference (qi$fd) is given by the difference in expected
    values, conditional on :math:`X_{ij}` and :math:`X_{ij}^\prime`,
    representing different values of the explanatory variables.
 
    .. math:: FD(Y_{ij} | X_{ij}, X_{ij}^\prime) = E(Y_{ij} | X_{ij}) - E(Y_{ij} | X_{ij}^\prime)
 
 -  In conditional prediction models, the average predicted treatment
-   effect for the treatment group is given by
+   effect (qi$att.pr) for the treatment group is given by
 
-   .. math::
-      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
+   .. math:: \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
 
    where :math:`t_{ij}` is a binary explanatory variable defining the
    treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
@@ -193,10 +219,9 @@ Quantities of Interest
    treatment indicator is switched to :math:`t_{ij} = 0`.
 
 -  In conditional prediction models, the average expected treatment
-   effect for the treatment group is given by
+   effect (qi$att.ev) for the treatment group is given by
 
-   .. math::
-      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
+   .. math:: \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
 
    where :math:`t_{ij}` is a binary explanatory variable defining the
    treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
@@ -241,9 +266,10 @@ summary of information through ``summary(z.out)``. Other elements available are 
 See also
 +++++
 
-Mixed effects Poisson regression is part of lme4 package.
+Mixed effects gamma regression is part of lme4 package.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
-z5 <- zpoissonmixed$new()
+z5 <- zgammamixed$new()
 z5$references()
 .. ..
+

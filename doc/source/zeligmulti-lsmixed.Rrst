@@ -96,13 +96,19 @@ summary(z.out)
 Set explanatory variables to their default values, with high (80th percentile) and low (20th percentile) values for education:
 
 .. {r, eval = TRUE}
-x.high <- setx(z.out, education=quantile(voteincome$education, 0.8))
-x.low <- setx(z.out, education=quantile(voteincome$education, 0.2))
+x.high <- setx(z.out, education = quantile(voteincome$education, 0.8))
+x.low <- setx(z.out, education = quantile(voteincome$education, 0.2))
 .. ..
 
-Generate first differences for the effect of high versus low education on income:
+Generate first differences for the effect of high versus low education
+on income:
 
-.. {r, eval = TRUE}
+.. {r, eval = TRUE, echo = FALSE}
+s.out <- Zelig::sim(z.out, x = x.high, x1 = x.low) # to avoid potential issues with arm::sim
+summary(s.out)
+.. ..
+
+.. {r, eval = FALSE}
 s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
@@ -148,13 +154,13 @@ observation :math:`j` in group :math:`i` as :math:`y_{ij}`, for
 Quantities of Interest
 +++++
 
--  The predicted values (qi$pr) are draws from the normal distribution
+-  The predicted values are draws from the normal distribution
    defined by mean :math:`\mu_{ij}` and variance :math:`\sigma^2`,
 
    .. math::
       \mu_{ij} = X_{ij} \beta + Z_{ij} b_{i}
 
-    given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of
+   given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of
    :math:`\beta` and :math:`b_i` from their posterior distributions. The
    estimated variance covariance matrices are taken as correct and are
    themselves not simulated.
@@ -171,20 +177,6 @@ Quantities of Interest
 
    .. math::
       FD(Y_{ij} | X_{ij}, X_{ij}^\prime) = E(Y_{ij} | X_{ij}) - E(Y_{ij} | X_{ij}^\prime)
-
--  In conditional prediction models, the average predicted treatment
-   effect for the treatment group is given by
-
-   .. math::
-      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
-
-    where :math:`t_{ij}` is a binary explanatory variable defining the
-   treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
-   groups. Variation in the simulations is due to uncertainty in
-   simulating :math:`Y_{ij}(t_{ij} = 0)`, the counterfactual predicted
-   value of :math:`Y_{ij}` for observations in the treatment group,
-   under the assumption that everything stays the same except that the
-   treatment indicator is switched to :math:`t_{ij} = 0`.
 
 -  In conditional prediction models, the average expected treatment
    effect for the treatment group is given by

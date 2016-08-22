@@ -4,6 +4,7 @@ doc/build
 
 # R knitr-generated files #
 ###########################
+doc/source/.Rhistory
 doc/source/*.R
 # except one
 !doc/source/knitall.R

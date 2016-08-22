@@ -100,9 +100,15 @@ x.high <- setx(z.out, education = quantile(voteincome$education, 0.8))
 x.low <- setx(z.out, education = quantile(voteincome$education, 0.2))
 .. ..
 
-Generate first differences for the effect of high versus low education on voting:
+Generate first differences for the effect of high versus low education
+on voting:
 
-.. {r, eval = TRUE}
+.. {r, eval = TRUE, echo = FALSE}
+s.out <- Zelig::sim(z.out, x = x.high, x1 = x.low) # to avoid potential issues with arm::sim
+summary(s.out)
+.. ..
+
+.. {r, eval = FALSE}
 s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
@@ -153,7 +159,7 @@ the value of either 0 or 1, for :math:`i = 1, \ldots, M`,
 Quantities of Interest
 +++++
 
--  The predicted values (qi$pr) are draws from the Binomial distribution
+-  The predicted values are draws from the Binomial distribution
    with mean equal to the simulated expected value, :math:`\pi_{ij}` for
 
    .. math::
@@ -199,7 +205,7 @@ Quantities of Interest
    treatment indicator is switched to :math:`t_{ij} = 0`.
 
 -  In conditional prediction models, the average expected treatment
-   effect (qi$att.ev) for the treatment group is given by
+   effect for the treatment group is given by
 
    .. math::
       \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
