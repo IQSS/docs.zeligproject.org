@@ -45,35 +45,35 @@ Inputs
 
 takes the following arguments for mixed:
 
--  | formula: a two-sided linear formula object describing the
-   systematic component of the model, with the response on the left of a
-   :math:`\tilde{}` operator and the fixed effects terms, separated by +
+-  formula: a two-sided linear formula object describing the
+   systematic component of the model, with the response on the left of
+   a :math:`\tilde{}` operator and the fixed effects terms, separated by +
    operators, on the right. Any random effects terms are included with
-   the notation tag(z1 + ... + zn \| g) with z1 + ... + zn specifying
+   the notation (z1 + ... + zn \| g) with z1 + ... + zn specifying
    the model for the random effects and g the grouping structure. Random
-   intercept terms are included with the notation tag(1 \| g).
+   intercept terms are included with the notation (1 \| g).
    | Alternatively, formula may be a list where the first entry, mu, is
    a two-sided linear formula object describing the systematic component
    of the model, with the repsonse on the left of a :math:`\tilde{}`
    operator and the fixed effects terms, separated by + operators, on
    the right. Any random effects terms are included with the notation
-   tag(z1, delta \| g) with z1 specifying the individual level model for
+   (z1, delta \| g) with z1 specifying the individual level model for
    the random effects, g the grouping structure and delta references the
    second equation in the list. The delta equation is one-sided linear
    formula object with the group level model for the random effects on
    the right side of a :math:`\tilde{}` operator. The model is specified
-   with the notation tag(w1 + ... + wn \| g) with w1 + ... + wn
+   with the notation (w1 + ... + wn \| g) with w1 + ... + wn
    specifying the group level model and g the grouping structure.
 
 Additional Inputs
 +++++
 
-In addition, zelig() accepts the following additional arguments for
+In addition, `zelig()` accepts the following additional arguments for
 model specification:
 
 -  data: An optional data frame containing the variables named in
    formula. By default, the variables are taken from the environment
-   from which zelig() is called.
+   from which `zelig()` is called.
 
 -  method: a character string. The criterion is always the
    log-likelihood but this criterion does not have a closed form
