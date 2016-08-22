@@ -4,18 +4,22 @@ doc/build
 
 # R knitr-generated files #
 ###########################
-doc/*.R
+doc/source/*.R
 # except one
 !doc/source/knitall.R
 
 # rst knitr-generated files #
 ###########################
-doc/*.rst
+doc/source/*.rst
 
 # knitr-generated figures #
 ###########################
+doc/source/figure/*
 
-doc/figure/*
+# json files (tree) #
+###########################
+doc/source/_static/*
+doc/source/_static/*.*
 
 # OS generated files #
 ######################
