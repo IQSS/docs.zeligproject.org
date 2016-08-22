@@ -135,7 +135,7 @@ x.low <- setx(z.out1, numst2 = 0)
 Simulate expected values and first differences:
 
 .. {r, eval = TRUE, echo = FALSE}
-s.out1 <- Zelig::sim(z.out1, x = x.high, x1 = x.low)
+s.out1 <- Zelig::sim(z.out1, x = x.high, x1 = x.low) # to avoid potential issues with arm::sim
 summary(s.out1)
 .. ..
 
