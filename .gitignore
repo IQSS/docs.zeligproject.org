@@ -2,6 +2,21 @@
 ##########################
 doc/build
 
+# R knitr-generated files #
+###########################
+doc/*.R
+# except one
+!doc/source/knitall.R
+
+# rst knitr-generated files #
+###########################
+doc/*.rst
+
+# knitr-generated figures #
+###########################
+
+doc/figure/*
+
 # OS generated files #
 ######################
 .DS_Store
