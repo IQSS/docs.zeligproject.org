@@ -113,7 +113,7 @@ s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
-.. {r ZeligMultilevel-logitmixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Linear Mixed Model"}
+.. {r ZeligMultilevel-probitmixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Probit Mixed Model"}
 plot(s.out)
 .. ..
 

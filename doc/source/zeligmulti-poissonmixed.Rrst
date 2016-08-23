@@ -104,13 +104,17 @@ Simulate draws using the default bootstrap method and view simulated
 quantities of interest:
 
 .. {r, eval = TRUE, echo = FALSE}
-s.out <- Zelig::sim(z.out) # to avoid potential issues with arm::sim
+s.out <- Zelig::sim(z.out, x.out) # to avoid potential issues with arm::sim
 summary(s.out)
 .. ..
 
 .. {r, eval = FALSE}
 s.out <- sim(z.out, x = x.out)
 summary(s.out)
+.. ..
+
+.. {r ZeligMultilevel-poissonmixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Poisson Mixed Model"}
+plot(s.out)
 .. ..
 
 Mixed effects Poisson Regression Model
