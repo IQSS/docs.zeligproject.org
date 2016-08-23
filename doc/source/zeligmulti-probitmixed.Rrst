@@ -1,9 +1,9 @@
-.. _zmultiprobitmixed:
+.. _zmultilevelprobitmixed:
 
 .. warning:: ``ZeligMultilevel`` is currently under development.  We
 	     are working on the model vignettes of the package.
 
-zeligmulti-probitmixed
+zeligmultilevel-probitmixed
 ~~~~~~
 
 probit.mixed: Mixed effects probit Regression

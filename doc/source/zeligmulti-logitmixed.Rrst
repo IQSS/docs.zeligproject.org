@@ -1,9 +1,9 @@
-.. _zmultilogitmixed:
+.. _zmultilevellogitmixed:
 
 .. warning:: ``ZeligMultilevel`` is currently under development.  We
 	     are working on the model vignettes of the package.
 
-zeligmulti-logitmixed
+zeligmultilevel-logitmixed
 ~~~~~~
 
 logit.mixed: Mixed effects logistic Regression

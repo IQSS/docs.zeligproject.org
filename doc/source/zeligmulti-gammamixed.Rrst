@@ -1,9 +1,9 @@
-.. _zmultigammamixed:
+.. _zmultilevelgammamixed:
 
 .. warning:: ``ZeligMultilevel`` is currently under development.  We
 	     are working on the model vignettes of the package.
 
-zeligmulti-gammamixed
+zeligmultilevel-gammamixed
 ~~~~~~
 
 gamma.mixed: Mixed effects gamma regression
