@@ -26,7 +26,7 @@ install.packages("Zelig")
 install.packages("ZeligChoice")
 install.packages("ZeligEI")
 .. ..
-at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  A simplified installation procedure will be available in the next Zelig release (5.0-12).
+at which point you will be asked to select from a list a local CRAN mirror to use for downloading.  
 
 *Beta Release*
 
