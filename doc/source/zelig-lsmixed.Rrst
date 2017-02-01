@@ -99,12 +99,12 @@ x.low <- setx(z.out, education=quantile(voteincome$education, 0.2))
 
 Generate first differences for the effect of high versus low education on income:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
-.. {r ZeligMultilevel-lsmixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Linear Mixed Model"}
+.. {r ZeligMultilevel-lsmixed, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Linear Mixed Model"}
 plot(s.out)
 .. ..
 
