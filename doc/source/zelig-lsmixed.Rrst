@@ -80,7 +80,7 @@ data(voteincome)
 Estimate model:
 
 .. {r, eval = TRUE}
-z.out1 <- zelig(income ~ education + age + female + (1 | state),
+z.out <- zelig(income ~ education + age + female + (1 | state),
                 data = voteincome, model = "ls.mixed")
 .. ..
 
@@ -100,7 +100,7 @@ x.low <- setx(z.out, education=quantile(voteincome$education, 0.2))
 Generate first differences for the effect of high versus low education on income:
 
 .. {r, eval = TRUE}
-s.out1 <- sim(z.out, x = x.high, x1 = x.low)
+s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
