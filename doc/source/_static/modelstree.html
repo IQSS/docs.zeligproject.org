@@ -51,6 +51,9 @@ var urls = {};
 d3.select(self.frameElement).style("height", "800px");
 BigTree("_static/zelig5models.json", "Core", "zelig5models", function(){
         BigTree("_static/zelig5choicemodels.json", "Choice", "zelig5choicemodels", function() {
+                  BigTree("_static/zelig5gammodels.json", "GAM", "zelig5gammodels", function() {
+                            BigTree("_static/zelig5eimodels.json", "EI", "zelig5eimodels", function() {
+
                 for (var j = big_tree.length; j--;){
                     if (dups.indexOf(big_tree[j]) == -1){
                         dups.push(big_tree[j]);
@@ -85,6 +88,8 @@ BigTree("_static/zelig5models.json", "Core", "zelig5models", function(){
                 // root.children.forEach(collapse);
                 update(root);
                 });
+        });
+        });
         });
    
 // 
