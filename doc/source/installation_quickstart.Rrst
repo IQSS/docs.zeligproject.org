@@ -3,7 +3,7 @@
 Installation and Quickstart
 =========================
 
-This guide is designed to get you up and running with the current release of Zelig (|version|). 
+This guide is designed to get you up and running with the current release of Zelig (:r:`packageVersion('Zelig')`). 
 
 ------------
 
