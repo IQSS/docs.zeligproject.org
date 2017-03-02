@@ -162,6 +162,10 @@ s.out2 <- sim(z.out, x = x.strong, x1 = x.weak)
 summary(s.out2)
 .. ..
 
+.. {r Zelig-mlogitbayes2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Multinomial Logit Bayes"}
+plot(s.out2)
+.. ..
+
 Model
 +++++
 
