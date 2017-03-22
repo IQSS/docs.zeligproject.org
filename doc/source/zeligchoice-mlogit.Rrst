@@ -36,19 +36,7 @@ z.out <- zelig(as.factor(Y) ~ X1 + X23,
                model = "mlogit", data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out, x1 = NULL)
-.. ..
 
-Input Values
-+++++
-
-If the user wishes to use the same formula across all levels, then
-``formula <- as.factor(Y) ~ X1 + X2`` may be used. If the user wants to
-use different formula for each level then the following syntax should be
-used:
-
-.. {r, eval = FALSE}
-    formulae <- list(list(id(Y, "apples")~ X1, 
-                          id(Y, "bananas")~ X1 + X2))
 .. ..
 
 where Y above is supposed to be a factor variable with levels
