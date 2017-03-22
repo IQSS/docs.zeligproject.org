@@ -54,9 +54,6 @@ suppressWarnings(suppressMessages(library(ZeligChoice)))
 set.seed(1234)
 .. .. 
 
-The same formula for each level
-!!!!!
-
 Load the sample data:
 
 .. {r, eval = TRUE}
