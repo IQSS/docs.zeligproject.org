@@ -21,8 +21,8 @@ With reference classes:
 .. {r, eval = FALSE}
 z5 <- zrelogit$new()
 z5$zelig(Y ~ X1 + X2, tau = NULL,
-         case.control = c("prior", "weighting"), 
-         bias.correct = TRUE, robust = FALSE, 
+         case.control = c("prior", "weighting"),
+         bias.correct = TRUE,
          data = mydata, ...)
 z5$setx()
 z5$sim()
@@ -32,8 +32,8 @@ With the Zelig 4 compatibility wrappers:
 
 .. {r, eval = FALSE}
 z.out <- zelig(Y ~ X1 + X2, model = "relogit", tau = NULL,
-               case.control = c("prior", "weighting"), 
-               bias.correct = TRUE, robust = FALSE, 
+               case.control = c("prior", "weighting"),
+               bias.correct = TRUE,
                data = mydata, ...)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
@@ -65,11 +65,11 @@ correction.
 Example 1: One Tau with Prior Correction and Bias Correction
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}	
+.. {r, eval = TRUE, echo = FALSE}
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
-.. .. 
+.. ..
 
 Due to memory and space considerations, the data used here are a sample
 drawn from the full data set used in King and Zeng, 2001, The proportion
@@ -82,7 +82,8 @@ data(mid)
 .. ..
 
 .. {r, eval = TRUE}
-z.out1 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = 1042/303772)
+z.out1 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years,
+                data = mid, model = "relogit", tau = 1042/303772)
 .. ..
 
 Summarize the model output:
@@ -108,14 +109,16 @@ summary(s.out1)
 plot(s.out1)
 .. ..
 
-Example 2: One Tau with Weighting, Robust Standard Errors, and Bias Correction
+Example 2: One Tau with Weighting, and Bias Correction
 +++++
 
 Suppose that we wish to perform case control correction using weighting
 (rather than the default prior correction). To estimate the model:
 
 .. {r, eval = TRUE}
-z.out2 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years, data = mid, model = "relogit", tau = 1042/303772, case.control = "weighting", robust = TRUE)
+z.out2 <- zelig(conflict ~ major + contig + power + maxdem + mindem + years,
+                data = mid, model = "relogit", tau = 1042/303772,
+                case.control = "weighting")
 .. ..
 
 Summarize the model output:
@@ -232,7 +235,7 @@ Model
 
    If :math:`\tau` is unknown, you may alternatively specify an upper
    and lower bound for the possible range of :math:`\tau`. In this case,
-   the relogit procedure uses “robust Bayesian” methods to generate a
+   the relogit procedure uses "robust Bayesian" methods to generate a
    confidence interval (rather than a point estimate) for each quantity
    of interest. The nominal coverage of the confidence interval is at
    least as great as the actual coverage.
@@ -334,7 +337,7 @@ Output Values
 
 The Zelig object stores fields containing everything needed to
 rerun the Zelig output, and all the results and simulations as they are generated.
-In addition to the summary commands demonstrated above, some simply utility 
+In addition to the summary commands demonstrated above, some simply utility
 functions (known as *getters*) provide easy access to the raw fields most
 commonly of use for further investigation.
 
@@ -352,7 +355,7 @@ is more numerically stable than standard matrix calculations.
 See also
 +++++
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zrelogit$new()
 z5$references()
 .. ..

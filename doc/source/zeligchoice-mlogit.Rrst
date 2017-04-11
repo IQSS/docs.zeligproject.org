@@ -36,19 +36,7 @@ z.out <- zelig(as.factor(Y) ~ X1 + X23,
                model = "mlogit", data = mydata)
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out, x1 = NULL)
-.. ..
 
-Input Values
-+++++
-
-If the user wishes to use the same formula across all levels, then
-``formula <- as.factor(Y) ~ X1 + X2`` may be used. If the user wants to
-use different formula for each level then the following syntax should be
-used:
-
-.. {r, eval = FALSE}
-    formulae <- list(list(id(Y, "apples")~ X1, 
-                          id(Y, "bananas")~ X1 + X2))
 .. ..
 
 where Y above is supposed to be a factor variable with levels
@@ -65,9 +53,6 @@ suppressWarnings(suppressMessages(library(Zelig)))
 suppressWarnings(suppressMessages(library(ZeligChoice)))
 set.seed(1234)
 .. .. 
-
-The same formula for each level
-!!!!!
 
 Load the sample data:
 
@@ -106,39 +91,6 @@ summary(s.out.mlogit)
 
 .. {r Zelig-mlogit1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Multinomial Logit"}
 plot(s.out.mlogit)
-.. ..
-
-Different formula for each level
-!!!!!
-
-Estimate the empirical model:
-
-.. {r, eval = FALSE}
-z.out2 <- zelig(list(id(vote88, "1") ~ pristr + othcok, 
-                     id(vote88, “2”) ~ othsocok),
-                model = "mlogit", data = mexico)
-.. ..
-
-Set the explanatory variables to their default values, with `pristr`
-(for the strength of the PRI) equal to 1 (weak) in the baseline values, and equal to 3 (strong) in the alternative values:
-
-.. {r Zeligchoice-mlogit, dev=c("png", "pdf"), eval = FALSE}
-x.weak <- setx(z.out2, pristr = 1)
-x.strong <- setx(z.out2, pristr = 3)
-.. ..
-
-Generate simulated predicted probabilities qi$ev and differences in the predicted probabilities qi$fd:
-
-.. {r, eval = FALSE}
-s.out1 <- sim(z.out2, x = x.strong, x1 = x.weak)
-.. ..
-
-.. {r, eval = FALSE}
-summary(s.out1)
-.. ..
-
-.. {r Zelig-mlogit2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Multinomial Logit"}
-plot(s.out1)
 .. ..
 
 Model
