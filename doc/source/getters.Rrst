@@ -10,6 +10,7 @@ As a key example, the ``get_qi()`` method extracts simulated quantities of inter
 Here is the example from the Poisson model:
 
 .. {r, eval = TRUE, echo = FALSE}	
+rm(list=ls(pattern="\\.out")) 
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
@@ -17,7 +18,7 @@ set.seed(1234)
 
 .. {r, eval = TRUE}
 data(sanction)
-zqi.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
+zqi.out <- zelig(num ~ target + coop + mil, model = "poisson", data = sanction)
 summary(zqi.out)
 zqi.out$setx(coop=1)
 zqi.out$setx1(coop=4)
@@ -40,6 +41,13 @@ If one asks the getter for a qi or xvalue that does not exist in the zelig objec
 .. {r, eval = TRUE}
 my.fd <- zqi.out$get_qi(qi="fa", xvalue="x1")
 my.fd <- zqi.out$get_qi(qi="fd", xvalue="x2")
+.. ..
+
+Average Treatment Effects on Treated (ATT) quantities of interest can be generated with the ``ATT()`` method, for any zelig model that can construct expected values.  These can similarly be retrieved with the ``get_qi()`` method.
+
+.. {r, eval = TRUE}
+zqi.out$ATT(treatment = "mil")
+zqi.out$get_qi(qi="ATT", xvalue="TE")
 .. ..
 
 
