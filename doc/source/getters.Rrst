@@ -17,19 +17,20 @@ set.seed(1234)
 
 .. {r, eval = TRUE}
 data(sanction)
-z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
-summary(z.out)
-z.out$setx(coop=1)
-z.out$sim()
+zqi.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
+summary(zqi.out)
+zqi.out$setx(coop=1)
+zqi.out$setx1(coop=4)
+zqi.out$sim()
 .. ..
 
 To extract the quantities of interest that have been simulated we can use the getter as:
 
 .. {r, eval = TRUE}
-my.pv.lowcoop <- z.out$get_qi(qi="pv", xvalue="x")
-my.ev.lowcoop <- z.out$get_qi(qi="ev", xvalue="x")
-my.ev.highcoop <- z.out$get_qi(qi="ev", xvalue="x1")
-my.fd <- z.out$get_qi(qi="fd", xvalue="x1")
+my.pv.lowcoop <- zqi.out$get_qi(qi="pv", xvalue="x")
+my.ev.lowcoop <- zqi.out$get_qi(qi="ev", xvalue="x")
+my.ev.highcoop <- zqi.out$get_qi(qi="ev", xvalue="x1")
+my.fd <- zqi.out$get_qi(qi="fd", xvalue="x1")
 .. ..
 
 The ``qi`` argument is the name of any quantity of interest simulated  in the object by ``sim``.  Depending on the model, this will generally be "ev", "pv", or "fd" for expected values, predicted values, or first differences, respectively.  The ``xvalue`` argument is the level of x for which that quantity of interest was simulated, either "x" or "x1".  Note that first differences, the difference between expected values with covariates at "x" and with covariates at "x1" are associated with the xvalue of "x1".
@@ -37,8 +38,8 @@ The ``qi`` argument is the name of any quantity of interest simulated  in the ob
 If one asks the getter for a qi or xvalue that does not exist in the zelig object, then the error message will result, which will also list all the values that are present that the getter can extract. 
 
 .. {r, eval = TRUE}
-my.fd <- z.out$get_qi(qi="fa", xvalue="x1")
-my.fd <- z.out$get_qi(qi="fd", xvalue="x2")
+my.fd <- zqi.out$get_qi(qi="fa", xvalue="x1")
+my.fd <- zqi.out$get_qi(qi="fd", xvalue="x2")
 .. ..
 
 
