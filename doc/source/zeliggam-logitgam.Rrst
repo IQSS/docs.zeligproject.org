@@ -68,7 +68,7 @@ following additional options for GAM models.
 Examples
 +++++
 
-.. {r, eval = FALSE, echo = FALSE}	
+.. {r, eval = TRUE, echo = FALSE}	
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(ZeligGAM)))
 set.seed(1234)
