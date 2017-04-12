@@ -24,7 +24,7 @@ individual experimental units drawn at random from a population.
 Syntax
 +++++
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z5 <- zlogitmixed$new()
 z5$zelig(formula= y ~ x1 + x2 + (z1 + z2 | g), weights = w, data = mydata)
 z5$setx()
