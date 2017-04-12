@@ -56,16 +56,17 @@ z.out <- zelig(num ~ target + coop, model = "poisson", data = sanction)
 summary(z.out)
 .. ..
 
-Set values for the explanatory variables to their default mean values:
+Set values for the explanatory variables to their default mean values, while changing the `coop` variable across its range:
 
 .. {r, eval = TRUE}
-x.out <- setx(z.out)
+x.low <- setx(z.out, coop=1)
+x.high <- setx1(z.out, coop=4)
 .. ..
 
 Simulate fitted values:
 
 .. {r, eval = TRUE}
-s.out <- sim(x.out, x = x.out)
+s.out <- sim(z.out, x = x.low, x1=x.high)
 summary(s.out)
 .. ..
 
