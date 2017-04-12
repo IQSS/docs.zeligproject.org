@@ -93,7 +93,7 @@ algorithm and their defaults.
 Examples
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}
+.. {r, eval = FALSE, echo = FALSE}
 rm(list=ls(pattern="\\.out"))	
 suppressWarnings(suppressMessages(library(Zelig)))
 suppressWarnings(suppressMessages(library(ZeligMultilevel)))
@@ -106,45 +106,45 @@ Basic Example with First Differences
 
 Attach sample data:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 data(coalition2)
 .. ..
 
 Estimate model using optional arguments to specify approximation
 method for the log-likelihood, and the log link function for the Gamma family:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out1 <- zelig(duration ~ invest + fract + polar + numst2 + crisis + (1 | country),
                 data=coalition2, model = "gamma.mixed")
 .. ..
 
 Summarize regression coefficients and estimated variance of random effects:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(z.out1)
 .. ..
 
 Set the baseline values (with the ruling coalition in the minority)
 and the alternative values (with the ruling coalition in the majority) for X:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 x.high <- setx(z.out1, numst2 = 1)
 x.low <- setx(z.out1, numst2 = 0)
 .. ..
 
 Simulate expected values and first differences:
 
-.. {r, eval = TRUE, echo = FALSE}
+.. {r, eval = FALSE, echo = FALSE}
 s.out1 <- Zelig::sim(z.out1, x = x.high, x1 = x.low) # to avoid potential issues with arm::sim
 summary(s.out1)
 .. ..
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 summary(s.out1)
 .. ..
 
-.. {r ZeligMultilevel-gammamixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Gamma Mixed Model"}
+.. {r ZeligMultilevel-gammamixed, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Gamma Mixed Model"}
 plot(s.out1)
 .. ..
 
