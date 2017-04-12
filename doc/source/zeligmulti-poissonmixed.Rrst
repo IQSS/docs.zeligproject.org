@@ -77,33 +77,33 @@ set.seed(1234)
 
 Attach sample data:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 data(homerun)
 .. ..
 
 Estimate model:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(homeruns ~ player + (player - 1 | month),
                data = homerun, model = "poisson.mixed")
 .. ..
 
 Summarize regression coefficients and estimated variance of random effects:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(z.out)
 .. ..
 
 Set explanatory variables to their default values:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 x.out <- setx(z.out)
 .. ..
 
 Simulate draws using the default bootstrap method and view simulated
 quantities of interest:
 
-.. {r, eval = TRUE, echo = FALSE}
+.. {r, eval = FALSE, echo = FALSE}
 s.out <- Zelig::sim(z.out, x.out) # to avoid potential issues with arm::sim
 summary(s.out)
 .. ..
