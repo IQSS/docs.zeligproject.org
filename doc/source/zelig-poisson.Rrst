@@ -65,7 +65,7 @@ x.out <- setx(z.out)
 Simulate fitted values:
 
 .. {r, eval = TRUE}
-s.out <- sim(z.out, x = x.out)
+s.out <- sim(x.out, x = x.out)
 summary(s.out)
 .. ..
 
