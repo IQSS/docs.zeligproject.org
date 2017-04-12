@@ -113,7 +113,7 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
-.. {r ZeligMultilevel-poissonmixed, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Poisson Mixed Model"}
+.. {r ZeligMultilevel-poissonmixed, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Poisson Mixed Model"}
 plot(s.out)
 .. ..
 
