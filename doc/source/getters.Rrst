@@ -47,7 +47,7 @@ Average Treatment Effects on Treated (ATT) quantities of interest can be generat
 
 .. {r, eval = TRUE}
 zqi.out$ATT(treatment = "mil")
-zqi.out$get_qi(qi="ATT", xvalue="TE")
+my.fd <- zqi.out$get_qi(qi="ATT", xvalue="TE")
 .. ..
 
 
