@@ -97,12 +97,12 @@ my.data <- as.data.frame(cbind(y, x0, x1, x2, x3))
 
 Estimate the model, summarize the results, and plot nonlinearities:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), model = "poisson.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-poissongam0, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-poissongam0"}
+.. {r Zeliggam-poissongam0, dev = c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-poissongam0"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
@@ -118,7 +118,7 @@ s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
-.. {r Zeliggam-poissongam1, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-poissongam1"}
+.. {r Zeliggam-poissongam1, dev = c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-poissongam1"}
 plot(s.out)
 .. ..
 
@@ -137,7 +137,7 @@ s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
-.. {r Zeliggam-poissongam2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-poissongam2"}
+.. {r Zeliggam-poissongam2, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-poissongam2"}
 plot(s.out)
 .. ..
 
@@ -149,7 +149,7 @@ above examples for any GAM model. As such, in the interest of
 parsimony, I will not re-specify the simulations of quantities of
 interest. An extra ridge penalty (useful with convergence problems):
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), H = diag(0.5, 37), model = "poisson.gam", data = my.data)
 summary(z.out)
 .. ..
@@ -160,34 +160,34 @@ plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 
 Set the smoothing parameter for the first term, estimate the rest:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), sp = c(0.01, -1, -1, -1), model = "poisson.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-poissongam4, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-poissongam4"}
+.. {r Zeliggam-poissongam4, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-poissongam4"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
 Set lower bounds on smoothing parameters:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), min.sp = c(0.001, + 0.01, 0, 10), model = "poisson.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-poissongam5, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-poissongam5"}
+.. {r Zeliggam-poissongam5, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-poissongam5"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1)
 .. ..
 
 A GAM with 3df regression spline term & 2 penalized terms:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0, k = 4, fx = TRUE, bs = "tp") + s(x1, k = 12) + s(x2, k = 15), model = "poisson.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-poissongam6, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-poissongam6"}
+.. {r Zeliggam-poissongam6, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-poissongam6"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1)
 .. ..
 
@@ -376,7 +376,7 @@ package by Simon N. Wood. Advanced users may wish to refer to ``help(gam)``, and
 accompanying the ``mgcv`` package. All examples are reproduced
 and extended from ``mgcv``'s ``gam()`` help pages.
 
-.. {r, eval=TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo = FALSE, results = "asis"} 
 z5 <- zpoissongam$new()
 z5$references()
 .. ..

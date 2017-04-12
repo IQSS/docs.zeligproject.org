@@ -68,7 +68,7 @@ following additional options for GAM models.
 Examples
 +++++
 
-.. {r, eval = TRUE, echo = TRUE}	
+.. {r, eval = FALSE, echo = TRUE}	
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(ZeligGAM)))
 set.seed(1234)
@@ -79,7 +79,7 @@ Basic Example
 
 Create some count data:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 set.seed(0)
 n <- 400
 sig <- 2
@@ -99,12 +99,12 @@ my.data <- as.data.frame(cbind(y, x0, x1, x2, x3))
 
 Estimate the model, summarize the results, and plot nonlinearities:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), model = "normal.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-normalgam0, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam0"}
+.. {r Zeliggam-normalgam0, dev = c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam0"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
@@ -114,12 +114,12 @@ and before simulation to view the nonlinear relationships in the independent var
 Set values for the explanatory variables to their default (mean/mode)
 values, then simulate, summarize and plot quantities of interest:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), model = "normal.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-normalgam1, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam1"}
+.. {r Zeliggam-normalgam1, dev = c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam1"}
 plot(s.out)
 .. ..
 
@@ -131,14 +131,14 @@ Estimating the risk difference (and risk ratio) between low values
 variable ``x3`` while all the other variables are held at
 their default (mean/mode) values.
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 x.high <- setx(z.out, x3 = quantile(my.data$x3, 0.8))
 x.low <- setx(z.out, x3 = quantile(my.data$x3, 0.2))
 s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
-.. {r Zeliggam-normalgam2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam2"}
+.. {r Zeliggam-normalgam2, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam2"}
 plot(s.out)
 .. ..
 
@@ -150,47 +150,47 @@ above examples for any GAM model. As such, in the interest of
 parsimony, I will not re-specify the simulations of quantities of
 interest. An extra ridge penalty (useful with convergence problems):
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 x.high <- setx(z.out, x3 = quantile(my.data$x3, 0.8))
 x.low <- setx(z.out, x3 = quantile(my.data$x3, 0.2))
 s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
-.. {r Zeliggam-normalgam3, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam3"}
+.. {r Zeliggam-normalgam3, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam3"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
 Set the smoothing parameter for the first term, estimate the rest:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), sp = c(0.01, -1, -1, -1), model = "normal.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-normalgam4, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam4"}
+.. {r Zeliggam-normalgam4, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam4"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
 Set lower bounds on smoothing parameters:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), min.sp = c(0.001, + 0.01, 0, 10), model = "normal.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-normalgam5, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam5"}
+.. {r Zeliggam-normalgam5, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam5"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1)
 .. ..
 
 A GAM with 3df regression spline term & 2 penalized terms:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out <- zelig(y ~ s(x0, k = 4, fx = TRUE, bs = "tp") + s(x1, k = 12) + s(x2, k = 15), model = "normal.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-normalgam6, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-normalgam6"}
+.. {r Zeliggam-normalgam6, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-normalgam6"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1)
 .. ..
 
