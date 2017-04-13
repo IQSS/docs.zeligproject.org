@@ -154,7 +154,7 @@ z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), H = diag(0.5, 37), model = "po
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-poissongam3, dev=c("png", "pdf"), eval= TRUE, fig.cap= "Zeliggam-poissongam3"}
+.. {r Zeliggam-poissongam3, dev=c("png", "pdf"), eval = FALSE, fig.cap= "Zeliggam-poissongam3"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
