@@ -79,7 +79,7 @@ Basic Example
 
 Create some count data:
 
-.. {r, eval=TRUE}
+.. {r, eval = FALSE}
 set.seed(0)
 n <- 400
 sig <- 2
