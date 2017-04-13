@@ -68,7 +68,7 @@ following additional options for GAM models.
 Examples
 +++++
 
-.. {r, eval = FALSE, echo = FALSE}	
+.. {r, eval = TRUE, echo = FALSE}	
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(ZeligGAM)))
 set.seed(1234)
@@ -79,7 +79,7 @@ Basic Example
 
 Create some count data:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 set.seed(0)
 n <- 400
 sig <- 2
@@ -100,12 +100,12 @@ my.data <- as.data.frame(cbind(y, x0, x1, x2, x3))
 
 Estimate the model, summarize the results, and plot nonlinearities:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), model = "probit.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-probitgam0, dev = c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-probitgam0"}
+.. {r Zeliggam-probitgam0, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-probitgam0"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
@@ -115,13 +115,13 @@ and before simulation to view the nonlinear relationships in the independent var
 Set values for the explanatory variables to their default (mean/mode)
 values, then simulate, summarize and plot quantities of interest:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 summary(s.out)
 .. ..
 
-.. {r Zeliggam-probitgam1, dev = c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-probitgam1"}
+.. {r Zeliggam-probitgam1, dev = c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-probitgam1"}
 plot(s.out)
 .. ..
 
@@ -140,7 +140,7 @@ s.out <- sim(z.out, x = x.high, x1 = x.low)
 summary(s.out)
 .. ..
 
-.. {r Zeliggam-logitgam2, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-logitgam2"}
+.. {r Zeliggam-logitgam2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-logitgam2"}
 plot(s.out)
 .. ..
 
@@ -152,34 +152,34 @@ above examples for any GAM model. As such, in the interest of
 parsimony, I will not re-specify the simulations of quantities of
 interest. An extra ridge penalty (useful with convergence problems):
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), H = diag(0.5, 37), model = "probit.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-probitgam3, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-probitgam3"}
+.. {r Zeliggam-probitgam3, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-probitgam3"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
 Set the smoothing parameter for the first term, estimate the rest:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), sp = c(0.01, -1, -1, -1), model = "probit.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-probitgam4, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-probitgam4"}
+.. {r Zeliggam-probitgam4, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-probitgam4"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1, residuals = TRUE)
 .. ..
 
 Set lower bounds on smoothing parameters:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 z.out <- zelig(y ~ s(x0) + s(x1) + s(x2) + s(x3), min.sp = c(0.001, + 0.01, 0, 10), model = "probit.gam", data = my.data)
 summary(z.out)
 .. ..
 
-.. {r Zeliggam-probitgam5, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Zeliggam-probitgam5"}
+.. {r Zeliggam-probitgam5, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Zeliggam-probitgam5"}
 plot(z.out$zelig.out$z.out[[1]], pages = 1)
 .. ..
 
