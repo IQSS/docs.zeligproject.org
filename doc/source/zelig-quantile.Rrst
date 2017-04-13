@@ -78,13 +78,13 @@ suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 data(stackloss)
 .. ..
 
 Estimate model:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 z.out1 <- zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
                 model = "rq", data = stackloss,
                 tau = 0.5)
@@ -92,7 +92,7 @@ z.out1 <- zelig(stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.,
 
 Summarize regression coefficients:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(z.out1)
 .. ..
 
@@ -100,22 +100,22 @@ Set explanatory variables to their default (mean/mode) values, with
 high (80th percentile) and low (20th percentile) values for the water
 temperature variable (the variable that indiates the temperature of water in the plant’s cooling coils):
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 x.high <- setx(z.out1, Water.Temp = quantile(stackloss$Water.Temp, 0.8))
 x.low <- setx(z.out1, Water.Temp = quantile(stackloss$Water.Temp, 0.2))
 .. ..
 
 Generate first differences for the effect of high versus low water temperature on stack loss:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 s.out1 <- sim(z.out1, x = x.high, x1 = x.low)
 .. ..
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(s.out1)
 .. ..
 
-.. {r Zelig-quantile1, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Quantile Regression"}
+.. {r Zelig-quantile1, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Quantile Regression"}
 plot(s.out1)
 .. ..
 
@@ -127,7 +127,7 @@ indicators and fixed effects for each country (see for help with dummy
 variables). Note that you do not need to create dummy variables, as
 the program will automatically parse the unique values in the selected variable into discrete levels.
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 data(macro)
 z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
                 model = "rq", tau = 0.5,
@@ -137,22 +137,22 @@ z.out2 <- zelig(unem ~ gdp + trade + capmob + as.factor(country),
 Set values for the explanatory variables, using the default mean/mode
 values, with country set to the United States and Japan, respectively:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 x.US <- setx(z.out2, country = "United States")
 x.Japan <- setx(z.out2, country = "Japan")
 .. ..
 
 Simulate quantities of interest:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 s.out2 <- sim(z.out2, x = x.US, x1 = x.Japan)
 .. ..
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(s.out2)
 .. ..
 
-.. {r Zelig-quantile2, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Quantile Regression"}
+.. {r Zelig-quantile2, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Quantile Regression"}
 plot(s.out2)
 .. ..
 
@@ -162,7 +162,7 @@ Estimating Multiple Quantiles
 Using the Engel dataset on food expenditure as a function of income,
 we can use the “quantile” model to estimate multiple conditional quantiles:
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 data(engel)
 z.out3 <- zelig(foodexp ~ income, model = "rq",
                 tau = seq(0.1, 0.9, by = 0.1), data = engel)
@@ -170,7 +170,7 @@ z.out3 <- zelig(foodexp ~ income, model = "rq",
 
 We can summarize the coefficient fits, or plot them to compare them to the least squares conditional mean estimator.
 
-.. {r, eval = TRUE}
+.. {r, eval = FALSE}
 summary(z.out3)
 .. ..
 
