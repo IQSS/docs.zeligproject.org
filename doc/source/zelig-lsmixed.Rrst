@@ -61,7 +61,7 @@ algorithm and their defaults.
 Examples
 +++++
 
-.. {r, eval = FALSE, echo = FALSE}
+.. {r, eval = TRUE, echo = FALSE}
 rm(list=ls(pattern="\\.out"))	
 suppressWarnings(suppressMessages(library(Zelig)))
 suppressWarnings(suppressMessages(library(ZeligMultilevel)))
