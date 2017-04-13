@@ -174,7 +174,7 @@ We can summarize the coefficient fits, or plot them to compare them to the least
 summary(z.out3)
 .. ..
 
-.. {r Zelig-quantile3, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Quantile Regression"}
+.. {r Zelig-quantile3, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Quantile Regression"}
 plot(summary(z.out3))
 .. ..
 
