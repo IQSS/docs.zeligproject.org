@@ -68,7 +68,7 @@ following additional options for GAM models.
 Examples
 +++++
 
-.. {r, eval=TRUE, echo = FALSE}	
+.. {r, eval = TRUE, echo = FALSE}	
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(ZeligGAM)))
 set.seed(1234)
@@ -112,7 +112,7 @@ and before simulation to view the nonlinear relationships in the independent var
 Set values for the explanatory variables to their default (mean/mode)
 values, then simulate, summarize and plot quantities of interest:
 
-.. {r, eval=TRUE}
+.. {r, eval = FALSE}
 x.out <- setx(z.out)
 s.out <- sim(z.out, x = x.out)
 summary(s.out)
