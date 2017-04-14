@@ -60,12 +60,10 @@ correlations within clusters:
 -  ``corstr``: defaults to “independence”. It can take on the following
    arguments:
 
-   -  Independence (``corstr = independence``): 
-      .. math::`{\rm
-          cor}(y_{it}, y_{it'})=0`, :math:`\forall t, t'` with
+   -  Independence (``corstr = independence``): :math:`{\rm cor}(y_{it}, y_{it'})=0`, :math:`\forall t, t'` with
       :math:`t\ne t'`. It assumes that there is no correlation within
       the clusters and the model becomes equivalent to standard normal
-      regression. The “working” correlation matrix is the identity
+      regression. The "working" correlation matrix is the identity
       matrix.
 
    -  Fixed (``corstr = fixed``): If selected, the user must define the
@@ -139,8 +137,7 @@ correlations within clusters:
       If (``corstr = AR-M``), you must also specify ``Mv`` = :math:`m`,
       where :math:`m` is the number of periods :math:`t` of dependence.
       For example, the first order autoregressive model (AR-1) implies
-      :math:`{\rm cor}(y_{it},
-        y_{it'})=\alpha^{|t-t'|}, \forall t, t'` with :math:`t\ne t'`.
+      :math:`{\rm cor}(y_{it}, y_{it'})=\alpha^{|t-t'|}, \forall t, t'` with :math:`t\ne t'`.
       In AR-1, observation 1 and observation 2 have a correlation of
       :math:`\alpha`. Observation 2 and observation 3 also have a
       correlation of :math:`\alpha`. Observation 1 and observation 3
@@ -160,13 +157,13 @@ correlations within clusters:
       \end{array} \right) `
 
    -  Unstructured (``corstr = unstructured``): :math:`{\rm
-          cor}(y_{it}, y_{it'})=\alpha_{tt'}`, :math:`\forall t, t'`
+      cor}(y_{it}, y_{it'})=\alpha_{tt'}`, :math:`\forall t, t'`
       with :math:`t\ne t'`. No constraints are placed on the
       correlations, which are then estimated from the data.
 
 -  ``Mv``: defaults to 1. It specifies the number of periods of
    correlation and only needs to be specified when ``corstr`` is
-   “stat\_M\_dep”, “non\_stat\_M\_dep”, or “AR-M”.
+   "stat\_M\_dep", "non\_stat\_M\_dep", or "AR-M".
 
 -  ``R``: defaults to ``NULL``. It specifies a user-defined correlation
    matrix rather than estimating it from the data. The argument is used

@@ -187,7 +187,7 @@ See also
 
 The negative binomial model is part of the MASS package by William N.
 Venable and Brian D. Ripley . Advanced users may wish to refer to
-``help(glm.nb)`.
+``help(glm.nb)``.
 
 .. {r, eval = TRUE, echo=FALSE, results = "asis"} 
 z5 <- znegbin$new()
