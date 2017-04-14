@@ -141,11 +141,9 @@ variable might be censored for some observations at a fixed time
 
    for :math:`y_i^* \ge 0`, the scale parameter :math:`\lambda_i > 0`,
    and the shape parameter :math:`\alpha > 0`. The mean of this
-   distribution is :math:`\lambda_i
-     \Gamma(1 + 1 / \alpha)`. When :math:`\alpha = 1`, the distribution
+   distribution is :math:`\lambda_i \Gamma(1 + 1 / \alpha)`. When :math:`\alpha = 1`, the distribution
    reduces to the exponential distribution (see Section [exp]). (Note
-   that the output from zelig() parameterizes
-   scale\ :math:` = 1 / \alpha`.)
+   that the output from zelig() parameterizes scale :math:` = 1 / \alpha`.)
 
    In addition, survival models like the Weibull have three additional
    properties. The hazard function :math:`h(t)` measures the probability
