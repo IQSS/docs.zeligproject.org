@@ -14,7 +14,7 @@ Syntax
 
 First load packages:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 library("Zelig")
 library("ZeligChoice")
 .. ..
