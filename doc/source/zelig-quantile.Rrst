@@ -31,10 +31,10 @@ s.out <- sim(z.out, x = x.out)
 Additional Inputs
 +++++
 
-In addition to the standard inputs, zelig() takes the followingad
-ditional options for quantile regression:
+In addition to the standard inputs, zelig() takes the following additional 
+options for quantile regression:
 
--  tau: defaults to 0.5. Specifies the conditional quantile(s) that will
+-  ``tau``: defaults to 0.5. Specifies the conditional quantile(s) that will
    be estimated. 0.5 corresponds to estimating the conditional median,
    0.25 and 0.75 correspond to the conditional quartiles, etc. If tau is
    a vector, the conditional quantile function at each tau is estimated.
@@ -42,23 +42,23 @@ ditional options for quantile regression:
    solution for all possible conditional quantiles given the data, but
    does not support inference on this fit (setx and sim will fail).
 
--  se: a string value that defaults to “nid”. Specifies the method by
+-  ``se``: a string value that defaults to “nid”. Specifies the method by
    which the covariance matrix of coefficients is estimated during the
    sim stage of analysis. se can take the following values, which are
    passed to the summary.rq function from the quantreg package. These
    descriptions are copied from the summary.rq documentation.
 
-   -  “iid” which presumes that the errors are iid and computes an
+   -  ``"iid"`` which presumes that the errors are iid and computes an
       estimate of the asymptotic covariance matrix as in KB(1978).
 
-   -  “nid” which presumes local (in tau) linearity (in x) of the the
+   -  ``"nid"`` which presumes local (in tau) linearity (in x) of the the
       conditional quantile functions and computes a Huber sandwich
       estimate using a local estimate of the sparsity.
 
-   -  “ker” which uses a kernel estimate of the sandwich as proposed by
+   -  ``"ker"`` which uses a kernel estimate of the sandwich as proposed by
       Powell(1990).
 
--  …: additional options passed to rq when fitting the model. See
+-  ``...``: additional options passed to rq when fitting the model. See
    documentation for rq in the quantreg package for more information.
 
 Examples
@@ -125,7 +125,8 @@ Using Dummy Variables
 We can estimate a model of unemployment as a function of macroeconomic
 indicators and fixed effects for each country (see for help with dummy
 variables). Note that you do not need to create dummy variables, as
-the program will automatically parse the unique values in the selected variable into discrete levels.
+the program will automatically parse the unique values in the selected 
+variable into discrete levels.
 
 .. {r, eval = FALSE}
 data(macro)
@@ -328,7 +329,10 @@ In addition to the summary commands demonstrated above, some simply utility
 functions (known as *getters*) provide easy access to the raw fields most
 commonly of use for further investigation.
 
-In the example above ``z.out$getcoef()`` returns the estimated coefficients, ``z.out$getvcov()`` returns the estimated covariance matrix, and ``z.out$getpredict()`` provides predicted values for all observations in the dataset from the analysis.
+In the example above ``z.out$getcoef()`` returns the estimated coefficients, 
+``z.out$getvcov()`` returns the estimated covariance matrix, and 
+``z.out$getpredict()`` provides predicted values for all observations in the 
+dataset from the analysis.
 
 
 
