@@ -85,14 +85,15 @@ correlations within clusters:
       to be the same for observations of the same :math:`|t-t'|` periods
       apart for :math:`|t-t'| \leq m`.
 
-      | Sample “working” correlation for Stationary 2 dependence (Mv=2)
-      | :math:`\left( \begin{array}{ccccc}
+      Sample “working” correlation for Stationary 2 dependence (Mv=2)
+      
+      .. math:: \left( \begin{array}{ccccc}
       1 & \alpha_1 & \alpha_2 & 0 & 0 \\
       \alpha_1 & 1 & \alpha_1 & \alpha_2 & 0 \\
       \alpha_2 & \alpha_1 & 1 & \alpha_1 & \alpha_2 \\
       0 & \alpha_2 & \alpha_1 & 1 & \alpha_1 \\
       0 & 0 & \alpha_2 & \alpha_1 & 1
-      \end{array} \right) `
+      \end{array} \right) 
 
    -  Non-stationary :math:`m` dependent (``corstr = non_stat_M_dep``):
 
