@@ -130,8 +130,9 @@ observation :math:`j` in group :math:`i` as :math:`y_{ij}`, for
 
 -  The *systematic component* is
 
-   .. math:: \mu_{ij} \equiv X_{ij} \beta + Z_{ij} b_i
+   .. math:: 
 
+      \mu_{ij} \equiv X_{ij} \beta + Z_{ij} b_i
 
    where :math:`X_{ij}` is the :math:`(n_i \times p \times M)` array of
    known fixed effects explanatory variables, :math:`\beta` is the
@@ -146,8 +147,9 @@ Quantities of Interest
 -  The predicted values (qi$pr) are draws from the normal distribution
    defined by mean :math:`\mu_{ij}` and variance :math:`\sigma^2`,
 
-   .. math:: \mu_{ij} = X_{ij} \beta + Z_{ij} b_{i}
+   .. math:: 
 
+      \mu_{ij} = X_{ij} \beta + Z_{ij} b_{i}
 
    given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of
    :math:`\beta` and :math:`b_i` from their posterior distributions. The
@@ -168,10 +170,11 @@ Quantities of Interest
 -  In conditional prediction models, the average predicted treatment
    effect (qi$att.pr) for the treatment group is given by
 
-   .. math:: \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
+   .. math:: 
 
+      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
 
-    where :math:`t_{ij}` is a binary explanatory variable defining the
+   where :math:`t_{ij}` is a binary explanatory variable defining the
    treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
    groups. Variation in the simulations is due to uncertainty in
    simulating :math:`Y_{ij}(t_{ij} = 0)`, the counterfactual predicted
@@ -182,10 +185,11 @@ Quantities of Interest
 -  In conditional prediction models, the average expected treatment
    effect (qi$att.ev) for the treatment group is given by
 
-   .. math:: \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
+   .. math:: 
 
+      \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
 
-    where :math:`t_{ij}` is a binary explanatory variable defining the
+   where :math:`t_{ij}` is a binary explanatory variable defining the
    treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
    groups. Variation in the simulations is due to uncertainty in
    simulating :math:`E[Y_{ij}(t_{ij} = 0)]`, the counterfactual expected
