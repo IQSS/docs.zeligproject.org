@@ -75,6 +75,7 @@ Once Zelig is successfully downloaded and installed, let's load the package and 
 First, open your R console and load Zelig:
 
 .. {r, eval = TRUE, echo = FALSE}	
+rm(list=ls(pattern="\\.out")) 
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. .. 
