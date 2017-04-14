@@ -25,7 +25,7 @@ Then we can use the output object from the Amelia package directly in the data a
 z.out <- zelig(gdp_pc ~ trade + civlib, model="ls", data=a.out)
 .. ..
 
-Zelig will automatically extract the imputed datasets from the Amelia object, and run the requested model in each of them.  When the estimated model parameters are summarized, the results from each imputed dataset are available, but more importantly, the combined answer across the imputed datasets calculated by ``Rubin's Rules'' are automatically presented:
+Zelig will automatically extract the imputed datasets from the Amelia object, and run the requested model in each of them.  When the estimated model parameters are summarized, the results from each imputed dataset are available, but more importantly, the combined answer across the imputed datasets calculated by "Rubin's Rules" are automatically presented:
 
 .. {r, eval = TRUE}
 summary(z.out)
