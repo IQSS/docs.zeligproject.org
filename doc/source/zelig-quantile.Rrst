@@ -160,11 +160,11 @@ plot(s.out2)
 Estimating Multiple Quantiles
 !!!!!
 
-Using the Engel dataset on food expenditure as a function of income,
+Using the Engel dataset (from the ``quantreg`` package) on food expenditure as a function of income,
 we can use the “quantile” model to estimate multiple conditional quantiles:
 
 .. {r, eval = FALSE}
-data(engel)
+data(engel, package="quantreg")
 z.out3 <- zelig(foodexp ~ income, model = "rq",
                 tau = seq(0.1, 0.9, by = 0.1), data = engel)
 .. ..
