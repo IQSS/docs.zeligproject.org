@@ -132,7 +132,8 @@ observation :math:`j` in group :math:`i` as :math:`y_{ij}`, for
 
    .. math:: \mu_{ij} \equiv X_{ij} \beta + Z_{ij} b_i
 
-    where :math:`X_{ij}` is the :math:`(n_i \times p \times M)` array of
+
+   where :math:`X_{ij}` is the :math:`(n_i \times p \times M)` array of
    known fixed effects explanatory variables, :math:`\beta` is the
    :math:`p`-dimensional vector of fixed effects coefficients,
    :math:`Z_{ij}` is the :math:`(n_i \times q \times M)` array of known
@@ -147,7 +148,8 @@ Quantities of Interest
 
    .. math:: \mu_{ij} = X_{ij} \beta + Z_{ij} b_{i}
 
-    given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of
+
+   given :math:`X_{ij}` and :math:`Z_{ij}` and simulations of
    :math:`\beta` and :math:`b_i` from their posterior distributions. The
    estimated variance covariance matrices are taken as correct and are
    themselves not simulated.
@@ -168,6 +170,7 @@ Quantities of Interest
 
    .. math:: \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
 
+
     where :math:`t_{ij}` is a binary explanatory variable defining the
    treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
    groups. Variation in the simulations is due to uncertainty in
@@ -180,6 +183,7 @@ Quantities of Interest
    effect (qi$att.ev) for the treatment group is given by
 
    .. math:: \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
+
 
     where :math:`t_{ij}` is a binary explanatory variable defining the
    treatment :math:`(t_{ij} = 1)` and control :math:`(t_{ij} = 0)`
