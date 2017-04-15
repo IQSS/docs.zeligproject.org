@@ -87,7 +87,9 @@ correlations within clusters:
 
       Sample “working” correlation for Stationary 2 dependence (Mv=2)
       
-      .. math:: \left( \begin{array}{ccccc}
+      .. math:: 
+
+      \left( \begin{array}{ccccc}
       1 & \alpha_1 & \alpha_2 & 0 & 0 \\
       \alpha_1 & 1 & \alpha_1 & \alpha_2 & 0 \\
       \alpha_2 & \alpha_1 & 1 & \alpha_1 & \alpha_2 \\
@@ -127,7 +129,9 @@ correlations within clusters:
       assumed to be the same for all observations within the cluster.
 
       Sample “working” correlation for Exchangeable
-      .. math:: \left( \begin{array}{ccccc}
+      .. math:: 
+
+      \left( \begin{array}{ccccc}
       1 & \alpha & \alpha & \alpha & \alpha \\
       \alpha & 1 & \alpha & \alpha & \alpha \\
       \alpha & \alpha & 1 & \alpha & \alpha \\
