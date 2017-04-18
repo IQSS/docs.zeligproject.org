@@ -72,10 +72,9 @@ efficiency of plants that convert ammonia to nitric acid. The
 dependent variable, stack.loss, is 10 times the percentage of ammonia
 that escaped unconverted:
 
-.. {r, eval = TRUE, echo = TRUE}	
+.. {r, eval = TRUE, echo = FALSE}	
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
-library(Zelig)
 set.seed(1234)
 .. .. 
 
