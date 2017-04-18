@@ -36,8 +36,8 @@ options for quantile regression:
 
 -  ``tau``: defaults to 0.5. Specifies the conditional quantile(s) that will
    be estimated. 0.5 corresponds to estimating the conditional median,
-   0.25 and 0.75 correspond to the conditional quartiles, etc. If tau is
-   a vector, the conditional quantile function at each tau is estimated.
+   0.25 and 0.75 correspond to the conditional quartiles, etc. tau
+   vectors with length greater than 1 is not currently supported.
    If tau is set outside of the interval [0,1], zelig returns the
    solution for all possible conditional quantiles given the data, but
    does not support inference on this fit (setx and sim will fail).
@@ -72,9 +72,10 @@ efficiency of plants that convert ammonia to nitric acid. The
 dependent variable, stack.loss, is 10 times the percentage of ammonia
 that escaped unconverted:
 
-.. {r, eval = TRUE, echo = FALSE}	
+.. {r, eval = TRUE, echo = TRUE}	
 rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
+library(Zelig)
 set.seed(1234)
 .. .. 
 
