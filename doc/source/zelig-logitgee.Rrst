@@ -65,11 +65,11 @@ correlations within clusters:
 Examples
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}	
-rm(list=ls(pattern="\\.out")) 
+.. {r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
-.. .. 
+.. ..
 
 Example with Stationary 3 Dependence
 !!!!!
@@ -144,6 +144,8 @@ Example with Fixed Correlation Structure
 User-defined correlation structure
 
 .. {r, eval = TRUE}
+library(geepack)
+
 corr.mat <- matrix(rep(0.5, 100), nrow = 10, ncol = 10)
 diag(corr.mat) <- 1
 corr.mat <- fixed2Zcor(corr.mat, id = sorted.turnout$cluster,
@@ -337,7 +339,7 @@ The geeglm function is part of the geepack package by Søren Højsgaard,
 Ulrich Halekoh and Jun Yan. Advanced users may wish to refer
 to ``help(geepack)`` and ``help(family)``.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zlogitgee$new()
 z5$references()
 .. ..
