@@ -58,7 +58,7 @@ additional options for exponential regression:
    define strata. Then
 
 .. {r, eval = FALSE}
-z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3", 
+z.out <- zelig(y ~ x1 + x2, robust = TRUE, cluster = "x3",
                model = "exp", data = mydata)
 .. ..
 
@@ -71,15 +71,17 @@ its own cluster.
 Example
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}	
-rm(list=ls(pattern="\\.out"))  
+.. {r, eval = TRUE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
-.. .. 
+.. ..
 
-Attach the sample data:
+Attach the sample data and load the survival package:
 
 .. {r, eval = TRUE}
+library(survival)
+
 data(coalition)
 .. ..
 
@@ -99,24 +101,24 @@ Set the baseline values (with the ruling coalition in the minority) and
 the alternative values (with the ruling coalition in the majority) for
 X:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 x.low <- setx(z.out, numst2 = 0)
 x.high <- setx(z.out, numst2 = 1)
 .. ..
 
 Simulate expected values and first differences:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 s.out <- sim(z.out, x = x.low, x1 = x.high)
 .. ..
 
 Summarize quantities of interest and produce some plots:
 
-.. {r, eval = FALSE}
+.. {r, eval = TRUE}
 summary(s.out)
 .. ..
 
-.. {r Zelig-exp, dev=c("png", "pdf"), eval = FALSE, fig.cap = "Graphs of Quantities of Interest for Zelig-exp"}
+.. {r Zelig-exp, dev=c("png", "pdf"), eval = TRUE, fig.cap = "Graphs of Quantities of Interest for Zelig-exp"}
 plot(s.out)
 .. ..
 
@@ -241,7 +243,7 @@ Output Values
 
 The Zelig object stores fields containing everything needed to
 rerun the Zelig output, and all the results and simulations as they are generated.
-In addition to the summary commands demonstrated above, some simply utility 
+In addition to the summary commands demonstrated above, some simply utility
 functions (known as *getters*) provide easy access to the raw fields most
 commonly of use for further investigation.
 
@@ -255,7 +257,7 @@ The exponential function is part of the survival library by Terry
 Therneau, ported to R by Thomas Lumley. Advanced users may wish to refer
 to ``help(survfit)`` in the survival library.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zexp$new()
 z5$references()
 .. ..
