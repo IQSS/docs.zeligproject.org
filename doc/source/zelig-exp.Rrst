@@ -77,18 +77,17 @@ suppressWarnings(suppressMessages(library(Zelig)))
 set.seed(1234)
 .. ..
 
-Attach the sample data and load the survival package:
+Attach the sample data:
 
 .. {r, eval = TRUE}
-library(survival)
-
 data(coalition)
 .. ..
 
 Estimate the model:
 
 .. {r, eval = TRUE}
-z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp", data = coalition)
+z.out <- zelig(Surv(duration, ciep12) ~ fract + numst2, model = "exp",
+               data = coalition)
 .. ..
 
 View the regression output:
