@@ -20,8 +20,11 @@ set.seed(1234)
 data(sanction)
 zqi.out <- zelig(num ~ target + coop + mil, model = "poisson", data = sanction)
 summary(zqi.out)
+class(zqi.out)
 zqi.out$setx(coop=1)
+class(zqi.out)
 zqi.out$setx1(coop=4)
+class(zqi.out)
 zqi.out$sim()
 .. ..
 
