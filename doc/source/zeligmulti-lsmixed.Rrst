@@ -1,10 +1,10 @@
 .. _zmultilevellsmixed:
 
-.. warning:: ``ZeligMultilevel`` is currently under development.  We
-	     are working on the model vignettes of the package.
-
 zeligmultilevel-lsmixed
 ~~~~~~
+
+.. warning:: ``ZeligMultilevel`` is currently under development.  We
+	     are working on the model vignettes of the package.
 
 ls.mixed: Mixed effects Linear Regression
 
