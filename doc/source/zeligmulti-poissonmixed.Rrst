@@ -68,8 +68,8 @@ Examples
 Basic Example
 !!!!!
 
-.. {r, eval = TRUE, echo = FALSE}
-rm(list=ls(pattern="\\.out"))	
+.. {r, eval = FALSE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
 suppressWarnings(suppressMessages(library(ZeligMultilevel)))
 set.seed(1234)
@@ -247,7 +247,7 @@ See also
 
 Mixed effects Poisson regression is part of lme4 package.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zpoissonmixed$new()
 z5$references()
 .. ..

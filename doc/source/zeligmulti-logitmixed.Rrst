@@ -64,8 +64,8 @@ algorithm and their defaults.
 Examples
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}
-rm(list=ls(pattern="\\.out"))	
+.. {r, eval = FALSE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
 suppressWarnings(suppressMessages(library(ZeligMultilevel)))
 set.seed(1234)
@@ -255,7 +255,7 @@ See also
 
 Mixed effects linear regression is part of lme4 package.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zlogitmixed$new()
 z5$references()
 .. ..

@@ -61,12 +61,12 @@ algorithm and their defaults.
 Examples
 +++++
 
-.. {r, eval = TRUE, echo = FALSE}
-rm(list=ls(pattern="\\.out"))	
+.. {r, eval = FALSE, echo = FALSE}
+rm(list=ls(pattern="\\.out"))
 suppressWarnings(suppressMessages(library(Zelig)))
 suppressWarnings(suppressMessages(library(ZeligMultilevel)))
 set.seed(1234)
-.. .. 
+.. ..
 
 Basic Example with First Differences
 !!!!!
@@ -130,7 +130,7 @@ observation :math:`j` in group :math:`i` as :math:`y_{ij}`, for
 
 -  The *systematic component* is
 
-   .. math:: 
+   .. math::
 
       \mu_{ij} \equiv X_{ij} \beta + Z_{ij} b_i
 
@@ -147,7 +147,7 @@ Quantities of Interest
 -  The predicted values (qi$pr) are draws from the normal distribution
    defined by mean :math:`\mu_{ij}` and variance :math:`\sigma^2`,
 
-   .. math:: 
+   .. math::
 
       \mu_{ij} = X_{ij} \beta + Z_{ij} b_{i}
 
@@ -170,7 +170,7 @@ Quantities of Interest
 -  In conditional prediction models, the average predicted treatment
    effect (qi$att.pr) for the treatment group is given by
 
-   .. math:: 
+   .. math::
 
       \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - \widehat{Y_{ij}(t_{ij} = 0)} \},
 
@@ -185,7 +185,7 @@ Quantities of Interest
 -  In conditional prediction models, the average expected treatment
    effect (qi$att.ev) for the treatment group is given by
 
-   .. math:: 
+   .. math::
 
       \frac{1}{\sum_{i = 1}^M \sum_{j = 1}^{n_i} t_{ij}} \sum_{i = 1}^M \sum_{j:t_{ij} = 1}^{n_i} \{ Y_{ij} (t_{ij} = 1) - E[Y_{ij}(t_{ij} = 0)] \},
 
@@ -246,8 +246,7 @@ See also
 
 Mixed effects linear regression is part of lme4 package.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"} 
+.. {r, eval = TRUE, echo=FALSE, results = "asis"}
 z5 <- zlsmixed$new()
 z5$references()
 .. ..
-
