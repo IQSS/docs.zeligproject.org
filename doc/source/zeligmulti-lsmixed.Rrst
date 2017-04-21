@@ -234,7 +234,7 @@ See also
 
 Mixed effects linear regression is part of lme4 package.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"}
+.. {r, eval = FALSE, echo=FALSE, results = "asis"}
 z5 <- zlsmixed$new()
 z5$references()
 .. ..
