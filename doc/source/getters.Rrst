@@ -41,11 +41,6 @@ The ``qi`` argument is the name of any quantity of interest simulated  in the ob
 
 If one asks the getter for a qi or xvalue that does not exist in the zelig object, then the error message will result, which will also list all the values that are present that the getter can extract. 
 
-.. {r, eval = TRUE}
-my.fd <- zqi.out$get_qi(qi="fa", xvalue="x1")
-my.fd <- zqi.out$get_qi(qi="fd", xvalue="x2")
-.. ..
-
 Average Treatment Effects on Treated (ATT) quantities of interest can be generated with the ``ATT()`` method, for any zelig model that can construct expected values.  These can similarly be retrieved with the ``get_qi()`` method.
 
 .. {r, eval = TRUE}
