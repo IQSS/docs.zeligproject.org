@@ -1,10 +1,10 @@
 .. _zmultilevellsmixed:
 
-.. warning:: ``ZeligMultilevel`` is currently under development.  We
-	     are working on the model vignettes of the package.
-
 zeligmultilevel-lsmixed
 ~~~~~~
+
+.. warning:: ``ZeligMultilevel`` is currently under development.  We
+	     are working on the model vignettes of the package.
 
 ls.mixed: Mixed effects Linear Regression
 
@@ -234,7 +234,7 @@ See also
 
 Mixed effects linear regression is part of lme4 package.
 
-.. {r, eval = TRUE, echo=FALSE, results = "asis"}
+.. {r, eval = FALSE, echo=FALSE, results = "asis"}
 z5 <- zlsmixed$new()
 z5$references()
 .. ..

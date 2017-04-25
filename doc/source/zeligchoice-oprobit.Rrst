@@ -7,7 +7,7 @@ Ordinal Probit Regression for Ordered Categorical Dependent Variables
 
 Use the ordinal probit regression model if your dependent variables are
 ordered and categorical. They may take on either integer values or
-character strings. For a Bayesian implementation of this model, see .
+character strings. For a Bayesian implementation of this model, see ``oprobitbayes``.
 
 Syntax
 +++++
