@@ -1,5 +1,8 @@
-docs.zeligproject.org
+LEGACY docs.zeligproject.org
 =====================
+
+> **Note:** this is source code for the legacy Zelig documentation website. For the most recent version see: <https://github.com/IQSS/Zelig/tree/master/vignettes>.  
+
 
 The [Zelig](http://zeligproject.org) documentation hosted at http://docs.zeligproject.org is built from the files in this repository.
 
